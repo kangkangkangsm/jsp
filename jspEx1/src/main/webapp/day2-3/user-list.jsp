@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div>
-		<button onclick="location.href='board-list2.jsp'">게시판으로 이동</button>
+		<button oonclick="locatin.href='board-list2.jsp'">게시판으로 이동</button>
 	</div>
 		<table>
 		<tr>
