@@ -39,9 +39,7 @@
 				out.println("</tr>");
 			}
 			out.println("</table>");
-			
-		
-		
+
 		} catch(SQLException ex) {
 			out.println("SQLException : " + ex.getMessage());
 		}
