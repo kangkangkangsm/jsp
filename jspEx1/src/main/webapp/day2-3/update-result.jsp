@@ -31,6 +31,7 @@
 		String contents = request.getParameter("contents");
 		
 		try{
+			System.out.println(title + "" + contents);
 			stmt = conn.createStatement();
 			String querytext = "UPDATE TBL_BOARD SET title ='" + title + "', contents='" + contents + "' WHERE boardNo=" + boardNo;
 			stmt.executeUpdate(querytext);

@@ -68,7 +68,10 @@
 					<%= rs.getString("title") %> <%= commentCnt %>
 				</a>
 			</td>
-			<td> <%= rs.getString("name") %></td>
+			<td> 
+				<a href="javascript:;" onclick="fnName('<%= rs.getString("boardNo") %>')">	
+				<%= rs.getString("name") %> </a>
+			</td>
 			<td> <%= rs.getString("cnt") %></td>
 			<td> <%= rs.getString("cdatetime") %></td>
 		</tr>
@@ -90,5 +93,9 @@
 <script>
 	function fnView(boardNo){
 		location.href="board-view.jsp?boardNo="+boardNo;
+	}
+	
+	function fnName(boardNo){
+		location.href="user-info.jsp?boardNo="+boardNo;
 	}
 </script>

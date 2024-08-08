@@ -1,3 +1,7 @@
+
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +22,7 @@
 </head>
 <body>
 	<div>
-		<button oonclick="locatin.href='board-list2.jsp'">게시판으로 이동</button>
+		<button onclick="location.href='board-list2.jsp'">게시판으로 이동</button>
 	</div>
 		<table>
 		<tr>
