@@ -35,14 +35,14 @@
 				<th> 초기화 </th>
 			</tr>
 	<sql:query var="result" dataSource="${dataSource}">		
-	SELECT * FROM TBL_USER
+			SELECT * FROM TBL_USER
 	</sql:query>
  	<c:forEach var="row" items="${result.rows}">
 			 <tr>
 				<td>${row.userId}</td>
 				<td>${row.name}</td>
 				<td>
-					<c:if test="${row.status.equals('A')}">관리자</c:if>
+					<c:if test="${row.status == 'A'}">관리자</c:if>
 					<c:if test="${row.status != 'A'}">일반회원</c:if>
 				</td>
 				<td>
