@@ -18,15 +18,17 @@
 <body>
 	<table>
 		<tr>
+			<th>게시번호</th>
+			<th>제목</th>
+			<th>내용</th>
 			<th>아이디</th>
-			<th>이름</th>
-			<th>등급</th>
 		</tr>
-		<c:forEach var="user" items="${userList}">
+		<c:forEach var="user" items="${boardList}">
 			<tr>
+				<td>${user.boardNo}</td>
+				<td>${user.title}</td>
+				<td>${user.contents}</td>
 				<td>${user.userId}</td>
-				<td>${user.name}</td>
-				<td>${user.status}</td>
 			</tr>
 		</c:forEach>
 	</table>
