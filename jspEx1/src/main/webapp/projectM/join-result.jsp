@@ -6,6 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 결과</title>
+<style>
+
+  h2 {
+            text-align: center;
+            margin-bottom: 70px;
+            color: #333;
+        }
+ button{
+            display: block;
+            width: 30%;
+            padding: 10px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+          	margin: 0 auto;
+        }
+</style>
 </head>
 <body>
 	<%@include file="db.jsp"%>
@@ -42,10 +62,17 @@
 				            + "'" + desired_activity + "'," 
 				            + "'" + special_skills + "')";
 			stmt.executeUpdate(query);
-			out.println("회원가입 완료되었습니다!");
+%>
+			<h2>축하축하!! 회원가입 완료!</h2>
+			<button onclick="location.href='Mlogin.jsp'">로그인</button>
+<% 			
 		} catch(SQLException ex) {
-			out.println("SQLException : " + ex.getMessage());
+			out.println("중복된 아이디로 가입하지 말라고");
 		}
+	        
 	%>
 </body>
 </html>
+<script>
+</script>
+
