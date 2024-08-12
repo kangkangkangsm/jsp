@@ -76,12 +76,14 @@
     <header>
         <div class="logo-nav">
             <div class="logo" >
+            <a href="#" onclick="location.href='main.jsp'">
                 <img src="../images/mainLogo.png" alt="로고" >
+                </a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#">봉사안내</a></li>
-                    <li><a href="#">봉사참여</a></li>
+                    <li><a href="#" onclick="location.href='guide.jsp'">봉사안내</a></li>
+                    <li><a href="#" onclick="location.href='participate.jsp'">봉사참여</a></li>
                     <li><a href="#">커뮤니티</a></li>
                     <li><a href="#">고객센터</a></li>
                     <li><a href="#" onclick="location.href='mypage.jsp'" >마이페이지</a></li>
@@ -100,7 +102,7 @@
 			String userID=(String)session.getAttribute("user_id");
 			
 %>
-	              <li><a href="#" onclick=""> <%= userID %> 님 환영합니다.</a></li>	
+	              <li><a> <%= userID %> 님 환영합니다.</a></li>	
                   <li><a href="#" onclick="fnlogout()">로그아웃</a></li>
 <%
 			}	

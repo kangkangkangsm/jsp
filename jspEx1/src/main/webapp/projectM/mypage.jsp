@@ -46,6 +46,7 @@
     }
 
     .container {
+    border-radius: 8px;
     margin-top: 80px;
         background-color: #ffffff;
         padding: 20px;
@@ -54,11 +55,13 @@
     }
     
     .container2 {
+    border-radius: 8px;
     margin-top: 80px;
+    margin-left:20px;
         background-color: #ffffff;
         padding: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 60%; /* Adjust width as needed */
+        width: 50%; /* Adjust width as needed */
     }
 
     .container:last-child {
@@ -109,6 +112,14 @@
     button:hover {
         background-color: #4cae4c;
     }
+            .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #009688;
+            color: #fff;
+            margin-top: 20px;
+            width:100%;
+        }
 </style>
 </head>
 <body>
@@ -129,6 +140,7 @@
             String querytext = "SELECT * FROM users WHERE user_id = '" + user_id + "'";
             pstmt = conn.prepareStatement(querytext);
             rs = pstmt.executeQuery();
+            
     %>
     <div class="container">
         <h2>마이페이지</h2>
@@ -199,9 +211,13 @@
         %>
     </div>
     <div class="container2">
-        <h2>참여활동</h2>
+        <h2>참여내역</h2>
         <!-- 참여활동 내용 추가 -->
     </div>
+    
 </div>
+<div class="footer">
+        &copy; Helpers
+        </div>
 </body>
 </html>

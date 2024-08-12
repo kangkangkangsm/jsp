@@ -125,5 +125,6 @@ nav ul li a {
             </div>
         </section>
     </main>
+    <%@ include file = "footer.jsp" %>
 </body>
 </html>
