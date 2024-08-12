@@ -206,11 +206,12 @@
             <input type="date" id="startDate" name="startDate" value="2024-01-01">
             <span style="margin: 0 -7px;">~</span>
             <input type="date" id="endDate" name="endDate" value="2024-12-31">         
-            <input type="text" id="volunteerName" name="volunteerName" placeholder="상세검색">
+            <input type="text" id="ActivityName " name="ActivityName " placeholder="상세검색">
             <input type="submit" value="검색">
             <input type="reset" value="초기화">
         </div>
     </form>
+    <hr>
 </div>
 
 <%@ include file="footer.jsp" %>
