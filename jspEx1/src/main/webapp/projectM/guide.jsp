@@ -54,13 +54,7 @@
     <%@ include file = "header.jsp" %>
     <div class="container">
         <h1>자원봉사란?</h1>
-        <p>라틴어 <strong>voluntas</strong>에서 유래:</p>
-        <ul>
-            <li><strong>volo(의지)</strong></li>
-            <li>영어의 will</li>
-            <li>voluntus라는 말 생성</li>
-            <li>의미: 자발적인 것, 자주적·임의적 자유의</li>
-        </ul>
+      
 
         <h2>자원봉사 활동</h2>
         <p>개인 또는 단체가 지역사회·국가 및 인류사회를 위하여 대가 없이 자발적으로 시간과 노력을 제공하는 행위</p>
@@ -86,6 +80,6 @@
             <li>자원봉사자는 끊임없이 공부하며 배우는 자세를 가져야 합니다.</li>
         </ul>
     </div>
-    <%@ include file = "footer.jsp" %>
+  
 </body>
 </html>

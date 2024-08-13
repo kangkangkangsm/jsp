@@ -198,6 +198,7 @@ th, td {
 
 <%@ include file="header2.jsp" %>
 <div class="container">
+<form action="" name="board">
     <%@include file="db.jsp"%>	
 	<%
 		ResultSet rs = null;
@@ -211,8 +212,6 @@ th, td {
 		String end_date = request.getParameter("end_date");
 		String search = request.getParameter("search");
 		
-		System.out.println(region);
-				
 		try{
 			stmt = conn.createStatement();
 			String querytext = "SELECT * FROM volunteering WHERE " +
@@ -244,19 +243,19 @@ th, td {
 <%	
 			while(rs.next()){
 				%>
-				<tr>
-				<td><label><a href="#" onclick=""><%= rs.getString("cdatetime") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("region") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("activity_type") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("field") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("target_group") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("start_date") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("end_date") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("recruitment_status") %></a></label></td>
-				<tr>
-				<td colspan ="2"><label><a href="#" onclick=""> <%= rs.getString("title") %></a></label></td>
-				<td colspan ="6"><label><a href="#" onclick=""> <%= rs.getString("contents") %></a></label></td>
-				</tr>			
+				 <tr>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			        <tr>
+			        <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
+			        <td colspan="6"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
+			    </tr>
 	<%
 				}
 				
@@ -282,19 +281,19 @@ th, td {
 <%	
 			while(rs.next()){
 				%>
-				<tr>
-				<td><label><a href="#" onclick=""><%= rs.getString("cdatetime") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("region") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("activity_type") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("field") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("target_group") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("start_date") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("end_date") %></a></label></td>
-				<td><label><a href="#" onclick=""> <%= rs.getString("recruitment_status") %></a></label></td>
-				<tr>
-				<td colspan ="2"><label><a href="#" onclick=""> <%= rs.getString("title") %></a></label></td>
-				<td colspan ="6"><label><a href="#" onclick=""> <%= rs.getString("contents") %></a></label></td>
-				</tr>			
+				 <tr>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			        <tr>
+			        <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
+			        <td colspan="6"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
+			    </tr>
 	<%
 				}		
 	%>		
@@ -305,10 +304,10 @@ th, td {
 	%>
 </div>
 
-
+</form>
 </body>
 </html>
 <script>
-  
+
 </script>
   

@@ -55,7 +55,7 @@
         
         button {
             
-            width: 49%;
+            width: 100%;
             padding: 10px;
             background-color: #5cb85c;
             border: none;
@@ -91,15 +91,14 @@
     <%
         ResultSet rs = null;
         Statement stmt = null;
-        String id = request.getParameter("id");
-        if (id == null || id.isEmpty()) {
-            out.println("잘못된 접근입니다.");
-            return;
-        }
+        String f_id = request.getParameter("f_id");
         
         try {
             stmt = conn.createStatement();
-            String querytext = "SELECT * FROM volunteering WHERE id = " + id;
+            String querytext = "SELECT * FROM users U "
+                    + "INNER JOIN applications A ON U.user_id = A.user_id "
+                    + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
+                    + "WHERE f_id = '" + f_id + "'";
             rs = stmt.executeQuery(querytext);
     %>
     <%
@@ -119,7 +118,6 @@
     </div>
     <div>
     <button type="button" onclick="history.back()">돌아가기</button>
-    <button type="button" onclick="fnapply(<%= id %>)">신청하기</button>
     </div>
     <%
         } else {
@@ -137,8 +135,6 @@
 </html>
 <script>
 	function fnapply(id){
-		if (confirm("신청 하시나요?")) {
 		 window.location.href = "apply.jsp?id=" + id;
-	}
 	}
 </script>

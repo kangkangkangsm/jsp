@@ -13,8 +13,22 @@
     * {
         box-sizing: border-box;
     }
-
-    body {
+  .details {
+            margin-bottom: 20px;
+        }
+        
+        .details p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .details strong {
+            display: inline-block;
+            width: 150px;
+            color: #333;
+        }
+   /*  body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
         margin: 0;
@@ -22,7 +36,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
+    } */
 
     header {
         width: 100%;
@@ -45,24 +59,36 @@
         padding: 20px;
     }
 
-    .container {
-    border-radius: 8px;
-    margin-top: 80px;
-        background-color: #ffffff;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 30%; /* Adjust width as needed */
-    }
-    
-    .container2 {
-    border-radius: 8px;
-    margin-top: 80px;
-    margin-left:20px;
-        background-color: #ffffff;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 50%; /* Adjust width as needed */
-    }
+    body {
+    margin: 0;
+    padding: 0;
+    position: relative; /* 부모 요소가 relative position일 때 자식 요소의 absolute positioning이 가능함 */
+}
+
+.container {
+    border-radius: 8px; /* 테두리 둥글기 */
+    background-color: #ffffff; /* 배경색 흰색 */
+    padding: 20px; /* 내부 여백 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 20%; /* 너비 20% */
+    position: absolute; /* 절대 위치 지정 */
+    top: 80px; /* 상단에서 80px 떨어진 위치 */
+    left: 8.5%; /* 페이지 왼쪽 끝에 정렬 */
+    height: calc(100vh - 80px); /* 화면 높이에서 80px를 뺀 높이 */
+}
+
+/* 오른쪽에 위치할 .container2 스타일 */
+.container2 {
+    border-radius: 8px; /* 테두리 둥글기 */
+    background-color: #ffffff; /* 배경색 흰색 */
+    padding: 20px; /* 내부 여백 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 60%; /* 너비 60% */
+    position: absolute; /* 절대 위치 지정 */
+    top: 80px; /* 상단에서 80px 떨어진 위치 */
+    left: 31%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
+    height: calc(100vh - 80px); /* 화면 높이에서 80px를 뺀 높이 */
+}
 
     .container:last-child {
         margin-left: 30px; /* Margin between the two sections */
@@ -72,30 +98,6 @@
         text-align: center;
         margin-bottom: 20px; /* Adjust as needed */
         color: #333;
-    }
-
-    .form-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-    }
-
-    .form-row label {
-        margin-bottom: 5px;
-        color: #555;
-        width: 48%;
-        text-align: left;
-    }
-
-    .form-row input[type="text"],
-    .form-row input[type="password"],
-    .form-row input[type="email"],
-    .form-row select {
-        width: 48%;
-        padding: 10px;
-        margin-bottom: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
     }
 
     button {
@@ -120,6 +122,51 @@
             margin-top: 20px;
             width:100%;
         }
+        /* 테이블 헤더 스타일 */
+th {
+    background-color: #4CAF50; /* 그라데이션 배경색 */
+    color: white; /* 텍스트 색상 */
+    padding: 12px 10px;
+    text-align: left;
+}
+
+/* 테이블 행 스타일 */
+
+
+tr:hover {
+    background-color: #ddd; /* 행에 마우스 오버 시 배경색 */
+}
+
+/* 테이블 셀 스타일 */
+td {
+    padding: 12px 10px;
+    border: 1px solid #ddd; /* 테두리 색상 */
+}
+
+/* 테이블 전체 테두리 스타일 */
+table{
+	width:100%;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+/* 테이블 전체 스타일 조정 */
+th, td {
+    text-align: center;
+}
+
+  a {
+            text-decoration: none; /* 밑줄 제거 */
+            color: black; /* 링크 색상 검정으로 설정 */
+        }
+        a:hover {
+            text-decoration: none; /* 마우스 오버 시 밑줄 제거 */
+            color: black; /* 마우스 오버 시 링크 색상 검정으로 유지 */
+        }
+        a:visited {
+            color: black; /* 방문한 링크 색상 검정으로 유지 */
+        }
 </style>
 </head>
 <body>
@@ -135,81 +182,74 @@
     try {
         // 세션에서 user_id 가져오기
         String user_id = (String) session.getAttribute("user_id");
-
-        if (user_id != null) {
-            String querytext = "SELECT * FROM users WHERE user_id = '" + user_id + "'";
+        	String querytext = "SELECT * FROM users U "
+                    + "INNER JOIN applications A ON U.user_id = A.user_id "
+                    + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
+                    + "WHERE U.user_id = '" + user_id + "'";
             pstmt = conn.prepareStatement(querytext);
-            rs = pstmt.executeQuery();
-            
+            rs = pstmt.executeQuery();            
     %>
     <div class="container">
-        <h2>마이페이지</h2>
-        <%
-        while (rs.next()) {
-            String name = rs.getString("name");
-            String userId = rs.getString("user_id");
-            String residentRegistrationNumber = rs.getString("resident_registration_number");
-            String phoneNumber = rs.getString("phone_number");
-
-            // 문자열 처리
-            String nameDisplay = (name != null && name.length() > 1) ? name.substring(0, name.length() - 1) + "*" : name;
-            String userIdDisplay = (userId != null && userId.length() > 3) ? userId.substring(0, userId.length() - 3) + "***" : userId;
-            String residentRegNumberDisplay = (residentRegistrationNumber != null && residentRegistrationNumber.length() > 8) ? residentRegistrationNumber.substring(0, 7) + "-" + residentRegistrationNumber.substring(7) : residentRegistrationNumber;
-            String phoneNumberDisplay = (phoneNumber != null && phoneNumber.length() > 4) ? "****" + phoneNumber.substring(phoneNumber.length() - 4) : phoneNumber;
-        %>
-        <div class="form-row">
-            <label for="name">이름</label>
-            <label><%= nameDisplay %></label>
-        </div>
-        <div class="form-row">
-            <label for="user_id">아이디</label>
-            <label><%= userIdDisplay %></label>
-        </div>
-        <div class="form-row">
-            <label for="resident_registration_number">주민등록번호</label>
-            <label><%= residentRegNumberDisplay %></label>
-        </div>
-        <div class="form-row">
-            <label for="address">주소</label>
-            <label><%= rs.getString("address") %></label>
-        </div>
-        <div class="form-row">
-            <label for="phone_number">휴대폰번호</label>
-            <label><%= phoneNumberDisplay %></label>
-        </div>
-        <div class="form-row">
-            <label for="email">이메일</label>
-            <label><%= rs.getString("email") %></label>
-        </div>
-        <div class="form-row">
-            <label for="volunteer_region">봉사희망지역</label>
-            <label><%= rs.getString("volunteer_region") %></label>
-        </div>
-        <div class="form-row">
-            <label for="created_at">가입일자</label>
-            <label><%= rs.getString("created_at") %></label>
-        </div>
-        <% 
-            }
-        } else {
-            out.println("User ID not found in session.");
-        }
+    <%
+if (rs.next()) {
+    %>
+     <h2>내정보</h2>
+     <hr>
+    <div class="details">
+        <p><strong>이름:</strong> <%= rs.getString("name") %> 님</p>
+        <p><strong>아이디:</strong> <%= rs.getString("user_id") %></p>
+        <p><strong>주민등록번호:</strong> <%= rs.getString("resident_registration_number") %></p>
+        <p><strong>주소:</strong> <%= rs.getString("address") %></p>
+        <p><strong>휴대폰번호:</strong> <%= rs.getString("phone_number") %></p>
+        <p><strong>이메일:</strong> <%= rs.getString("email") %></p>
+        <p><strong>봉사희망지역:</strong> <%= rs.getString("volunteer_region") %></p>
+        <p><strong>가입일자:</strong> <%= rs.getString("created_at") %></p>
+    </div>
+    </div>
+</div>
+<div class="container2">
+        <h2>신청내역</h2>
+        <hr>
+        	<table>
+				<tr>
+					
+					<th> 봉사지역 </th>
+					<th> 활동구분 </th>
+					<th> 봉사시작일 </th>
+					<th> 봉사종료일 </th>
+					<th> 봉사내용 </th>
+					<th> 관리자확인 </th>
+					<th>  취소 </th>
+				</tr>
+<% 
+        while(rs.next()) {
+%> 
+ 				<tr>
+			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("region") %></a></td>
+			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("activity_type") %></a></td>
+			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("start_date") %></a></td>
+			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("end_date") %></a></td>
+			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("field") %></a></td>
+			        <td><a ><%= rs.getString("status") %></a></td>  
+			        <td><button type ="button" onclick="fnDelete(<%= rs.getString("f_id") %>)">취소하기</button></td>
+			    </tr>
+         
+<% 
+            }}
+%>
+</div>
+<%
         } catch(SQLException ex) {
             out.println("SQLException : " + ex.getMessage());
-        } finally {
-            if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
         }
-        %>
-    </div>
-    <div class="container2">
-        <h2>봉사내역</h2>
-        <!-- 참여활동 내용 추가 -->
-    </div>
-    
-</div>
-<div class="footer">
-        &copy; Helpers
-        </div>
+        %>  
 </body>
 </html>
+
+<script>
+function fnDelete(f_id){
+    if (confirm("정말로 이 신청을 취소하시겠습니까?")) {
+        window.location.href = "deleteB.jsp?f_id=" + f_id;
+    }
+}
+</script>
