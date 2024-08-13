@@ -70,10 +70,10 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 20%; /* 너비 20% */
+    width: 24.5%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
-    left: 8.5%; /* 페이지 왼쪽 끝에 정렬 */
+    left: 4%; /* 페이지 왼쪽 끝에 정렬 */
     height: calc(100vh - 80px); /* 화면 높이에서 80px를 뺀 높이 */
 }
 
@@ -83,7 +83,7 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 60%; /* 너비 60% */
+    width: 64%; /* 너비 60% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 31%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
@@ -173,83 +173,100 @@ th, td {
 <header>
     <%@ include file = "header.jsp" %>
 </header>
+<form action="" name="user">
 <div class="content">
-    <%@include file="db.jsp"%>
+   <%@include file="db.jsp"%>
     <%
-    ResultSet rs = null;
-    PreparedStatement pstmt = null;
+    ResultSet rs1 = null;
+    ResultSet rs2 = null;
+    PreparedStatement pstmt1 = null;
+    PreparedStatement pstmt2 = null;
 
     try {
-        // 세션에서 user_id 가져오기
         String user_id = (String) session.getAttribute("user_id");
-        	String querytext = "SELECT * FROM users U "
-                    + "INNER JOIN applications A ON U.user_id = A.user_id "
-                    + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
-                    + "WHERE U.user_id = '" + user_id + "'";
-            pstmt = conn.prepareStatement(querytext);
-            rs = pstmt.executeQuery();            
+
+        // 사용자 정보 가져오기
+        String userQuery = "SELECT * FROM users WHERE user_id = ?";
+        pstmt1 = conn.prepareStatement(userQuery);
+        pstmt1.setString(1, user_id);
+        rs1 = pstmt1.executeQuery();
+
+        if (rs1.next()) {
     %>
     <div class="container">
+        <h2>내정보</h2>
+        <hr>
+        <div class="details">
+            <p><strong>이름:</strong> <%= rs1.getString("name") %> 님</p>
+            <p><strong>아이디:</strong> <%= rs1.getString("user_id") %></p>
+            <p><strong>주소:</strong> <%= rs1.getString("address") %></p>
+            <p><strong>휴대폰번호:</strong> <%= rs1.getString("phone_number") %></p>
+            <p><strong>이메일:</strong> <%= rs1.getString("email") %></p>
+            <p><strong>봉사희망지역:</strong> <%= rs1.getString("volunteer_region") %></p>
+            <p><strong>가입일자:</strong> <%= rs1.getString("created_at") %></p>
+            <button type="button" onclick="fnUpdate('<%= rs1.getString("user_id") %>')">내정보 변경</button>
+        </div>
+    </div>
     <%
-if (rs.next()) {
+        }
+
+        // 신청내역 가져오기
+        String applicationsQuery = "SELECT * FROM applications A "
+                                 + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
+                                 + "WHERE A.user_id = ?";
+        pstmt2 = conn.prepareStatement(applicationsQuery);
+        pstmt2.setString(1, user_id);
+        rs2 = pstmt2.executeQuery();
     %>
-     <h2>내정보</h2>
-     <hr>
-    <div class="details">
-        <p><strong>이름:</strong> <%= rs.getString("name") %> 님</p>
-        <p><strong>아이디:</strong> <%= rs.getString("user_id") %></p>
-        <p><strong>주민등록번호:</strong> <%= rs.getString("resident_registration_number") %></p>
-        <p><strong>주소:</strong> <%= rs.getString("address") %></p>
-        <p><strong>휴대폰번호:</strong> <%= rs.getString("phone_number") %></p>
-        <p><strong>이메일:</strong> <%= rs.getString("email") %></p>
-        <p><strong>봉사희망지역:</strong> <%= rs.getString("volunteer_region") %></p>
-        <p><strong>가입일자:</strong> <%= rs.getString("created_at") %></p>
-    </div>
-    </div>
-</div>
-<div class="container2">
+    <div class="container2">
         <h2>신청내역</h2>
         <hr>
-        	<table>
-				<tr>
-					
-					<th> 봉사지역 </th>
-					<th> 활동구분 </th>
-					<th> 봉사시작일 </th>
-					<th> 봉사종료일 </th>
-					<th> 봉사내용 </th>
-					<th> 관리자확인 </th>
-					<th>  취소 </th>
-				</tr>
-<% 
-        while(rs.next()) {
-%> 
- 				<tr>
-			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("region") %></a></td>
-			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("activity_type") %></a></td>
-			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("start_date") %></a></td>
-			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("end_date") %></a></td>
-			        <td><a href="board2.jsp?f_id=<%= rs.getString("f_id") %>"><%= rs.getString("field") %></a></td>
-			        <td><a ><%= rs.getString("status") %></a></td>  
-			        <td><button type ="button" onclick="fnDelete(<%= rs.getString("f_id") %>)">취소하기</button></td>
-			    </tr>
-         
-<% 
-            }}
-%>
+        <table>
+            <tr>
+                <th>봉사지역</th>
+                <th>활동구분</th>
+                <th>봉사시작일</th>
+                <th>봉사종료일</th>
+                <th>봉사내용</th>
+                <th>관리자확인</th>
+                <th>취소</th>
+            </tr>
+            <%
+            while(rs2.next()) {
+            %>
+            <tr>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("region") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("activity_type") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("start_date") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("end_date") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("field") %></a></td>
+                <td><a ><%= rs2.getString("status") %></a></td>
+                <td><button type="button" onclick="fnDelete('<%= rs2.getString("f_id") %>')">취소하기</button></td>
+            </tr>
+            <%
+            }
+            %>
+        </table>
+    </div>
+    <%
+    } catch(SQLException ex) {
+        out.println("SQLException : " + ex.getMessage());
+    }
+    %>
 </div>
-<%
-        } catch(SQLException ex) {
-            out.println("SQLException : " + ex.getMessage());
-        }
-        %>  
-</body>
-</html>
-
+</form>
 <script>
 function fnDelete(f_id){
     if (confirm("정말로 이 신청을 취소하시겠습니까?")) {
         window.location.href = "deleteB.jsp?f_id=" + f_id;
     }
 }
+
+function fnUpdate(user_id){
+    if (confirm("정보를 수정합니까?")) {
+        window.open("updateB.jsp?id=" + user_id, "reset", "width=500,height=230");
+    }
+}
 </script>
+</body>
+</html>

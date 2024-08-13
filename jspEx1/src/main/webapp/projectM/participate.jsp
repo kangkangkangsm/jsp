@@ -52,6 +52,7 @@
     h2 {
         text-align: center;
         margin-bottom: 20px; /* Adjust as needed */
+        margin-top:-5px;
         color: #333;
     }
 
