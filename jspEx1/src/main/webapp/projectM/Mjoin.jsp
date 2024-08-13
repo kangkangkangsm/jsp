@@ -22,6 +22,7 @@
         }
         
         .container {
+        	margin-top:60px;
             background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
@@ -98,8 +99,22 @@
         .Joinbtn:hover {
             background-color: #4cae4c;
         }
+         header {
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
     </style>
 </head>
+<header>
+ <%@ include file = "header.jsp" %>
+</header>
 <body>
     <div class="container">
         <h2>회원가입</h2>
@@ -174,31 +189,6 @@
                     <option value="제주특별자치도">제주특별자치도</option>
                 </select>
             </div>
-
-            <div class="form-row">
-                <label for="desired_activity">온라인/오프라인</label>
-                <label for="special_skills">희망_봉사분야</label>
-            </div>
-            <div class="form-row">
-                <select id="desired_activity" name="desired_activity" required>
-                    <option value=''>::온라인/오프라인::</option>
-                    <option value="온라인">온라인</option>
-                    <option value="오프라인">오프라인</option>
-                </select>
-                <select id="special_skills" name="special_skills" required>
-                    <option value=''>::희망_봉사분야::</option>
-                    <option value="A">[온라인] 번역 및 콘텐츠 제작</option>
-                    <option value="B">[온라인] 멘토링 및 상담</option>
-                    <option value="C">[온라인] 디지털 서포터</option>
-                    <option value="D">[온라인] 사회적 캠페인 참여</option>
-                    <option value="E">[오프라인] 환경 보호 활동</option>
-                    <option value="F">[오프라인] 사회복지시설 지원</option>
-                    <option value="G">[오프라인] 교육 봉사</option>
-                    <option value="H">[오프라인] 건강 및 의료 봉사</option>
-                    <option value="I">[오프라인] 문화 및 예술 활동 지원</option>
-                </select>
-            </div>
-
             <button type="button" class="Joinbtn" onclick="fnJoin()">가입하기</button>
             
         </form>
@@ -227,13 +217,11 @@ function fnJoin(){
     var phone_number = document.querySelector('#phone_number').value;
     var gender = document.querySelector('#gender').value;
     var volunteer_region = document.querySelector('#volunteer_region').value;
-    var desired_activity = document.querySelector('#desired_activity').value;
-    var special_skills = document.querySelector('#special_skills').value;
     
     if (user_id === '' || name === '' || password === '' || repassword === ''
     	|| resident_registration_number === '' || address === '' || email === ''
     	|| phone_number === ''|| gender === '' || volunteer_region === '' 
-    	|| desired_activity === '' || special_skills === '') {
+    	) {
         alert('빈칸/선택 채워주세요.');
         return;
     }

@@ -98,8 +98,22 @@
         .Joinbtn:hover {
             background-color: #4cae4c;
         }
+         header {
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
     </style>
 </head>
+<header>
+ <%@ include file = "header.jsp" %>
+</header>
 <body>
     <div class="container">
         <h2>로그인</h2>

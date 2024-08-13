@@ -186,14 +186,6 @@
             <label><%= rs.getString("volunteer_region") %></label>
         </div>
         <div class="form-row">
-            <label for="desired_activity">온/오프라인</label>
-            <label><%= rs.getString("desired_activity") %></label>
-        </div>
-        <div class="form-row">
-            <label for="special_skills">희망_봉사분야</label>
-            <label><%= rs.getString("special_skills") %></label>
-        </div>
-        <div class="form-row">
             <label for="created_at">가입일자</label>
             <label><%= rs.getString("created_at") %></label>
         </div>
