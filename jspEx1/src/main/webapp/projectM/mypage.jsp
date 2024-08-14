@@ -74,7 +74,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-    height: 370px;/* 화면 높이에서 80px를 뺀 높이 */
+    height: 380px;/* 화면 높이에서 80px를 뺀 높이 */
 }
 
 .container3 {
@@ -84,7 +84,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     width: 32%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
-    top: 460px; /* 상단에서 80px 떨어진 위치 */
+    top: 470px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
    	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
 }
@@ -110,6 +110,7 @@
         text-align: center;
         margin-bottom: 20px; /* Adjust as needed */
         color: #333;
+        margin-top:-3px;
     }
 
     button {
@@ -121,6 +122,17 @@
         color: #fff;
         font-size: 16px;
         cursor: pointer;
+    }
+    .Jbutton {
+        width: 20%;
+        padding: 10px;
+        background-color: #5cb85c;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        float:left;
     }
 
     button:hover {
@@ -218,7 +230,8 @@ th, td {
             <p><strong>이메일:</strong> <%= rs1.getString("email") %></p>
             <p><strong>봉사희망지역:</strong> <%= rs1.getString("volunteer_region") %></p>
             <p><strong>가입일자:</strong> <%= rs1.getString("created_at") %></p>
-            <%-- <button type="button" onclick="fnUpdate('<%= rs1.getString("user_id") %>','<%= rs1.getString("password") %>')">내정보 변경</button> --%>
+            <p><strong>나의등급:</strong> <%= rs1.getString("user_grade") %></p>
+           <button type="button" class ="Jbutton" onclick="fnUpdate2('<%= rs1.getString("user_id") %>')">내정보 변경</button> 
         </div>
     </div>
 <%        
@@ -316,6 +329,13 @@ function fnUpdate(c_id){
         window.location.href = "updateC.jsp?c_id=" + c_id;
     }
 }
+
+function fnUpdate2(uesr_id){
+    if (confirm("정말로 수정하실겁니까?")) {
+        window.location.href = "updateA.jsp?user_id=" + uesr_id;
+    }
+}
+
 </script>
 </body>
 </html>

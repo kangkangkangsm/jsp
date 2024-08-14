@@ -87,7 +87,7 @@
         }
         
         .Joinbtn {
-            width: 100%;
+            width: 49%;
             padding: 10px;
             background-color: #5cb85c;
             border: none;
@@ -131,6 +131,7 @@
 %>
 			<div class="container">
 			<h2>신청이 완료되었습니다.</h2>
+			<button class="Joinbtn" onclick="location.href='participate.jsp'">계속 보기</button>
 			<button class="Joinbtn" onclick="location.href='mypage.jsp'">마이페이지 에서 확인</button>
 		</div>
 <%				
