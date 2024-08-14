@@ -66,6 +66,21 @@
             margin-top: 20px;
         }
         
+         .xbutton {
+            
+            width: 49%;
+            padding: 10px;
+            background-color: #C0CECB;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .xbutton:hover {
+            background-color: #F4F4F4;
+        }
         button:hover {
             background-color: #4cae4c;
         }
@@ -118,7 +133,17 @@
         <p><strong>내용:</strong> <%= rs.getString("contents") %></p>
     </div>
     <div>
+   <% 
+     if ("모집중".equals(rs.getString("recruitment_status"))) {
+                    %>                        
     <button type="button" onclick="fnapply(<%= id %>)">신청하기</button>
+                    <% 
+                    }else{
+                    %>	
+    <button class="xbutton" onclick="return false;" disabled>모집완료</button>              	
+                    <%
+                    }
+                    %>
     <button type="button" onclick="history.back()">돌아가기</button>
     </div>
     <%

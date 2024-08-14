@@ -124,7 +124,7 @@
         cursor: pointer;
     }
     .Jbutton {
-        width: 20%;
+        width: 25%;
         padding: 10px;
         background-color: #5cb85c;
         border: none;
@@ -233,7 +233,7 @@ th, td {
             <p><strong>가입일자:</strong> <%= rs1.getString("created_at") %></p>
             <p><strong>나의등급:</strong> <%= rs1.getString("user_grade") %></p>
            <button type="button" class ="Jbutton" onclick="fnUpdate2('<%= rs1.getString("user_id") %>')">내정보 변경</button> 
-           <button type="button" class ="Jbutton" onclick="fnDelete('<%= rs1.getString("user_id") %>')">회원탈퇴</button>
+           <button type="button" class ="Jbutton" onclick="fnDelete3('<%= rs1.getString("user_id") %>')">회원탈퇴</button>
         </div>
     </div>
 <%        
@@ -338,7 +338,7 @@ function fnUpdate2(uesr_id){
     }
 }
 
-function fnDelete(uesr_id){
+function fnDelete3(uesr_id){
     if (confirm("정말로 탈퇴하실겁니까?")) {
         window.location.href = "unregister.jsp?user_id=" + uesr_id;
     }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,8 @@
         h3 {
             text-align: center;
             color: #333;
-            margin-bottom: -10px;
+            margin-bottom: 30px;
+ 
         }
         h2 {
             text-align: center;
@@ -103,6 +105,21 @@
         .Joinbtn:hover {
             background-color: #4cae4c;
         }
+        
+        .Joinbtns {
+            width: 49%;
+            padding: 10px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .Joinbtns:hover {
+            background-color: #4cae4c;
+        }
          header {
         width: 100%;
         background-color: #333;
@@ -121,47 +138,35 @@
 </header>
 <body>
 <%@include file="db.jsp"%>	
-	<%
-	String user_id = (String) session.getAttribute("user_id");
-	String password = (String) session.getAttribute("password");
- 	%>
-     <div class="container">
-     	<h3>[ 회원탈퇴 ]</h3>
-        <h2>아이디 비밀번호 입력</h2>
-        <form action="login-result.jsp" name="user">
-            <div class="form-row">
-                <input type="text" id="user_id" name="user_id" required placeholder="아이디">
-            </div>
-            <div class="form-row">
-            <input type="password" id="password" name="password" required placeholder="비밀번호">
-            </div>
-            <button type="button" class="Joinbtn" onclick="fnLogin()"> 회원 탈퇴</button>
-            
-        </form>
-    </div>
+<%
+
+		ResultSet rs = null;
+		Statement stmt = null;
+	    String sessionUserId = (String)session.getAttribute("user_id");
+	    
+	    try{
+			stmt = conn.createStatement();
+			String querytext = 
+					"DELETE FROM users WHERE user_id = '" + sessionUserId + "'";
+			stmt.executeUpdate(querytext);		
+			session.removeAttribute("user_id");
+		
+%>
+				 <div class="container">
+        		<div><h2>탈퇴되었습니다.</h2></div>					
+				<button class="Joinbtn" onclick="location.href='main.jsp'">메인페이지 이동</button>
+				</div>
+<%
+		} catch(SQLException ex) {
+			out.println("SQLException : " + ex.getMessage());
+			   out.println("아이디는 =" + sessionUserId);
+		}
+%>
+   
+</div>
 </body>
 </html>
 <script>
 
-function fnLogin(){
-	var sessionUserId = '<%= user_id %>';  
-	var sessionPassword = '<%= password %>';
-	var user_id = document.querySelector('#user_id').value;
-	var password = document.querySelector('#password').value;
-	if (user_id !== sessionUserId || password !== sessionPassword) {
-	    alert('아이디 또는 비밀번호가 틀립니다.');
-	    return;
-	} else {
-		 var url = "unregister_result.jsp?dat=" + dat + "&c_id=" + c_id;
-	        window.open(url, "reset", "width=500, height=500");
-	}
-	
-function fnComment(c_id) {
-    var dat = document.getElementById('dat').value;
-    if (confirm("댓글을 달까요?")) {
-        var url = "comment_result.jsp?dat=" + dat + "&c_id=" + c_id;
-        window.open(url, "reset", "width=500, height=500");
-      
-    }	
 
 </script>

@@ -216,16 +216,18 @@ th, td {
 		try{
 			stmt = conn.createStatement();
 			String querytext = "SELECT * FROM volunteering WHERE " +
-                    "region LIKE '%" + region + "%' " +
-                    "AND field LIKE '%" + field + "%' " +
-                    "AND target_group LIKE '%" + target_group + "%' " +
-                    "AND recruitment_status LIKE '%" + recruitment_status + "%' " +
-                    "AND activity_type LIKE '%" + activity_type + "%' " +
-                    "AND start_date >= '" + start_date + "' " +
-                    "AND end_date <= '" + end_date + "' " +
-                    "AND (contents LIKE '%" + search + "%' " +
-                    "OR title LIKE '%" + search + "%')";
-			//System.out.println(querytext);
+			        "region LIKE '%" + region + "%' " +
+			        "AND field LIKE '%" + field + "%' " +
+			        "AND target_group LIKE '%" + target_group + "%' " +
+			        "AND recruitment_status LIKE '%" + recruitment_status + "%' " +
+			        "AND activity_type LIKE '%" + activity_type + "%' " +
+			        "AND start_date >= '" + start_date + "' " +
+			        "AND end_date <= '" + end_date + "' " +
+			        "AND (contents LIKE '%" + search + "%' " +
+			        "OR title LIKE '%" + search + "%') " +
+			        "ORDER BY cdatetime DESC"; // c_cdatetime을 오름차순으로 정렬
+
+			// System.out.println(querytext); // 쿼리 확인용 출력
 			rs = stmt.executeQuery(querytext);
 			
 			
@@ -265,7 +267,7 @@ th, td {
 			
 <%	
 			} catch(SQLException ex) {
-				String querytext = "SELECT * FROM volunteering";
+				String querytext = "SELECT * FROM volunteering ORDER BY cdatetime DESC";
 				rs = stmt.executeQuery(querytext);
 %>				
 				<table>

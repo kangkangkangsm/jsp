@@ -10,6 +10,8 @@
 <body>
 	<%
 		session.removeAttribute("user_id");
+		session.removeAttribute("password");
+		session.removeAttribute("user_grade");
 		response.sendRedirect("main.jsp");
 	%>
 </body>

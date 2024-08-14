@@ -85,7 +85,6 @@ body {
 </body>
 </html>
 <script>
-alert("저장");
 window.close();
 window.opener.fnReload();
 </script>

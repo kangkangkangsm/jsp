@@ -193,7 +193,7 @@ function fnComment(c_id) {
     var dat = document.getElementById('dat').value;
     if (confirm("댓글을 달까요?")) {
         var url = "comment_result.jsp?dat=" + dat + "&c_id=" + c_id;
-        window.open(url, "reset", "width=500, height=500");
+        window.open(url, "reset", "width=0, height=0");
       
     }
 }
