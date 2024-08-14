@@ -1,25 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤 추가하기</title>
-    <style>
-   * {
+<title>Insert title here</title>
+<style>
+    * {
         box-sizing: border-box;
     }
-
+    
     body {
         font-family: Arial, sans-serif;
-        background-color: #ffffff;
+        background-color: #f4f4f4;
         margin: 0;
         padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
-
+    
     header {
         width: 100%;
         background-color: #333;
@@ -32,26 +30,36 @@
         z-index: 1000;
     }
 
-    .content {
-        margin-top: 60px; /* Adjust based on header height */
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-    }
-
     .container {
-        border-radius: 8px;
-        margin-top: 150px;
+        margin: 150px auto; /* Adjusted margin-top to account for header */
         background-color: #ffffff;
-        padding: 20px 5%;
+        padding: 20px;
+        border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 80%; /* Adjust width as needed */
+        width: 80%;
+        max-width: 800px;
+       
     }
-
+    
     h2 {
         text-align: center;
-        margin-bottom: 20px; /* Adjust as needed */
+        color: #333;
+        margin-bottom: 30px;
+    }
+    
+    .details {
+        margin-bottom: 20px;
+    }
+    
+    .details p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #555;
+    }
+    
+    .details strong {
+        display: inline-block;
+        width: 150px;
         color: #333;
     }
 
@@ -62,39 +70,26 @@
         align-items: center;
     }
 
-    .form-row label {
-        width: 19%;
-        color: #555;
-        text-align: left;
-        margin-left: 5px;
-    }
-
-    .form-row input[type="text"],
-    .form-row input[type="date"],
-    .form-row select {
-        width: 18%;
+     .form-row input[type="text"],
+    .form-row input[type="date"]
+ 	   {
+        width: calc(95% - 100px); /* Adjust width to fit next to button */
         padding: 10px;
-        margin-right: 5px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        height:41px;
+    }
+    
+    .form-row select {
+        width: 200px; /* Adjust width to fit next to button */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height:41px;
     }
 
-    .form-row input[type="checkbox"],
-    .form-row input[type="radio"] {
-        margin-right: 5px;
-    }
-
-    .form-row label.inline {
-        width: auto;
-        margin-left: 10px;
-    }
-
-       button,
-    input[type="submit"],
-    input[type="reset"] {
-   		float:right;
-        justify-content: space-between;
-        width: 8%;
+    button {
+        width: 120px; /* Adjust button width */
         padding: 10px;
         background-color: #5cb85c;
         border: none;
@@ -102,56 +97,100 @@
         color: #fff;
         font-size: 16px;
         cursor: pointer;
-        margin-left:10px;
+        
     }
-
-    button:hover,
-    input[type="submit"]:hover,
-    input[type="reset"]:hover {
+    
+    button:hover {
         background-color: #4cae4c;
     }
+    
+    .comment {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fafafa;
+    }
+    
+    .comment p {
+        margin: 0;
+        font-size: 14px;
+        color: #333;
+    }
 
-   
-  </style>
+    .button-group {
+        text-align: right;
+    }
+
+    .button-group button {
+        width: 120px; /* Set width to auto for dynamic width based on text */
+       
+    }
+
+</style>
 </head>
 <body>
-
-<%@ include file="header.jsp" %>
+<header>
+    <%@ include file="header.jsp" %>
+</header>
 <div class="container">
-    <form action="community_insert_result.jsp" method="get" target="_blank">
-        <h2>글쓰기</h2>
-
-        <!-- First Row -->
-        <div class="form-row">
+    <form action="updateC_result.jsp" method="get" target="_blank">
+        <%@include file="db.jsp"%>
+        <%
+            ResultSet rs = null;
+            Statement stmt = null;
+            String c_id = (String)request.getParameter("c_id");
+            
+            try {
+                stmt = conn.createStatement();
+                String querytext = "SELECT * FROM community WHERE c_id ='" + c_id + "'";
+                rs = stmt.executeQuery(querytext);
+                if(rs.next()){
+          %>      
+	<div class="form-row">
             <label for="board_type">게시글 유형</label>
         </div>
         <div class="form-row">
-            <select id="board_type" name="board_type" required>
-                <option value="">전체포함</option>
+            <select id="board_type" name="board_type">
+                <option value="<%= rs.getString("board_type") %>"><%= rs.getString("board_type") %></option>
                 <option value="자유게시판">자유게시판</option>
                 <option value="소식알리기">소식알리기</option>
                 <option value="건의합니다">건의합니다</option>
                 <option value="요청합니다">요청합니다</option>
             </select>
         </div>
+ 		<input type="hidden" name ="c_id" value="<%= rs.getString("c_id") %>">
 	   <div class="form-row">
             <label for="c_title" >제목</label>
         </div>
           <div class="form-row">
-        <input type="text" id="c_title" name="c_title" placeholder="제목" style="width:100%;">
+        <input type="text" id="c_title" name="c_title" placeholder="제목" style="width:100%;" value="<%= rs.getString("c_title") %>">
         </div>    
           <div class="form-row">
             <label for="c_contents" >내용</label>
         </div>
           <div class="form-row">
-        <input type="text" id="c_contents" name="c_contents" placeholder="내용" style="width:100%; height:250px;">
-        </div>    
-            <button onclick="history.back()" value="취소">취소</button>
-            <input type="submit" value="저장">
+        <input type="text" id="c_contents" name="c_contents" placeholder="내용" style="width:100%; height:250px;" value="<%= rs.getString("c_contents") %>" >
+       	</div>
+         <div class="button-group">
+            <button type="submit" value="저장">저장</button>           
+            <button type="button" onclick="Back()">취소</button>
+        </div>         
+                
+        <%
+                }
+            } catch (SQLException ex) {
+                out.println("SQLException : " + ex.getMessage());
+            }
+        %>
+        </div>
     </form>
 </div>
+
+<script>
+function Back() {
+    window.history.back();
+}
+</script>
 </body>
 </html>
-<script>
-</script>
-  
