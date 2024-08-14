@@ -123,6 +123,7 @@
                 <option value="소식알리기">소식알리기</option>
                 <option value="건의합니다">건의합니다</option>
                 <option value="요청합니다">요청합니다</option>
+                <option value="공지사항">공지사항</option>
             </select>
             <input type="text" id="user_id" name="user_id" placeholder="아이디 검색">
             <input type="text" id="search" name="search" placeholder="통합 검색">

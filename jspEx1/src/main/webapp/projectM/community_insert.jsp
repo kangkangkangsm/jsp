@@ -115,8 +115,13 @@
   </style>
 </head>
 <body>
-
 <%@ include file="header.jsp" %>
+<%@ include file="db.jsp" %>
+
+<%
+    String s = (String) session.getAttribute("user_grade");
+%>
+
 <div class="container">
     <form action="community_insert_result.jsp" method="get" target="_blank">
         <h2>글쓰기</h2>
@@ -132,26 +137,31 @@
                 <option value="소식알리기">소식알리기</option>
                 <option value="건의합니다">건의합니다</option>
                 <option value="요청합니다">요청합니다</option>
+<%    
+            if ("관리자".equals(s)) {
+%>
+               <option value="공지사항">공지사항</option>
+<%
+            }
+%>
             </select>
         </div>
-	   <div class="form-row">
-            <label for="c_title" >제목</label>
+        <div class="form-row">
+            <label for="c_title">제목</label>
         </div>
-          <div class="form-row">
-        <input type="text" id="c_title" name="c_title" placeholder="제목" style="width:100%;">
+        <div class="form-row">
+            <input type="text" id="c_title" name="c_title" placeholder="제목" style="width:100%;">
         </div>    
-          <div class="form-row">
-            <label for="c_contents" >내용</label>
+        <div class="form-row">
+            <label for="c_contents">내용</label>
         </div>
-          <div class="form-row">
-        <input type="text" id="c_contents" name="c_contents" placeholder="내용" style="width:100%; height:250px;">
+        <div class="form-row">
+            <input type="text" id="c_contents" name="c_contents" placeholder="내용" style="width:100%; height:250px;">
         </div>    
-            <button onclick="history.back()" value="취소">취소</button>
-            <input type="submit" value="저장">
+        <button type="button" onclick="history.back()">취소</button>
+        <input type="submit" value="저장">
     </form>
 </div>
 </body>
 </html>
-<script>
-</script>
   

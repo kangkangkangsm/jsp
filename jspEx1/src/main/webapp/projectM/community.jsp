@@ -135,6 +135,8 @@ th, td {
 <%@ include file="header3.jsp" %>
 <form action="community.jsp" method="get">
 <%@ include file="db.jsp"%>  
+
+
 <div class="container2">
     <%
     ResultSet rs = null;
@@ -175,7 +177,7 @@ th, td {
         }
 
         // 최근 날짜 기준으로 정렬
-        querytext += " ORDER BY c_cdatetime DESC";
+        querytext += " ORDER BY CASE WHEN board_type = '공지사항' THEN 0 ELSE 1 END, c_cdatetime DESC";
 
         // 쿼리 실행
         rs = stmt.executeQuery(querytext);

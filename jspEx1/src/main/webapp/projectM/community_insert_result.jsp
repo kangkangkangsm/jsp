@@ -26,7 +26,7 @@ header {
     z-index: 1000;
 }
 .container {
-    margin: 380px auto 20px auto; /* Adjusted margin-top to account for header */
+    margin: 300px auto 20px auto; /* Adjusted margin-top to account for header */
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;

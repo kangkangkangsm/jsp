@@ -52,9 +52,20 @@
 </head>
 <body>
     <%@ include file = "header.jsp" %>
-    <div class="container">
-        <h1>기능추가예정없음</h1>
-      </div>
+      <%@include file="db.jsp"%>	
+<%
+		ResultSet rs = null;
+		Statement stmt = null;
+		
+   	    String user_id = (String) session.getAttribute("user_id");
+%> 
+  	 	    <div class="container">
+ 	    <h1>관리자 <%= user_id %>님 안녕하세요</h1>
+ 		  </div>
+				
+		
+</body>
+    
 
       
 </body>
