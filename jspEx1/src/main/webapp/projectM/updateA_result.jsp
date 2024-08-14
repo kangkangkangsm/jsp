@@ -19,12 +19,12 @@
 		String address = request.getParameter("address");
 		String phone_number = request.getParameter("phone_number");
 		String volunteer_region = request.getParameter("volunteer_region");
-		String user_id = (String)request.getParameter("user_id");
+		String sessionId = (String) session.getAttribute("user_id");
 		
 		try{
 			stmt = conn.createStatement();
 			String querytext = "UPDATE users SET " 
-			+ "email = '" + email + "', address = '" + address + "', phone_number = '" + phone_number + "', volunteer_region = '" + volunteer_region +"' WHERE user_id ='" + user_id +"'";
+			+ "email = '" + email + "', address = '" + address + "', phone_number = '" + phone_number + "', volunteer_region = '" + volunteer_region +"' WHERE user_id ='" + sessionId +"'";
 			stmt.executeUpdate(querytext);	
 			response.sendRedirect("mypage.jsp");
 		

@@ -85,20 +85,21 @@
             background-color: #4cae4c;
         }
         
-        .Joinbtn {
-            width: 100%;
-            padding: 10px;
-            background-color: #5cb85c;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-        }
+      button {
+        width: 120px; /* Adjust button width */
+        padding: 10px;
+        background-color: #5cb85c;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
         
-        .Joinbtn:hover {
-            background-color: #4cae4c;
-        }
+    }
+    
+    button:hover {
+        background-color: #4cae4c;
+    }
          header {
         width: 100%;
         background-color: #333;
@@ -109,6 +110,14 @@
         top: 0;
         left: 0;
         z-index: 1000;
+    }
+      .button-group {
+        text-align: right;
+    }
+
+    .button-group button {
+        width: 120px; /* Set width to auto for dynamic width based on text */
+       
     }
     </style>
 </head>
@@ -123,7 +132,7 @@
             ResultSet rs = null;
             Statement stmt = null;
             String user_id = request.getParameter("user_id");
-                	System.out.println(user_id);
+            
             try {
                 stmt = conn.createStatement();
                 String querytext = "SELECT * FROM users WHERE user_id ='" + user_id + "'";
@@ -159,8 +168,8 @@
                     <label for="phone_number">휴대전화번호</label>
                 </div>
                 <div class="form-row">
-                    <input type="text" id="address" name="address" maxlength="255" value="<%= rs.getString("address") %>">
-                    <input type="text" id="phone_number" name="phone_number" maxlength="15"value="<%= rs.getString("phone_number") %>">
+                    <input type="text" id="address" name="address" maxlength="255" value="<%= rs.getString("address") %>" required>
+                    <input type="text" id="phone_number" name="phone_number" maxlength="15" value="<%= rs.getString("phone_number") %>" required>
                 </div>
 
                 <div class="form-row">
@@ -193,7 +202,10 @@
                         <option value="제주특별자치도">제주특별자치도</option>
                     </select>
                 </div>
+                <div class="button-group">
                 <button type="submit" value="저장">저장</button>
+                <button type="button" onclick="Back()">취소</button>
+                </div>  
 <%                
             
             
@@ -206,5 +218,10 @@
         
     </form>
 </div>
+<script>
+function Back() {
+    window.history.back();
+}
+</script>
 </body>
 </html>

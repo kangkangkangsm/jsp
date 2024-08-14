@@ -118,8 +118,8 @@
         <p><strong>내용:</strong> <%= rs.getString("contents") %></p>
     </div>
     <div>
-    <button type="button" onclick="history.back()">돌아가기</button>
     <button type="button" onclick="fnapply(<%= id %>)">신청하기</button>
+    <button type="button" onclick="history.back()">돌아가기</button>
     </div>
     <%
         } else {

@@ -132,7 +132,7 @@
         color: #fff;
         font-size: 16px;
         cursor: pointer;
-        float:left;
+        float:right;
     }
 
     button:hover {
