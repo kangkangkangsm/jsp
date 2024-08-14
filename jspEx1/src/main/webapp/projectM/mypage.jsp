@@ -102,6 +102,15 @@
     height: calc(200vh); /* 화면 높이에서 80px를 뺀 높이 */
 }
 
+ .container4 {
+        	margin-top:260px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
     .container:last-child {
         margin-left: 30px; /* Margin between the two sections */
     }
@@ -208,16 +217,21 @@ th, td {
     PreparedStatement pstmt1 = null;
     PreparedStatement pstmt2 = null;
     PreparedStatement pstmt3 = null;
-
+    String user_id = (String) session.getAttribute("user_id");
+	
+    if(user_id == null){			
+%>			
+			<div class="container4">	
+			<h2 style="margin-bottom: 70px; margin-top: 30px;">로그인 하세요</h2>
+			<button type="button" onclick="location.href='Mlogin.jsp'">로그인 하러 가기</button>
+			</div>
+<%
+		} else {			
     try {
-        String user_id = (String) session.getAttribute("user_id");
-
-        // 사용자 정보 가져오기
         String userQuery = "SELECT * FROM users WHERE user_id = ?";
         pstmt1 = conn.prepareStatement(userQuery);
         pstmt1.setString(1, user_id);
         rs1 = pstmt1.executeQuery();
-
         if (rs1.next()) {
     %>
     <div class="container">
@@ -309,7 +323,7 @@ th, td {
     <%
     } catch(SQLException ex) {
         out.println("SQLException : " + ex.getMessage());
-    }
+    }}
     %>
 </div>
 </form>

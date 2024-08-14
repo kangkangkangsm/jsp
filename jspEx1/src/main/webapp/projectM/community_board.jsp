@@ -150,7 +150,18 @@
         
         
         <div class="form-row">
+<%
+				if(sessionId == null){			
+%>				
+					<input type="text" placeholder="로그인 하셔야 글쓰기 가능!" disabled  >
+<%
+				} else {
+%>
             <input type="text" id="dat" name="dat" placeholder="<%= sessionId %> 님의 댓글">
+<% 
+				}
+%>            
+
             <button type="button" onclick="fnComment('<%= c_id %>')">등록하기</button>
         </div>
         
@@ -159,11 +170,21 @@
             querytext = "SELECT * FROM comment WHERE c_id = " + c_id;
             rs = stmt.executeQuery(querytext);
             while(rs.next()) {
-        %>
-        
+			if(sessionId == null){			
+%>				
+					<div class="comment">
+            <p><strong>익명 :</strong> <%= rs.getString("com_contents") %></p>
+        </div>
+<%
+				} else {
+%>
         <div class="comment">
             <p><strong><%= rs.getString("session_id") %>님 :</strong> <%= rs.getString("com_contents") %></p>
         </div>
+        
+<% 
+				}
+%>            
         
         <%
             }

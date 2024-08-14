@@ -186,17 +186,30 @@ th, td {
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>조회</th>
+            <th>조회수</th>
         </tr>
         <%
         while (rs.next()) {
+            ResultSet rs3 = null;
+            PreparedStatement pstmt3 = null;
+            // 수정된 SQL 쿼리
+            String applicationsQuery = "SELECT COUNT(*) AS CNT FROM comment WHERE c_id = ?";
+            pstmt3 = conn.prepareStatement(applicationsQuery);
+            pstmt3.setInt(1, rs.getInt("c_id"));  // c_id를 int로 설정
+            rs3 = pstmt3.executeQuery();
+            
+            String CNT = "";
+            if (rs3.next()) {  // rs3.next()로 결과를 가져온 후
+                CNT = "(" + rs3.getString("CNT") + ")";  // CNT 값을 읽어서 괄호에 감쌈
+            }
+            rs3.close(); // ResultSet 리소스 해제
         %>
         <tr>
-            <td><a href="community_board.jsp?c_id=<%= rs.getString("c_id") %>"><%= rs.getString("board_type") %></a></td>
-            <td><a href="community_board.jsp?c_id=<%= rs.getString("c_id") %>"><%= rs.getString("c_title") %></a></td>
-            <td><a href="community_board.jsp?c_id=<%= rs.getString("c_id") %>"><%= rs.getString("user_id") %></a></td>
-            <td><a href="community_board.jsp?c_id=<%= rs.getString("c_id") %>"><%= rs.getString("c_cdatetime") %></a></td>
-            <td><a href="community_board.jsp?c_id=<%= rs.getString("c_id") %>"><%= rs.getString("user_id") %></a></td>
+            <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></td>
+            <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("c_title") %> <%= CNT %></a></td>
+            <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></td>
+            <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></td>
+            <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></td>
         </tr>
         <%
         }

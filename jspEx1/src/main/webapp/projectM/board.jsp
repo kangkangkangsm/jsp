@@ -116,6 +116,7 @@
             stmt = conn.createStatement();
             String querytext = "SELECT * FROM volunteering WHERE id = " + id;
             rs = stmt.executeQuery(querytext);
+            
     %>
     <%
         if (rs.next()) {
