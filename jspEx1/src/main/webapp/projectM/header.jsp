@@ -84,7 +84,7 @@
                 <ul>
                     <li><a href="#" onclick="location.href='guide.jsp'">봉사안내</a></li>
                     <li><a href="#" onclick="location.href='participate.jsp'">봉사참여</a></li>
-                    <li><a href="#">커뮤니티</a></li>
+                    <li><a href="#" onclick="location.href='community.jsp'">커뮤니티</a></li>
                     <li><a href="#">고객센터</a></li>
                     <li><a href="#" onclick="location.href='mypage.jsp'" >마이페이지</a></li>
                 </ul>

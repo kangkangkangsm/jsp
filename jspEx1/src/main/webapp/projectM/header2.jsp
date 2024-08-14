@@ -44,8 +44,8 @@
 
     .container {
         border-radius: 8px;
-        margin-top: 140px;
-        margin-bottom : -130px;
+        margin-top: 110px;
+        margin-bottom : -102px;
         background-color: #ffffff;
         padding: 20px 5%;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -56,12 +56,14 @@
         text-align: center;
         margin-bottom: 20px; /* Adjust as needed */
         color: #333;
+        margin-top:10px;
     }
 
     .form-row {
         display: flex;
         justify-content: space-between;
         margin-bottom: 15px;
+        
         align-items: center;
     }
 

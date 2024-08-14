@@ -25,10 +25,7 @@
 			
 			
 			if(rs.next()){
-				out.println("로그인 성공.");
-				session.setAttribute("user_id", rs.getString("user_id"));
-				session.setAttribute("user_grade", rs.getString("user_grade"));
-				response.sendRedirect("main.jsp");
+			
 			} else {
 %>
 

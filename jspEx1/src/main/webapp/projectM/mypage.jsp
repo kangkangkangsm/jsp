@@ -70,11 +70,23 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 24.5%; /* 너비 20% */
+    width: 32%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
-    left: 4%; /* 페이지 왼쪽 끝에 정렬 */
-    height: calc(100vh - 80px); /* 화면 높이에서 80px를 뺀 높이 */
+    left: 5%; /* 페이지 왼쪽 끝에 정렬 */
+    height: 370px;/* 화면 높이에서 80px를 뺀 높이 */
+}
+
+.container3 {
+    border-radius: 8px; /* 테두리 둥글기 */
+    background-color: #ffffff; /* 배경색 흰색 */
+    padding: 20px; /* 내부 여백 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 32%; /* 너비 20% */
+    position: absolute; /* 절대 위치 지정 */
+    top: 460px; /* 상단에서 80px 떨어진 위치 */
+    left: 5%; /* 페이지 왼쪽 끝에 정렬 */
+   	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
 }
 
 /* 오른쪽에 위치할 .container2 스타일 */
@@ -83,11 +95,11 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 64%; /* 너비 60% */
+    width: 58%; /* 너비 60% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
-    left: 31%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
-    height: calc(100vh - 80px); /* 화면 높이에서 80px를 뺀 높이 */
+    left: 37.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
+    height: calc(200vh); /* 화면 높이에서 80px를 뺀 높이 */
 }
 
     .container:last-child {
@@ -179,8 +191,10 @@ th, td {
     <%
     ResultSet rs1 = null;
     ResultSet rs2 = null;
+    ResultSet rs3 = null;
     PreparedStatement pstmt1 = null;
     PreparedStatement pstmt2 = null;
+    PreparedStatement pstmt3 = null;
 
     try {
         String user_id = (String) session.getAttribute("user_id");
@@ -204,12 +218,41 @@ th, td {
             <p><strong>이메일:</strong> <%= rs1.getString("email") %></p>
             <p><strong>봉사희망지역:</strong> <%= rs1.getString("volunteer_region") %></p>
             <p><strong>가입일자:</strong> <%= rs1.getString("created_at") %></p>
-            <button type="button" onclick="fnUpdate('<%= rs1.getString("user_id") %>')">내정보 변경</button>
+            <%-- <button type="button" onclick="fnUpdate('<%= rs1.getString("user_id") %>','<%= rs1.getString("password") %>')">내정보 변경</button> --%>
         </div>
     </div>
+<%        
+		String applicationsQuery = "SELECT * FROM community WHERE user_id = ?";
+        pstmt3 = conn.prepareStatement(applicationsQuery);
+        pstmt3.setString(1, user_id);
+        rs3 = pstmt3.executeQuery();
+%>  
+    <div class="container3">
+        <h2>내가 쓴글</h2>
+        <hr>
+       <table>
+            <tr>
+                <th>제목</th>
+                <th>게시일</th>
+                <th>수정</th>
+                <th>삭제</th>
+             </tr>
+            <%
+            while(rs3.next()) {
+            %>
+            <tr>       
+             <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_title") %></a></td>
+                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_cdatetime") %></a></td>
+                 <td><button type="button" onclick="fnUpdate('<%= rs3.getString("c_id") %>')">수정</button></td>
+                 <td><button type="button" onclick="fnDelete2('<%= rs3.getString("c_id") %>')">삭제</button></td>
+                 </tr>
+            <%
+            }
+            %>
+            </table>
+            </div>
     <%
         }
-
         // 신청내역 가져오기
         String applicationsQuery = "SELECT * FROM applications A "
                                  + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
@@ -262,9 +305,15 @@ function fnDelete(f_id){
     }
 }
 
-function fnUpdate(user_id){
-    if (confirm("정보를 수정합니까?")) {
-        window.open("updateB.jsp?id=" + user_id, "reset", "width=500,height=230");
+function fnDelete2(c_id){
+    if (confirm("정말로 삭제하실겁니까?")) {
+        window.location.href = "deleteC.jsp?c_id=" + c_id;
+    }
+}
+
+function fnUpdate(c_id){
+    if (confirm("정말로 수정하실겁니까?")) {
+        window.location.href = "updateC.jsp?c_id=" + c_id;
     }
 }
 </script>
