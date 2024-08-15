@@ -224,18 +224,20 @@ th, td {
     <div class="container3">
             </div>
     <div class="container2">
+    <h2>관리 내역</h2>
+    <hr>
     <table>
     <tr>
     <th>관리내용</th>
     </tr>
      <tr>
-    <td><a href="admin_Member.jsp">회원 관리</a></td>
+    <td><a href="admin_Member.jsp">회원목록 관리</a></td>
     </tr>
      <tr>
-    <td><a href="#">봉사목록 관리</a></td>
+    <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
        <tr>
-    <td><a href="#">봉사참여 확인</a></td>
+    <td><a href="#">봉사관련 관리</a></td>
     </tr>
       <tr>
     <td><a href="#">고객센터 문의</a></td>

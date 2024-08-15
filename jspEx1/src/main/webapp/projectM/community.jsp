@@ -129,6 +129,13 @@ th, td {
         a:visited {
             color: black; /* 방문한 링크 색상 검정으로 유지 */
         }
+        
+         .disabled {
+        color: #a9a9a9; /* 회색 텍스트 색상 */
+        text-decoration: none; /* 밑줄 제거 */
+        cursor: not-allowed; /* 비활성화된 커서 */
+        pointer-events: none; /* 클릭 이벤트 차단 */
+    }
 </style>
 </head>
 <body>
@@ -205,6 +212,18 @@ th, td {
                 CNT = "(" + rs3.getString("CNT") + ")";  // CNT 값을 읽어서 괄호에 감쌈
             }
             rs3.close(); // ResultSet 리소스 해제
+            if ("N".equals(rs.getString("c_hidden"))) { 
+            if ("공지사항".equals(rs.getString("board_type"))) {        
+            %>
+        <tr>
+            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
+            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("c_title") %> <%= CNT %></a></strong></td>
+            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></strong></td>
+            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
+            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
+        </tr>
+        <%
+        } else {
         %>
         <tr>
             <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></td>
@@ -213,10 +232,35 @@ th, td {
             <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></td>
             <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></td>
         </tr>
+        
         <%
         }
+            }else{ 
+            if ("공지사항".equals(rs.getString("board_type"))) {        
+            %>
+        <tr>
+            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
+            <td><strong><a class="disabled">관리자에 의해 숨김처리 되었습니다.</a></strong></td>
+            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></strong></td>
+            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
+            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
+        </tr>
+        <%
+        } else {
         %>
-    </table>
+        <tr>
+            <td><a class="disabled"><%= rs.getString("board_type") %></a></td>
+            <td><a class="disabled">관리자에 의해 숨김처리 되었습니다.</a></td>
+            <td><a class="disabled"><%= rs.getString("user_id") %></a></td>
+            <td><a class="disabled"><%= rs.getTimestamp("c_cdatetime") %></a></td>
+            <td><a class="disabled"><%= rs.getInt("c_id") %></a></td>
+        </tr>
+        
+        <%
+        }       
+        }}
+%>  
+        </table>
     <%
     } catch (SQLException ex) {
         out.println("SQLException : " + ex.getMessage());

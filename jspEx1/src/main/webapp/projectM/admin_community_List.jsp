@@ -56,7 +56,6 @@
 
         h2 {
             text-align: center;
-            margin-bottom: 0px;
             color: #333; /* 텍스트 색상을 어두운 회색으로 설정 */
         }
 
@@ -72,6 +71,7 @@
             cursor: pointer;
             transition: background-color 0.3s; /* 버튼 배경색 변화에 애니메이션 추가 */
             margin: 5px;
+        
         }
 
         button:hover,
@@ -142,67 +142,54 @@
             <%
                 ResultSet rs = null;
                 Statement stmt = null;
+               
                 try {
                     stmt = conn.createStatement();
-                    String querytext = "SELECT * FROM users ORDER BY user_grade ASC,name ASC";
+                    String querytext = "SELECT * FROM community ORDER BY c_cdatetime DESC";
                     rs = stmt.executeQuery(querytext);
+                    
             %>
             <div class="container">
-                <h2>회원 관리</h2>
-               
-               
-                <button type="button" style="float:right" onclick="location.href='adminpage.jsp'">뒤로가기</button>
-                <table>
-                    <tr>
-                        <th>이름</th>
-                        <th>아이디</th>
-                        <th>전화번호</th>
-                        <th>이메일</th>
-                        <th>봉사지역</th>
-                        <th>등급</th>
-                        <th>가입일자</th>
-                        <th>VEN</th>
-                        <th>탈퇴</th>
-                    </tr>
-                    <%
-                        while (rs.next()) {
-                    %>
-                    <tr>
-                        <td><a><%= rs.getString("name") %></a></td>
-                        <td><a><%= rs.getString("user_id") %></a></td>               
-                        <td><a><%= rs.getString("phone_number") %></a></td>
-                        <td><a><%= rs.getString("email") %></a></td>
-                        <td><a><%= rs.getString("volunteer_region") %></a></td>
-                        <td><a><%= rs.getString("user_grade") %></a></td>
-                        <td><a><%= rs.getString("created_at") %></a></td>
-<% 
-     if ("일반사용자".equals(rs.getString("user_grade"))) {
-     if ("Y".equals(rs.getString("VEN"))) {
-%>
-                       <td><button  type="button" onclick="fnven('<%= rs.getString("user_id") %>')">정지</button></td>
-<% 
-	}else{                       
-%>
-		               <td><button style="background-color: red" type="button" onclick="fnrven('<%= rs.getString("user_id") %>')">정상화</button></td>
-<% 
-	}                       
-%>
-                       <td><button type="button" onclick="fndelete('<%= rs.getString("user_id") %>')">탈퇴</button></td>
-                    </tr>
+                <h2>게시판 관리</h2>
+<button type="button" style="float:right" onclick="location.href='adminpage.jsp'">뒤로가기</button>
+              
+        <table>
+        <tr>
+            <th style="width: 10%;">게시유형</th>
+            <th style="width: 15%;">제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th style="width: 8%;">숨기기</th>
+            <th style="width: 8%;">삭제</th>
+        </tr>           
 <%
-                        }else{
+        	while (rs.next()) {
+        		 
 %>
-<td><button type="button" style="background-color: #d3d3d3;" disabled>관리자</button></td>
-<td><button type="button" style="background-color: #d3d3d3;" disabled>관리자</button></td>
+                    <tr>
+            <td style="width: 10%;"><a><%= rs.getString("board_type") %></a></td>
+            <td style="width: 15%;"><a><%= rs.getString("c_title") %> </a></td>
+            <td><a><%= rs.getString("c_contents") %> </a></td>
+            <td><a><%= rs.getString("user_id") %></a></td>
+            <td><a><%= rs.getTimestamp("c_cdatetime") %></a></td>
+<%            
+    if ("N".equals(rs.getString("c_hidden"))) {            
+%> 
+    	<td><button  type="button" onclick="fnhidden('<%= rs.getString("c_id") %>')">숨김</button></td>
+<% }else{ %>    	    	
+		   	<td><button style="background-color: red"  type="button" onclick="fnrhidden('<%= rs.getString("c_id") %>')">해제</button></td>
+<%} %>           
+            <td><button  type="button" onclick="fndelete('<%= rs.getString("c_id") %>')">삭제</button></td>
+      
+     		   </tr>
 <%
-                        }}
+ 			}
 %>
-                </table>
-            </div>
-            <%
+<%
+                
                 } catch (SQLException ex) {
                     out.print("데이터베이스 오류: " + ex.getMessage());
-              
                 }
             %>
         </div>
@@ -212,23 +199,23 @@
 </html>
 
 <script>
-function fndelete(user_id){
-if (confirm("정말 탈퇴시켜요?")) {
-	 window.location.href = "unregister_result4.jsp?user_id=" + user_id;
+function fndelete(c_id){
+if (confirm("정말 삭제시켜요?")) {
+	 window.location.href = "deleteC2.jsp?c_id=" + c_id;
 	}
 	}
 
-function fnven(user_id){
-	if (confirm("정말 정지시켜요?")) {
-		 window.location.href = "member_ven.jsp?user_id=" + user_id;
+function fnhidden(c_id){
+	if (confirm("숨김처리 할게용?")) {
+		 window.location.href = "admin_community_hidden.jsp?c_id=" + c_id;
 		}
 		}
 		
-function fnrven(user_id){
-	if (confirm("정상화 시킵니다?")) {
-		 window.location.href = "member_rven.jsp?user_id=" + user_id;
+function fnrhidden(c_id){
+	if (confirm("숨김처리 해제 할게용?")) {
+		 window.location.href = "admin_community_rhidden.jsp?c_id=" + c_id;
 		}
-		}		
+		}
 function fnReload(){ /* 페이지 새로고침 함수 */
 	location.reload(); /* 페이지를 새로 고침 */
 }

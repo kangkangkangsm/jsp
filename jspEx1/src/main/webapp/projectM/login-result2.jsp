@@ -83,21 +83,32 @@
 			rs = stmt.executeQuery(querytext);
 			
 			
-			if(rs.next()){
-				out.println("로그인 성공.");
-				session.setAttribute("user_id", rs.getString("user_id"));
-				session.setAttribute("user_grade", rs.getString("user_grade"));
-				session.setAttribute("password", rs.getString("password"));
-				response.sendRedirect("participate.jsp");
-			} else {
-%>
-
-				 <div class="container">
-        		<div><h2>아이디 및 비밀번호를 확인해주세요.</h2></div>					
-				<button id="btn" onclick="location.href='Mlogin2.jsp'">로그인 페이지로 이동</button>
-				</div>
-<%
-			}
+			  if (rs.next()) {
+		            // 로그인 성공
+		            if ("F".equals(rs.getString("VEN"))) {
+		                // 계정이 정지된 경우
+		%>
+		                <div class="container">
+		                    <h2>정지먹었어요 문의하세요</h2>
+		                    <button id="btn" onclick="location.href='Customer_Service.jsp'">고객센터 이동</button>
+		                </div>
+		<%
+		            } else {
+		                // 로그인 성공
+		                session.setAttribute("user_id", rs.getString("user_id"));
+		                session.setAttribute("user_grade", rs.getString("user_grade"));
+		                session.setAttribute("password", rs.getString("password"));
+		                response.sendRedirect("participate.jsp");
+		            }
+		        } else {
+		            // 로그인 실패
+		%>
+		            <div class="container">
+		                <h2>아이디 및 비밀번호를 확인해주세요.</h2>
+		                <button id="btn" onclick="location.href='Mlogin2.jsp'">로그인 페이지로 이동</button>
+		            </div>
+		<%
+		        }
 		} catch(SQLException ex) {
 			out.println("SQLException : " + ex.getMessage());
 		}
