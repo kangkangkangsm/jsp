@@ -74,7 +74,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-    height: 380px;/* 화면 높이에서 80px를 뺀 높이 */
+    height: calc(200vh); /* 화면 높이에서 80px를 뺀 높이 */
 }
 
 .container3 {
@@ -220,9 +220,9 @@ th, td {
 		rs = stmt.executeQuery(querytext);
 %>
     <div class="container">
+     <h2>넣을게없넹</h2>
         </div>
-    <div class="container3">
-            </div>
+ 
     <div class="container2">
     <h2>관리 내역</h2>
     <hr>

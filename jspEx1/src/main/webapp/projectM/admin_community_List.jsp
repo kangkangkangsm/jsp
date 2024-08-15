@@ -145,7 +145,7 @@
                
                 try {
                     stmt = conn.createStatement();
-                    String querytext = "SELECT * FROM community ORDER BY c_cdatetime DESC";
+                    String querytext = "SELECT * FROM community ORDER BY CASE WHEN board_type = '공지사항' THEN 0 ELSE 1 END, c_cdatetime DESC";
                     rs = stmt.executeQuery(querytext);
                     
             %>
@@ -165,9 +165,28 @@
         </tr>           
 <%
         	while (rs.next()) {
-        		 
+if ("공지사항".equals(rs.getString("board_type"))) {          		 
 %>
-                    <tr>
+<tr>
+            <td style="width: 10%; color:red"><strong><a style="color:red"><%= rs.getString("board_type") %></a></strong></td>
+            <td style="width: 15%;"><strong><a style="color:red"><%= rs.getString("c_title") %> </a></strong></td>
+            <td><strong><a style="color:red"><%= rs.getString("c_contents") %> </a></strong></td>
+            <td><strong><a style="color:red"><%= rs.getString("user_id") %></a></strong></td>
+            <td><strong><a style="color:red"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
+<%            
+    if ("N".equals(rs.getString("c_hidden"))) {            
+%> 
+    	<td><button  type="button" onclick="fnhidden('<%= rs.getString("c_id") %>')">숨김</button></td>
+<% }else{ %>    	    	
+		   	<td><button style="background-color: red"  type="button" onclick="fnrhidden('<%= rs.getString("c_id") %>')">해제</button></td>
+<%} %>           
+            <td><button  type="button" onclick="fndelete('<%= rs.getString("c_id") %>')">삭제</button></td>
+      
+</tr>
+
+<% 
+}else {
+%>          <tr>
             <td style="width: 10%;"><a><%= rs.getString("board_type") %></a></td>
             <td style="width: 15%;"><a><%= rs.getString("c_title") %> </a></td>
             <td><a><%= rs.getString("c_contents") %> </a></td>
@@ -182,13 +201,13 @@
 <%} %>           
             <td><button  type="button" onclick="fndelete('<%= rs.getString("c_id") %>')">삭제</button></td>
       
-     		   </tr>
+     		</tr>
 <%
  			}
 %>
 <%
                 
-                } catch (SQLException ex) {
+        	}} catch (SQLException ex) {
                     out.print("데이터베이스 오류: " + ex.getMessage());
                 }
             %>

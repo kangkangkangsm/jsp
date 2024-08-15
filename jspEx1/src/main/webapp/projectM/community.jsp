@@ -239,11 +239,11 @@ th, td {
             if ("공지사항".equals(rs.getString("board_type"))) {        
             %>
         <tr>
-            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
+            <td><strong><a class="disabled"><%= rs.getString("board_type") %></a></strong></td>
             <td><strong><a class="disabled">관리자에 의해 숨김처리 되었습니다.</a></strong></td>
-            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></strong></td>
-            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
-            <td><strong><a class="disabled" style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
+            <td><strong><a class="disabled"><%= rs.getString("user_id") %></a></strong></td>
+            <td><strong><a class="disabled"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
+            <td><strong><a class="disabled"><%= rs.getInt("c_id") %></a></strong></td>
         </tr>
         <%
         } else {
