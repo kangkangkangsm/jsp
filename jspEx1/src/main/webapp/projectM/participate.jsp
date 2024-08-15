@@ -254,8 +254,18 @@ th, td {
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
-			        <tr>
+			        <% 
+     				if("모집중".equals(rs.getString("recruitment_status"))) {
+                    %>                        
+			        <td><a style = "color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			      	<% 
+			      	}else{			       
+			        %>
+			        	<td><a style = "color:red" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			        <%
+			        }
+			        %>
+			   		<tr>
 			        <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
 			        <td colspan="6"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
 			    </tr>
