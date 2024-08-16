@@ -247,9 +247,9 @@ th, td {
 			while(rs.next()){
 				%>
 				 <tr>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
+			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
+			        <td style="width:12%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
+			        <td style="width:8%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
@@ -295,9 +295,9 @@ th, td {
 			while(rs.next()){
 				%>
 				 <tr>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
+			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
+			        <td style="width:12%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
+			        <td style="width:8%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>

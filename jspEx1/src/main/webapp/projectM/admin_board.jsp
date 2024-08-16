@@ -136,28 +136,58 @@
 ResultSet rs2 = null;
 Statement stmt2 = null;
 stmt2 = conn.createStatement();
-String querytext2 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+String querytext2 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "' AND clear = 'N'";
 rs2 = stmt2.executeQuery(querytext2);
 %>
 <%
   ResultSet rs3 = null;
         Statement stmt3 = null;
         stmt3 = conn.createStatement();
-        String querytext3 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+        String querytext3 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "' AND clear = 'N'";
         rs3 = stmt3.executeQuery(querytext3);
-  if(rs3.next()){
+%>    
+<%
+ResultSet rs4 = null;
+Statement stmt4 = null;
+stmt4 = conn.createStatement();
+String querytext4 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "' AND clear = 'Y'";
+rs4 = stmt4.executeQuery(querytext4);
+%>
+<%
+  ResultSet rs5 = null;
+        Statement stmt5 = null;
+        stmt5 = conn.createStatement();
+        String querytext5 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "' AND clear = 'Y'";
+        rs5 = stmt5.executeQuery(querytext5);
 %>        
 <hr>
-	<p><strong>참가 희망(<%= rs3.getString("CNT") %>명)</strong></p>
+<%
+  if(rs3.next()){
+%>            
+	<p><strong>참여희망(<%= rs3.getString("CNT") %>명)</strong></p>
 <%
   }
 while(rs2.next()) {
 %>	
-<p><strong>아이디(신청결과) : </strong><%= rs2.getString("user_id") %>(<%= rs2.getString("status") %>) </p>
+<p><strong><%= rs2.getString("user_id") %> : </strong><%= rs2.getString("status") %> </p>
 <%	
 }
 %>  
-<hr>      
+<hr> 
+<%
+if(rs5.next()){
+%>            
+	<p><strong>봉사완료(<%= rs5.getString("CNT") %>명)</strong></p>
+<%
+}
+while(rs4.next()) {
+%>	
+<p><strong><%= rs4.getString("user_id") %> : </strong> 봉사 완료(<%= rs4.getString("clear_date") %>)</p>
+<%	
+}
+%>  
+<hr>
+    
     </div>
     <div>
     <button type="button" onclick="history.back()">돌아가기</button>

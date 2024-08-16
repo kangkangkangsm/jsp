@@ -271,7 +271,9 @@ th, td {
                         <th>탈퇴</th>
                     </tr>
                     <%
+                    
                         while (rs2.next()) {
+                        	if ("일반사용자".equals(rs2.getString("user_grade"))) {   	
                     %>
                     <tr>
                         <td><a><%= rs2.getString("name") %></a></td>
@@ -301,7 +303,41 @@ th, td {
 <td><button type="button" style="background-color: #d3d3d3;" disabled>관리자</button></td>
 <td><button type="button" style="background-color: #d3d3d3;" disabled>관리자</button></td>
 <%
-                        }}
+                        }
+                        	}else{
+%>
+<tr>
+                        <td><strong><a style="color:#1E90FF" ><%= rs2.getString("name") %></a></strong></td>
+                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("user_id") %></a></strong></td>               
+                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("phone_number") %></a></strong></td>
+                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("email") %></a></strong></td>
+                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("volunteer_region") %></a></strong></td>
+                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("user_grade") %></a></strong></td>
+                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("created_at") %></a></strong></td>
+<% 
+     if ("일반사용자".equals(rs2.getString("user_grade"))) {
+     if ("Y".equals(rs2.getString("VEN"))) {
+%>
+                       <td><button  type="button" onclick="fnven('<%= rs2.getString("user_id") %>')">정지</button></td>
+<% 
+	}else{                       
+%>
+		               <td><button style="background-color: red" type="button" onclick="fnrven('<%= rs2.getString("user_id") %>')">정상화</button></td>
+<% 
+	}                       
+%>
+                       <td><button type="button" onclick="fndelete('<%= rs2.getString("user_id") %>')">탈퇴</button></td>
+                    </tr>
+<%
+                        }else{
+%>
+<td><button type="button" style="background-color: #d3d3d3;" disabled>관리자</button></td>
+<td><button type="button" style="background-color: #d3d3d3;" disabled>관리자</button></td>
+<%
+                        }
+                       		
+                        	}
+}
 %>
                 </table>
             </div>

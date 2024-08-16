@@ -216,11 +216,11 @@ th, td {
             if ("공지사항".equals(rs.getString("board_type"))) {        
             %>
         <tr>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
+            <td style="width:10%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
             <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("c_title") %> <%= CNT %></a></strong></td>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></strong></td>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
+            <td style="width:10%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></strong></td>
+            <td style="width:15%"><strong><a style="color:red"  href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
+            <td style="width:5%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
         </tr>
         <%
         } else {

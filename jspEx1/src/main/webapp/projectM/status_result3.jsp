@@ -15,11 +15,11 @@
 		Statement stmt = null;
 		
 		String f_id = request.getParameter("f_id");
-
+		
 		try{
 			stmt = conn.createStatement();
 			String querytext = 
-					"UPDATE applications SET clear = 'Y' WHERE f_id = '" + f_id + "'";
+					"UPDATE applications SET clear = 'Y', clear_date = now() WHERE f_id = '" + f_id + "'";
 			stmt.executeUpdate(querytext);
 				out.println("승인완료.");	
 				response.sendRedirect("admin_clear_check.jsp");

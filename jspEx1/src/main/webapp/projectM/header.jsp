@@ -113,11 +113,11 @@
                    
                     if ("관리자".equals(userGrade)) {
                     %>
-              <li><a href="#" onclick="location.href='mypage.jsp'">  (관리자) <%= userID %> 님 환영합니다.</a></li>
+              <li><a href="#" onclick="location.href='mypage2.jsp'">  (관리자) <%= userID %> 님 환영합니다.</a></li>
                     <% 
                     }else{
                     %>
-	              <li><a href="#" onclick="location.href='mypage.jsp'">  <%= userID %> 님 환영합니다.</a></li>	
+	              <li><a href="#" onclick="location.href='mypage2.jsp'">  <%= userID %> 님 환영합니다.</a></li>	
 	              <% 
                     }
 	              %>
