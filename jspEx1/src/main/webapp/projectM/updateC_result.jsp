@@ -26,7 +26,7 @@
 					"UPDATE community SET " 
 					+ "board_type = '" + board_type + "', c_title = '" + c_title + "', c_contents = '" + c_contents + "' WHERE c_id ='" + c_id +"'";
 			stmt.executeUpdate(querytext);
-			response.sendRedirect("mypage.jsp");
+			response.sendRedirect("mypage3.jsp");
 		
 		
 		} catch(SQLException ex) {

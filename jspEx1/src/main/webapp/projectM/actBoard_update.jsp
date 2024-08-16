@@ -120,7 +120,7 @@
         justify-content: space-between;
         width: 8%;
         padding: 10px;
-        background-color: #5cb85c;
+        background-color: #00BFFF;
         border: none;
         border-radius: 4px;
         color: #fff;
@@ -132,7 +132,7 @@
     button:hover,
     input[type="submit"]:hover,
     input[type="reset"]:hover {
-        background-color: #4cae4c;
+        background-color: #1E90FF;
     }
 
     .footer {

@@ -41,7 +41,7 @@ h2 {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #5cb85c;
+    background-color: #00BFFF;
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -50,7 +50,7 @@ button {
     margin-top: 20px;
 }
 button:hover {
-    background-color: #4cae4c;
+    background-color: #1E90FF;
 }
 </style>
 </head>

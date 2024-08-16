@@ -126,7 +126,7 @@
     button {
         width: 100%;
         padding: 10px;
-        background-color: #5cb85c;
+        background-color: #00BFFF;
         border: none;
         border-radius: 4px;
         color: #fff;
@@ -136,7 +136,7 @@
     .Jbutton {
         width: 25%;
         padding: 10px;
-        background-color: #5cb85c;
+        background-color: #00BFFF;
         border: none;
         border-radius: 4px;
         color: #fff;
@@ -147,7 +147,7 @@
     }
 
     button:hover {
-        background-color: #4cae4c;
+        background-color: #1E90FF;
     }
             .footer {
             text-align: center;
@@ -159,7 +159,7 @@
         }
         /* 테이블 헤더 스타일 */
 th {
-    background-color: #4CAF50; /* 그라데이션 배경색 */
+    background-color: #1E90FF; /* 그라데이션 배경색 */
     color: white; /* 텍스트 색상 */
     padding: 12px 10px;
     text-align: left;

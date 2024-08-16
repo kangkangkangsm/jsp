@@ -56,7 +56,7 @@
          button {
         width: 120px; /* Adjust button width */
         padding: 10px;
-        background-color: #5cb85c;
+        background-color: #00BFFF;
         border: none;
         border-radius: 4px;
         color: #fff;
@@ -65,14 +65,14 @@
     }
     
     button:hover {
-        background-color: #4cae4c;
+        background-color: #1E90FF;
     }
         
          .xbutton {
             
             width: 100%;
             padding: 10px;
-            background-color: #5cb85c;
+            background-color: #00BFFF;
             border: none;
             border-radius: 4px;
             color: #fff;
@@ -81,7 +81,7 @@
             margin-top: 20px;
         }
         .xbutton:hover {
-            background-color: #F4F4F4;
+            background-color: #1E90FF;
       
         }
         
