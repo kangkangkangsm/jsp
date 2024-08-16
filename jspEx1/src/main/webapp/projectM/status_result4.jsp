@@ -14,17 +14,15 @@
 		ResultSet rs = null;
 		Statement stmt = null;
 		
-		String f_id = request.getParameter("f_id");
-		
-				
-		
+		String id = request.getParameter("id");
+
 		try{
 			stmt = conn.createStatement();
 			String querytext = 
-					"DELETE FROM applications WHERE f_id = '" + f_id + "'";
+					"UPDATE customer_support SET status = '답변완료' WHERE id = '" + id + "'";
 			stmt.executeUpdate(querytext);
-				out.println("삭제완료.");	
-				response.sendRedirect("mypage2.jsp");
+				out.println("변경완료.");	
+				response.sendRedirect("admin_service.jsp");
 			
 		} catch(SQLException ex) {
 			out.println("SQLException : " + ex.getMessage());
@@ -32,4 +30,3 @@
 		
 	%>
 </body>
-</html>

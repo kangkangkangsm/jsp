@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고센...</title>
+<title>Insert title here</title>
     <style>
    * {
         box-sizing: border-box;
@@ -116,23 +117,32 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<%@ include file="db.jsp" %>
-
-<%
-    String s = (String) session.getAttribute("user_grade");
-%>
-
 <div class="container">
-    <form action="service_result.jsp" method="get" target="_blank">
-        <h2>고객센터</h2>
-
+ <form action="updateD_result.jsp" name="board">
+    <div class="details">
+    <%@include file="db.jsp"%>
+    <%
+        ResultSet rs = null;
+        Statement stmt = null;
+        String id = request.getParameter("id");
+        
+        stmt = conn.createStatement();
+        String querytext = "SELECT * FROM customer_support WHERE id = '" + id + "'";
+        rs = stmt.executeQuery(querytext);
+%>
+                
+ <h2>문의 수정하기</h2>
+    <%
+        if (rs.next()) {
+    %>
+		<input type="hidden" name="id" value="<%= rs.getString("id") %>" >
         <!-- First Row -->
         <div class="form-row">
             <label for="board_type">게시글 유형</label>
         </div>
         <div class="form-row">
             <select id="board_type" name="service_type" required>
-                <option value="">::선택하세요::</option>
+                <option value="<%= rs.getString("service_type") %>"><%= rs.getString("service_type") %></option>
                 <option value="정지 해제">정지 해제</option>
                 <option value="봉사 요청">봉사 요청</option>
                 <option value="봉사 확인">봉사 확인</option>
@@ -144,18 +154,20 @@
             <label for="service_title">제목</label>
         </div>
         <div class="form-row">
-            <input type="text" id="service_title" name="service_title" placeholder="제목" style="width:100%;">
+            <input type="text" value="<%= rs.getString("service_title") %>" id="service_title" name="service_title" placeholder="제목" style="width:100%;">
         </div>    
         <div class="form-row">
             <label for="service_contents">내용</label>
         </div>
         <div class="form-row">
-            <input type="text" id="service_contents" name="service_contents" placeholder="로그인  본인 id 꼭 입력해주세요." style="width:100%; height:250px;">
-        </div>    
+            <input type="text" value="<%= rs.getString("service_contents") %>" id="service_contents" name="service_contents" placeholder="로그인  본인 id 꼭 입력해주세요." style="width:100%; height:250px;">
+        </div>   
+ <% } %>        
         <button type="button" onclick="history.back()">취소</button>
-        <input type="submit" value="문의하기">
+        <input type="submit" value="수정하기">
     </form>
 </div>
 </body>
 </html>
-  
+<script>
+</script>

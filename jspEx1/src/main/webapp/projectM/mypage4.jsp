@@ -295,13 +295,18 @@ th, td {
             while(rs3.next()) {
             %>
             <tr>       
-              <td style="width:10%"><a><%= rs3.getString("service_type") %></a></td>
-                <td><a><%= rs3.getString("service_title") %></a></td>
-             <td><a><%= rs3.getString("service_contents") %></a></td>
-                <td><a><%= rs3.getString("c_cdatetime") %></a></td>
-                 <td><a><%= rs3.getString("status") %></a></td>
-                 <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("submission_date") %>')">수정</button></td>
-                 <td style="width:8%"><button type="button" onclick="fnDelete2('<%= rs3.getString("c_id") %>')">삭제</button></td>
+              <td style="width:10%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("service_type") %></a></td>
+                <td style="width:20%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("service_title") %></a></td>
+             <td style="width:38%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("service_contents") %></a></td>
+                <td style="width:10%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("submission_date") %></a></td>
+<%  if("대기중".equals(rs3.getString("status"))){ %>
+                 <td style="width:6%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
+                <% }else{ %>
+                <td style="width:6%"><a style="color:red" href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
+                
+                <%} %> 
+                 <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("id") %>')">수정</button></td>
+                 <td style="width:8%"><button type="button" onclick="fnDelete2('<%= rs3.getString("id") %>')">삭제</button></td>
                  </tr>
             <%
             }
@@ -312,21 +317,21 @@ th, td {
 </div>
 </form>
 <script>
-function fnDelete(f_id){
+/* function fnDelete(f_id){
     if (confirm("정말로 이 신청을 취소하시겠습니까?")) {
         window.location.href = "deleteB.jsp?f_id=" + f_id;
     }
 }
-
-function fnDelete2(c_id){
+ */
+function fnDelete2(id){
     if (confirm("정말로 삭제하실겁니까?")) {
-        window.location.href = "deleteC.jsp?c_id=" + c_id;
+        window.location.href = "deleteC3.jsp?id=" + id;
     }
 }
 
-function fnUpdate(c_id){
+function fnUpdate(id){
     if (confirm("정말로 수정하실겁니까?")) {
-        window.location.href = "updateC.jsp?c_id=" + c_id;
+       location.href = "board4.jsp?id=" + id;
     }
 }
 

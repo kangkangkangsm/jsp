@@ -14,17 +14,17 @@
 		ResultSet rs = null;
 		Statement stmt = null;
 		
-		String f_id = request.getParameter("f_id");
+		String id = request.getParameter("id");
 		
 				
 		
 		try{
 			stmt = conn.createStatement();
 			String querytext = 
-					"DELETE FROM applications WHERE f_id = '" + f_id + "'";
+					"DELETE FROM customer_support WHERE id = '" + id + "'";
 			stmt.executeUpdate(querytext);
 				out.println("삭제완료.");	
-				response.sendRedirect("mypage2.jsp");
+				response.sendRedirect("mypage4.jsp");
 			
 		} catch(SQLException ex) {
 			out.println("SQLException : " + ex.getMessage());

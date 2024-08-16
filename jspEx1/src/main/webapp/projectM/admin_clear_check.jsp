@@ -242,6 +242,9 @@ th, td {
        <tr>
     <td style="background-color:#C0CECB"><a href="admin_clear_check.jsp">참가완료 확인</a></td>
     </tr>
+     <tr>
+    <td ><a href="admin_service.jsp">문의내용 확인</a></td>
+    </tr>
     </table>
         </div>
  

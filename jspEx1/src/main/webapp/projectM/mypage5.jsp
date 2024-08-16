@@ -259,7 +259,7 @@ th, td {
     <th>목록</th>
     </tr>
        <tr>
-    <td style="background-color:#C0CECB"><a href="mypage2.jsp">봉사관련 관리</a></td>
+    <td ><a href="mypage2.jsp">봉사관련 관리</a></td>
     </tr>
      <tr>
     <td><a href="mypage3.jsp">게시글목록 관리</a></td>
@@ -268,7 +268,7 @@ th, td {
     <td><a href="mypage4.jsp">고객센터 문의 목록</a></td>
     </tr>
       <tr>
-    <td><a href="mypage5.jsp">참여완료 봉사 목록</a></td>
+    <td style="background-color:#C0CECB"><a href="mypage5.jsp">참여완료 봉사 목록</a></td>
     </tr>
     </table>
             </div>

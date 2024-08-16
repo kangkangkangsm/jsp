@@ -1,4 +1,4 @@
-A<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
@@ -167,7 +167,7 @@ if(user_id == null){
 			<div class="container">
 			<h2>신청이 완료되었습니다.</h2>
 			<button class="Joinbtn" onclick="location.href='participate.jsp'">계속 보기</button>
-			<button class="Joinbtn" onclick="location.href='mypage.jsp'">마이페이지 에서 확인</button>
+			<button class="Joinbtn" onclick="location.href='mypage2.jsp'">마이페이지 에서 확인</button>
 		</div>
 <%				
 		} catch(SQLException ex) {

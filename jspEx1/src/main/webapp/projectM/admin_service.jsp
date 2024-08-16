@@ -87,7 +87,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 14.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
-    
+   
 }
 /* .container3 {
     border-radius: 8px; /* 테두리 둥글기 */
@@ -174,8 +174,8 @@ tr:hover {
 
 /* 테이블 셀 스타일 */
 td {
-    padding: 12px 10px;
     border: 1px solid #ddd; /* 테두리 색상 */
+    padding: 12px 10px;
 }
 
 /* 테이블 전체 테두리 스타일 */
@@ -211,7 +211,15 @@ th, td {
 <form action="" name="user">
 <div class="content">
    <%@include file="db.jsp"%>
-
+<%
+	ResultSet rs = null;
+	Statement stmt = null;
+    String user_id = (String) session.getAttribute("user_id");
+  
+    	stmt = conn.createStatement();
+		String querytext = "SELECT * FROM volunteering";
+		rs = stmt.executeQuery(querytext);
+%>
     <div class="container">
     <h2>관리 내역</h2>
     <hr>
@@ -226,117 +234,84 @@ th, td {
     <td><a href="admin_Member.jsp">회원목록 관리</a></td>
     </tr>
      <tr>
-    <td style="background-color:#C0CECB"><a href="admin_community_List.jsp">게시글목록 관리</a></td>
+    <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
       <tr>
-    <td><a href="admin_status_check.jsp">참가신청 확인</a></td>
+    <td ><a href="admin_status_check.jsp">참가신청 확인</a></td>
     </tr>
        <tr>
     <td><a href="admin_clear_check.jsp">참가완료 확인</a></td>
     </tr>
      <tr>
-    <td ><a href="admin_service.jsp">문의내용 확인</a></td>
+    <td style="background-color:#C0CECB"><a href="admin_status_check.jsp">문의내용 확인</a></td>
     </tr>
     </table>
         </div>
  
     <div class="container2">
-               
-            <%
-                ResultSet rs = null;
-                Statement stmt = null;
-               
-                try {
+    <h2>문의내용 확인</h2>
+     <%
+                ResultSet rs2 = null;
+                Statement stmt2 = null;
+            
                     stmt = conn.createStatement();
-                    String querytext = "SELECT * FROM community ORDER BY CASE WHEN board_type = '공지사항' THEN 0 ELSE 1 END, c_cdatetime DESC";
-                    rs = stmt.executeQuery(querytext);
-                    
-            %>
-          
-                <h2>게시판 관리</h2>
-
-        <table>
-        <tr>
-            <th style="width: 10%;">게시유형</th>
-            <th style="width: 15%;">제목</th>
-            <th>내용</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th style="width: 8%;">숨기기</th>
-            <th style="width: 8%;">삭제</th>
-        </tr>           
-<%
-        	while (rs.next()) {
-if ("공지사항".equals(rs.getString("board_type"))) {          		 
+                    String querytext2 = "SELECT * FROM customer_support ORDER BY submission_date DESC";
+                    rs2 = stmt.executeQuery(querytext2);
+%>  
+	<table>
+ <tr>
+                <th>문의ID</th>
+            	<th>유형</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>문의일</th>
+                <th>진행</th>
+                <th>답변완료</th>
+ </tr>
+<%	    
+   while(rs2.next()){
+	   if("대기중".equals(rs2.getString("status"))){
 %>
-<tr>
-            <td style="width: 10%; color:red"><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getString("board_type") %></a></strong></td>
-            <td style="width: 15%;"><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getString("c_title") %> </a></strong></td>
-            <td><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getString("c_contents") %> </a></strong></td>
-            <td><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getString("user_id") %></a></strong></td>
-            <td><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
-<%            
-    if ("N".equals(rs.getString("c_hidden"))) {            
-%> 
-    	<td><button  type="button" onclick="fnhidden('<%= rs.getString("c_id") %>')">숨김</button></td>
-<% }else{ %>    	    	
-		   	<td><button style="background-color: red"  type="button" onclick="fnrhidden('<%= rs.getString("c_id") %>')">해제</button></td>
-<%} %>           
-            <td><button  type="button" onclick="fndelete('<%= rs.getString("c_id") %>')">삭제</button></td>
-      
-</tr>
-
-<% 
-}else {
-%>          <tr>
-            <td style="width: 10%;"><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("board_type") %></a></td>
-            <td style="width: 15%;"><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("c_title") %> </a></td>
-            <td><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("c_contents") %> </a></td>
-            <td><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("user_id") %></a></td>
-            <td><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getTimestamp("c_cdatetime") %></a></td>
-<%            
-    if ("N".equals(rs.getString("c_hidden"))) {            
-%> 
-    	<td><button  type="button" onclick="fnhidden('<%= rs.getString("c_id") %>')">숨김</button></td>
-<% }else{ %>    	    	
-		   	<td><button style="background-color: red"  type="button" onclick="fnrhidden('<%= rs.getString("c_id") %>')">해제</button></td>
-<%} %>           
-            <td><button  type="button" onclick="fndelete('<%= rs.getString("c_id") %>')">삭제</button></td>
-      
-     		</tr>
-<%
- 			}
-%>
-<%
+<tr>          <td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+              <td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_type") %></a></td>
+                <td style="width:20%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_title") %></a></td>
+             <td style="width:34%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_contents") %></a></td>
+                <td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("submission_date") %></a></td>
+                 <td style="width:8%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
+                 <td style="width:10%"><button type="button" onclick="fnstatus2('<%= rs2.getString("id") %>','<%= rs2.getString("user_id") %>')">답변완료</button></td>
                 
-        	}} catch (SQLException ex) {
-                    out.print("데이터베이스 오류: " + ex.getMessage());
-                }
-            %>
-	</div>
+                 </tr>
+<% }else{ %>	
+			<tr>          
+			<td style="width:10%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+              <td style="width:10%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_type") %></a></td>
+                <td style="width:20%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_title") %></a></td>
+             <td style="width:34%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_contents") %></a></td>
+                <td style="width:10%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("submission_date") %></a></td>
+                 <td style="width:8%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
+                 <td style="width:10%; background-color:#C0CECB"></td>
+                
+                 </tr>
+<%
+}
+	   } %>	
+
+</table>
 </div>
 </form>
 <script>
-function fndelete(c_id){
-	if (confirm("정말 삭제시켜요?")) {
-		 window.location.href = "deleteC2.jsp?c_id=" + c_id;
-		}
-		}
 
-	function fnhidden(c_id){
-		if (confirm("숨김처리 할게용?")) {
-			 window.location.href = "admin_community_hidden.jsp?c_id=" + c_id;
-			}
-			}
+function fnstatus2(id,user_id){
+    if (confirm("아이디(" + user_id + ") 문의사항에 답변을 해주셨나요?")) {
+        window.location.href = "status_result4.jsp?id=" + id;
+    }
+}
 			
-	function fnrhidden(c_id){
-		if (confirm("숨김처리 해제 할게용?")) {
-			 window.location.href = "admin_community_rhidden.jsp?c_id=" + c_id;
-			}
-			}
-	function fnReload(){ /* 페이지 새로고침 함수 */
-		location.reload(); /* 페이지를 새로 고침 */
-	}
+function fnReload(){ /* 페이지 새로고침 함수 */
+	location.reload(); /* 페이지를 새로 고침 */
+}
+
+
 </script>
 </body>
 </html>
