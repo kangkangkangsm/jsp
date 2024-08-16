@@ -273,20 +273,21 @@ th, td {
     </table>
             </div>
          <%   
-         String applicationsQuery = "SELECT * FROM community WHERE user_id = ?";
+         String applicationsQuery = "SELECT * FROM customer_support WHERE user_id = ?";
          pstmt3 = conn.prepareStatement(applicationsQuery);
          pstmt3.setString(1, user_id);
          rs3 = pstmt3.executeQuery();
         %>
     <div class="container2">
-         <h2>내가 쓴글</h2>
+         <h2>문의목록</h2>
         <hr>
        <table>
             <tr>
             	<th>유형</th>
                 <th>제목</th>
                 <th>내용</th>
-                <th>게시일</th>
+                <th>문의일</th>
+                <th>진행</th>
                 <th>수정</th>
                 <th>삭제</th>
              </tr>
@@ -294,11 +295,12 @@ th, td {
             while(rs3.next()) {
             %>
             <tr>       
-              <td style="width:10%"><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("board_type") %></a></td>
-                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_title") %></a></td>
-             <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_contents") %></a></td>
-                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_cdatetime") %></a></td>
-                 <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("c_id") %>')">수정</button></td>
+              <td style="width:10%"><a><%= rs3.getString("service_type") %></a></td>
+                <td><a><%= rs3.getString("service_title") %></a></td>
+             <td><a><%= rs3.getString("service_contents") %></a></td>
+                <td><a><%= rs3.getString("c_cdatetime") %></a></td>
+                 <td><a><%= rs3.getString("status") %></a></td>
+                 <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("submission_date") %>')">수정</button></td>
                  <td style="width:8%"><button type="button" onclick="fnDelete2('<%= rs3.getString("c_id") %>')">삭제</button></td>
                  </tr>
             <%
