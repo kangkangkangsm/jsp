@@ -159,26 +159,26 @@ th, td {
         String querytext = "SELECT * FROM community";
         
         // 검색 조건이 있을 때만 WHERE 절 추가
-        boolean hasConditions = false;
+        boolean condition = false;
         if (board_type != null && !board_type.isEmpty()) {
             querytext += " WHERE board_type LIKE '%" + board_type + "%'";
-            hasConditions = true;
+            condition = true;
         }
         if (user_id != null && !user_id.isEmpty()) {
-            if (hasConditions) {
+            if (condition) {
                 querytext += " AND";
             } else {
                 querytext += " WHERE";
-                hasConditions = true;
+                condition = true;
             }
             querytext += " user_id LIKE '%" + user_id + "%'";
         }
         if (search != null && !search.isEmpty()) {
-            if (hasConditions) {
+            if (condition) {
                 querytext += " AND";
             } else {
                 querytext += " WHERE";
-                hasConditions = true;
+                condition = true;
             }
             querytext += " (c_contents LIKE '%" + search + "%' OR c_title LIKE '%" + search + "%')";
         }
@@ -201,6 +201,7 @@ th, td {
         while (rs.next()) {
             ResultSet rs3 = null;
             PreparedStatement pstmt3 = null;
+            // 수정된 SQL 쿼리
             String applicationsQuery = "SELECT COUNT(*) AS CNT FROM comment WHERE c_id = ?";
             pstmt3 = conn.prepareStatement(applicationsQuery);
             pstmt3.setInt(1, rs.getInt("c_id"));  // c_id를 int로 설정
@@ -215,11 +216,11 @@ th, td {
             if ("공지사항".equals(rs.getString("board_type"))) {        
             %>
         <tr>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
+            <td style="width:10%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
             <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("c_title") %> <%= CNT %></a></strong></td>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></strong></td>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
-            <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
+            <td style="width:10%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></strong></td>
+            <td style="width:15%"><strong><a style="color:red"  href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
+            <td style="width:5%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
         </tr>
         <%
         } else {

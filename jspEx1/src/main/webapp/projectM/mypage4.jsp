@@ -302,12 +302,13 @@ th, td {
                 <td style="width:10%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("submission_date") %></a></td>
 <%  if("대기중".equals(rs3.getString("status"))){ %>
                  <td style="width:10%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
+                  <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("id") %>')">수정</button></td>
+                 <td style="width:8%"><button type="button" onclick="fnDelete2('<%= rs3.getString("id") %>')">삭제</button></td>
                 <% }else{ %>
                 <td style="width:10%"><a style="color:red" href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
-                
+                 <td style="width:8%"><button style="background-color:#C0CECB"type="button" onclick="fnUpdate('<%= rs3.getString("id") %>')" disabled>수정불가</button></td>
+                 <td style="width:8%"><button style="background-color:#C0CECB"type="button" onclick="fnDelete2('<%= rs3.getString("id") %>')" disabled>삭제불가</button></td>              
                 <%} %> 
-                 <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("id") %>')">수정</button></td>
-                 <td style="width:8%"><button type="button" onclick="fnDelete2('<%= rs3.getString("id") %>')">삭제</button></td>
                  </tr>
             <%
             }
