@@ -60,6 +60,7 @@ button:hover {
 <%
 		ResultSet rs = null;
 		Statement stmt = null;
+		String id = request.getParameter("id");
 		String region = request.getParameter("region");
 		String activity_type = request.getParameter("activity_type");
 		String field = request.getParameter("field");
@@ -74,15 +75,22 @@ button:hover {
 		try{
 			stmt = conn.createStatement();
 					String querytext = 
-				    "INSERT INTO Volunteering "  
-				    + "(region, activity_type, field, target_group, " 
-				    + "recruitment_status, start_date, end_date, title, cdatetime, contents) "
-				    + "VALUES ('" + region + "', '" + activity_type + "', '" + field + "', '" + target_group + "', '"
-				    + recruitment_status + "', '" + start_date + "', '" + end_date + "', '" + title + "', NOW(), '" + contents + "')";
+							 "UPDATE Volunteering SET "  
+									    + "region = '" + region + "', " 
+									    + "activity_type = '" + activity_type + "', " 
+									    + "field = '" + field + "', " 
+									    + "target_group = '" + target_group + "', " 
+									    + "recruitment_status = '" + recruitment_status + "', " 
+									    + "start_date = '" + start_date + "', " 
+									    + "end_date = '" + end_date + "', " 
+									    + "title = '" + title + "', " 
+									    + "contents = '" + contents + "' " 
+									    + "WHERE id = '" + id + "'";
+					
 			stmt.executeUpdate(querytext);
 %>
 			<div class="container">
-			<h2>추가 완료</h2>
+			<h2>수정 완료</h2>
 			<button onclick="location.href='admin_participate.jsp'">닫기</button>
 		</div>
 				

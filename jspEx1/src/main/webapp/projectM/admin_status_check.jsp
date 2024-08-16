@@ -87,7 +87,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 14.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
-    height: calc(200vh); /* 화면 높이에서 80px를 뺀 높이 */
+   
 }
 /* .container3 {
     border-radius: 8px; /* 테두리 둥글기 */
@@ -174,8 +174,8 @@ tr:hover {
 
 /* 테이블 셀 스타일 */
 td {
-    padding: 12px 10px;
     border: 1px solid #ddd; /* 테두리 색상 */
+    padding: 12px 10px;
 }
 
 /* 테이블 전체 테두리 스타일 */
@@ -227,7 +227,7 @@ th, td {
     <tr>
     <th>관리내용</th>
     </tr>
-        <tr>
+       <tr>
     <td><a href="admin_participate.jsp">봉사관련 관리</a></td>
     </tr>
      <tr>
@@ -236,23 +236,78 @@ th, td {
      <tr>
     <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
-    <tr>
-    <td><a href="admin_status_check.jsp">참가신청 확인</a></td>
+      <tr>
+    <td style="background-color:#C0CECB"><a href="admin_status_check.jsp">참가신청 확인</a></td>
     </tr>
     </table>
         </div>
  
     <div class="container2">
-    <h2>공백</h2>
-	</div>
-	<%
+    <h2>참가신청 확인</h2>
+     <%
+                ResultSet rs2 = null;
+                Statement stmt2 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext2 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id ORDER BY A.application_date DESC";
+                    rs2 = stmt.executeQuery(querytext2);
+%>  
+	<table>
+	<tr>
+	<th> 신청ID </th>
+	<th> 참가 신청일 </th>
+	<th> 유형 </th>
+	<th> 제목 </th>
+	<th> 상태 </th>
+	<th> 승인/취소 </th>
+	<th> 삭제 </th>
+	</tr>	
+<%	    
+   while(rs2.next()){
+%>
+<%		
+		if("신청중".equals(rs2.getString("status"))){
+%>
+<tr>
+		<td><%= rs2.getString("user_id") %></td>
+		<td><%= rs2.getString("application_date") %></td>
+		<td><%= rs2.getString("field") %></td>
+		<td><%= rs2.getString("title") %></td>
+		<td><%= rs2.getString("status") %></td>
+			<td><button type="button" onclick="fnstatus2('<%= rs2.getString("f_id") %>')">승인</button></td>
+			<td><button type="button" onclick="fnstatus('<%= rs2.getString("f_id") %>')" >신청삭제</button></td>
+<% } %>	
+</tr>
+<%	   
+   }
+%>
+</table>
+<%              
     } catch(SQLException ex) {
         out.println("SQLException : " + ex.getMessage());
     }
+    
+    
     %>
 </div>
 </form>
 <script>
+function fnstatus(f_id){
+if (confirm("삭제하겠습니다?")) {
+	 window.location.href = "status_result.jsp?f_id=" + f_id;
+	}
+	}
+
+function fnstatus2(f_id){
+	if (confirm("승인하시겠습니까? 승인시 목록에서 사라집니다아")) {
+		 window.location.href = "status_result2.jsp?f_id=" + f_id;
+		}
+		}
+			
+function fnReload(){ /* 페이지 새로고침 함수 */
+	location.reload(); /* 페이지를 새로 고침 */
+}
+
 
 </script>
 </body>

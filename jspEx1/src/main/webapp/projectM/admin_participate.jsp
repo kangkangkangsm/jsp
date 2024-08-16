@@ -28,15 +28,6 @@
             width: 150px;
             color: #333;
         }
-   /*  body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    } */
 
     header {
         width: 100%;
@@ -87,7 +78,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 14.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
-    height: calc(200vh); /* 화면 높이에서 80px를 뺀 높이 */
+    
 }
 /* .container3 {
     border-radius: 8px; /* 테두리 둥글기 */
@@ -134,9 +125,9 @@
         cursor: pointer;
     }
     .Jbutton {
-        width: 25%;
+        width: 8%;
         padding: 10px;
-        background-color: #5cb85c;
+        background-color: #C0CECB;
         border: none;
         border-radius: 4px;
         color: #fff;
@@ -144,6 +135,8 @@
         cursor: pointer;
         float:right;
         margin-left:5px;
+        margin-top:-50px;
+        margin-bottom:0px;
     }
 
     button:hover {
@@ -211,15 +204,7 @@ th, td {
 <form action="" name="user">
 <div class="content">
    <%@include file="db.jsp"%>
-<%
-	ResultSet rs = null;
-	Statement stmt = null;
-    String user_id = (String) session.getAttribute("user_id");
-    try {
-    	stmt = conn.createStatement();
-		String querytext = "SELECT * FROM volunteering";
-		rs = stmt.executeQuery(querytext);
-%>
+
     <div class="container">
     <h2>관리 내역</h2>
     <hr>
@@ -227,8 +212,8 @@ th, td {
     <tr>
     <th>관리내용</th>
     </tr>
-        <tr>
-    <td><a href="admin_participate.jsp">봉사관련 관리</a></td>
+       <tr>
+    <td style="background-color:#C0CECB"><a href="admin_participate.jsp">봉사관련 관리</a></td>
     </tr>
      <tr>
     <td><a href="admin_Member.jsp">회원목록 관리</a></td>
@@ -236,24 +221,118 @@ th, td {
      <tr>
     <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
-    <tr>
+      <tr>
     <td><a href="admin_status_check.jsp">참가신청 확인</a></td>
     </tr>
     </table>
         </div>
  
     <div class="container2">
-    <h2>공백</h2>
-	</div>
-	<%
-    } catch(SQLException ex) {
-        out.println("SQLException : " + ex.getMessage());
+<%
+        ResultSet rs = null;
+        Statement stmt = null;
+                     
+        try {
+        stmt = conn.createStatement();
+        String querytext = "SELECT * FROM volunteering ORDER BY cdatetime DESC";
+        rs = stmt.executeQuery(querytext);
+                    
+ %>
+                <h2>봉사게시글 관리</h2>
+               <button type="button" class="Jbutton" onclick="fnmove()" value="글쓰기">추가하기</button>
+
+        <table>
+        <tr>
+            <th style="width: 8%;">게시일</th>
+            <th style="width: 18%;">분야</th>
+            <th style="width: 25%;">제목</th>
+            <th style="width: 7%;">시작일</th>
+            <th style="width: 7%;">종료일 </th>
+            <th style="width: 5%;">신청 인원수</th>
+             <th style="width:7%;">상태</th>
+            <th style="width: 8%;">상태 변경</th>
+            <th style="width: 8%;">수정</th>
+            <th style="width: 8%;">삭제</th>
+        </tr>           
+<%
+    while (rs.next()) {
+        ResultSet rs2 = null;
+        Statement stmt2 = null;
+        stmt2 = conn.createStatement();
+        String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+        rs2 = stmt2.executeQuery(querytext2);
+        
+   
+        if (rs2.next()) {
+%>
+        <tr>
+            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("cdatetime") %></a></td>
+            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("field") %></a></td>
+            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("title") %></a></td>
+            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("start_date") %></a></td>
+            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("end_date") %></a></td>
+            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs2.getString("CNT") %></a></td>
+<% 
+        } 
+%>         
+        <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+<% 
+        if ("모집중".equals(rs.getString("recruitment_status"))) {
+%>
+        <td><button type="button" onclick="fnstatus('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>')">모집완료</button></td>
+<% 
+        } else { 
+%>         
+        <td><button type="button" onclick="fnstatus2('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>')" style="background-color:red">모집중</button></td>     
+<% 
+        }
+%>         
+        <td><button type="button" onclick="fnupdate('<%= rs.getString("id") %>')">수정</button></td>
+        <td><button type="button" onclick="fndelete('<%= rs.getString("id") %>')">삭제</button></td>
+    </tr>
+<% 
+   
     }
-    %>
+} catch (SQLException ex) {
+    out.print("데이터베이스 오류: " + ex.getMessage());
+}
+%>
+	</table>
+	</div>
 </div>
 </form>
 <script>
+function fndelete(id){
+	if (confirm("정말 삭제시켜요?")) {
+		 window.location.href = "deleteD1.jsp?id=" + id;
+		}
+		}	
+function fnupdate(id){
+	if (confirm("수정하러 이동합니다?")) {
+		 window.location.href = "actBoard_update.jsp?id=" + id;
+		}
+		}	
+		
+function fnmove(){
+	if (confirm("추가?")) {
+		location.href="Board_insert.jsp";
+	}
+		}
+	
+	function fnstatus(id,recruitment_status){
+		if (confirm("상태 변경할까요?")) {
+			 window.location.href = "admin_status.jsp?id=" + id +"&recruitment_status=" + recruitment_status;
+			}
+			}
+	function fnstatus2(id,recruitment_status){
+		if (confirm("상태 변경할까요?")) {
+			 window.location.href = "admin_status2.jsp?id=" + id +"&recruitment_status=" + recruitment_status;
+			}
+			}
 
+	function fnReload(){ /* 페이지 새로고침 함수 */
+		location.reload(); /* 페이지를 새로 고침 */
+	}
 </script>
 </body>
 </html>

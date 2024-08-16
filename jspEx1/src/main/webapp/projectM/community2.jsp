@@ -159,26 +159,26 @@ th, td {
         String querytext = "SELECT * FROM community";
         
         // 검색 조건이 있을 때만 WHERE 절 추가
-        boolean condition = false;
+        boolean hasConditions = false;
         if (board_type != null && !board_type.isEmpty()) {
             querytext += " WHERE board_type LIKE '%" + board_type + "%'";
-            condition = true;
+            hasConditions = true;
         }
         if (user_id != null && !user_id.isEmpty()) {
-            if (condition) {
+            if (hasConditions) {
                 querytext += " AND";
             } else {
                 querytext += " WHERE";
-                condition = true;
+                hasConditions = true;
             }
             querytext += " user_id LIKE '%" + user_id + "%'";
         }
         if (search != null && !search.isEmpty()) {
-            if (condition) {
+            if (hasConditions) {
                 querytext += " AND";
             } else {
                 querytext += " WHERE";
-                condition = true;
+                hasConditions = true;
             }
             querytext += " (c_contents LIKE '%" + search + "%' OR c_title LIKE '%" + search + "%')";
         }
@@ -201,7 +201,6 @@ th, td {
         while (rs.next()) {
             ResultSet rs3 = null;
             PreparedStatement pstmt3 = null;
-            // 수정된 SQL 쿼리
             String applicationsQuery = "SELECT COUNT(*) AS CNT FROM comment WHERE c_id = ?";
             pstmt3 = conn.prepareStatement(applicationsQuery);
             pstmt3.setInt(1, rs.getInt("c_id"));  // c_id를 int로 설정

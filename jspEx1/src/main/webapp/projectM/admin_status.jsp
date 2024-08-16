@@ -60,37 +60,23 @@ button:hover {
 <%
 		ResultSet rs = null;
 		Statement stmt = null;
-		String region = request.getParameter("region");
-		String activity_type = request.getParameter("activity_type");
-		String field = request.getParameter("field");
-		String target_group = request.getParameter("target_group");
+		String id = request.getParameter("id");
 		String recruitment_status = request.getParameter("recruitment_status");
-		String start_date = request.getParameter("start_date");
-		String end_date = request.getParameter("end_date");
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-		
-				
-		try{
+		System.out.println(id + "," + recruitment_status);
 			stmt = conn.createStatement();
-					String querytext = 
-				    "INSERT INTO Volunteering "  
-				    + "(region, activity_type, field, target_group, " 
-				    + "recruitment_status, start_date, end_date, title, cdatetime, contents) "
-				    + "VALUES ('" + region + "', '" + activity_type + "', '" + field + "', '" + target_group + "', '"
-				    + recruitment_status + "', '" + start_date + "', '" + end_date + "', '" + title + "', NOW(), '" + contents + "')";
-			stmt.executeUpdate(querytext);
-%>
-			<div class="container">
-			<h2>추가 완료</h2>
-			<button onclick="location.href='admin_participate.jsp'">닫기</button>
-		</div>
-				
-<%			
-			} catch(SQLException ex) {
-			out.println("SQLException : " + ex.getMessage());
-		}
+			
 		
+					String querytext = 
+							 "UPDATE Volunteering SET "  
+									    + "recruitment_status = '모집완료' " 
+									    + "WHERE id = '" + id + "'";
+					
+			stmt.executeUpdate(querytext);
+		
+			out.println("변경완료.");	
+				response.sendRedirect("admin_participate.jsp");
+				
 %>
+
 </body>
 </html>

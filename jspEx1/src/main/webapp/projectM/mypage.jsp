@@ -306,16 +306,32 @@ th, td {
             <%
             while(rs2.next()) {
             %>
+<%		
+		if("신청중".equals(rs2.getString("status"))){
+%>            
             <tr>
                 <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("region") %></a></td>
                 <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("activity_type") %></a></td>
                 <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("start_date") %></a></td>
                 <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("end_date") %></a></td>
                 <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("field") %></a></td>
-                <td><a ><%= rs2.getString("status") %></a></td>
+                <td><a><%= rs2.getString("status") %></a></td>
                 <td><button type="button" onclick="fnDelete('<%= rs2.getString("f_id") %>')">취소하기</button></td>
             </tr>
             <%
+            }else{
+            	%>            
+                <tr>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("region") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("activity_type") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("start_date") %></a></td>
+                    <td style="background-color:#C0CECB"><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("end_date") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("field") %></a></td>
+                    <td style="background-color:#C0CECB"><a><%= rs2.getString("status") %></a></td>
+                    <td style="background-color:#C0CECB"><a href="Customer_Service.jsp?f_id=<%= rs2.getString("f_id") %>">고객센터 문의</a></td>
+                </tr>
+                <%
+            }
             }
             %>
         </table>

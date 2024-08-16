@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>처리문</title>
-</head>
+<title>Insert title here</title>
  <style>
 body {
     font-family: Arial, sans-serif;
@@ -56,41 +55,28 @@ button:hover {
 </style>
 </head>
 <body>
-<header>
-    <%@ include file="header.jsp" %>
-</header>
-<%@include file="db.jsp"%>    
-<%
-    ResultSet rs = null;
-    Statement stmt = null;
+<%@include file="db.jsp"%>	
 
-    String user_id = (String)session.getAttribute("user_id");
-    String board_type = request.getParameter("board_type");
-    String c_title = request.getParameter("c_title");
-    String c_contents = request.getParameter("c_contents");
-    
-    try {
-        stmt = conn.createStatement();
-        String sql = "INSERT INTO community (user_id, board_type, c_title, c_contents) VALUES ('"
-                + user_id + "', '"
-                + board_type + "', '"
-                + c_title + "', '"
-                + c_contents + "')";
-        stmt.executeUpdate(sql);
-%>        
-<div class="container">    
-    <h2> 글쓰기 완료 </h2>
-    <button type="button" onclick="fnmove()">커뮤니티 이동</button>
-</div>
-<%        
-    } catch(SQLException ex) {
-        out.println("SQLException : " + ex.getMessage());
-    }
+<%
+		ResultSet rs = null;
+		Statement stmt = null;
+		String id = request.getParameter("id");
+		String recruitment_status = request.getParameter("recruitment_status");
+		System.out.println(id + "," + recruitment_status);
+			stmt = conn.createStatement();
+			
+		
+					String querytext = 
+							 "UPDATE Volunteering SET "  
+									    + "recruitment_status = '모집중' " 
+									    + "WHERE id = '" + id + "'";
+					
+			stmt.executeUpdate(querytext);
+		
+			out.println("변경완료.");	
+				response.sendRedirect("admin_participate.jsp");
+				
 %>
-<script>
-function fnmove(){
-    location.href="community.jsp";
-}
-</script>
+
 </body>
 </html>
