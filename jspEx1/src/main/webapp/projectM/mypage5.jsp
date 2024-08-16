@@ -74,7 +74,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-    height: 400px;/* 화면 높이에서 80px를 뺀 높이 */
+    height: 450px;/* 화면 높이에서 80px를 뺀 높이 */
 }
 
 .container3 {
@@ -84,7 +84,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     width: 20%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
-    top: 490px; /* 상단에서 80px 떨어진 위치 */
+    top: 540px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
    	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
 }
@@ -143,6 +143,7 @@
         cursor: pointer;
         float:right;
         margin-left:5px;
+        margin-top:40px;
     }
 
     button:hover {

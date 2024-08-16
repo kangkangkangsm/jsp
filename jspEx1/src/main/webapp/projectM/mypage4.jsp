@@ -74,7 +74,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-    height: 400px;/* 화면 높이에서 80px를 뺀 높이 */
+    height: 450px;/* 화면 높이에서 80px를 뺀 높이 */
 }
 
 .container3 {
@@ -84,7 +84,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     width: 20%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
-    top: 490px; /* 상단에서 80px 떨어진 위치 */
+    top: 540px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
    	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
 }
@@ -143,6 +143,7 @@
         cursor: pointer;
         float:right;
         margin-left:5px;
+        margin-top:40px;
     }
 
     button:hover {
@@ -297,12 +298,12 @@ th, td {
             <tr>       
               <td style="width:10%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("service_type") %></a></td>
                 <td style="width:20%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("service_title") %></a></td>
-             <td style="width:38%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("service_contents") %></a></td>
+             <td style="width:30%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("service_contents") %></a></td>
                 <td style="width:10%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("submission_date") %></a></td>
 <%  if("대기중".equals(rs3.getString("status"))){ %>
-                 <td style="width:6%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
+                 <td style="width:10%"><a href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
                 <% }else{ %>
-                <td style="width:6%"><a style="color:red" href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
+                <td style="width:10%"><a style="color:red" href="board3.jsp?id=<%= rs3.getString("id") %>"><%= rs3.getString("status") %></a></td>
                 
                 <%} %> 
                  <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("id") %>')">수정</button></td>
