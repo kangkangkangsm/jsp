@@ -262,9 +262,9 @@ th, td {
     <td><a href="mypage2.jsp">봉사관련 관리</a></td>
     </tr>
      <tr>
-    <td><a href="mypage3.jsp">게시글목록 관리</a></td>
+    <td style="background-color:#C0CECB"><a href="mypage3.jsp">게시글목록 관리</a></td>
     </tr>
-      <tr>
+    <tr>
     <td><a href="mypage4.jsp">고객센터 문의 목록</a></td>
     </tr>
       <tr>
@@ -272,9 +272,39 @@ th, td {
     </tr>
     </table>
             </div>
-  
+         <%   
+         String applicationsQuery = "SELECT * FROM community WHERE user_id = ?";
+         pstmt3 = conn.prepareStatement(applicationsQuery);
+         pstmt3.setString(1, user_id);
+         rs3 = pstmt3.executeQuery();
+        %>
     <div class="container2">
-     
+         <h2>내가 쓴글</h2>
+        <hr>
+       <table>
+            <tr>
+            	<th>유형</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>게시일</th>
+                <th>수정</th>
+                <th>삭제</th>
+             </tr>
+            <%
+            while(rs3.next()) {
+            %>
+            <tr>       
+              <td style="width:10%"><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("board_type") %></a></td>
+                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_title") %></a></td>
+             <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_contents") %></a></td>
+                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_cdatetime") %></a></td>
+                 <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("c_id") %>')">수정</button></td>
+                 <td style="width:8%"><button type="button" onclick="fnDelete2('<%= rs3.getString("c_id") %>')">삭제</button></td>
+                 </tr>
+            <%
+            }
+            %>
+            </table>
     </div>
    
 </div>

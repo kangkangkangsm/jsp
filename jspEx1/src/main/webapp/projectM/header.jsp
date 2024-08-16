@@ -86,12 +86,12 @@
                     <li><a href="#" onclick="location.href='participate.jsp'">봉사참여</a></li>
                     <li><a href="#" onclick="location.href='community.jsp'">커뮤니티</a></li>
                     <li><a href="#" onclick="location.href='Customer_Service.jsp'">고객센터</a></li>
-                    <li><a href="#" onclick="location.href='mypage.jsp'" >마이페이지</a></li>
+                    <li><a href="#" onclick="location.href='mypage2.jsp'" >마이페이지</a></li>
                      <% 
                     String userGrade = (String) session.getAttribute("user_grade");
                     if ("관리자".equals(userGrade)) {
                     %>
-                        <li><a href="#" style="color:blue;" onclick="location.href='adminpage.jsp'">관리자페이지</a></li>
+                        <li><a href="#" style="color:blue;" onclick="location.href='admin_participate.jsp'">관리자페이지</a></li>
                     <% 
                     }
                     %>

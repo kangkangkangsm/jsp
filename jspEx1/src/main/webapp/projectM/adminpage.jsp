@@ -239,6 +239,9 @@ th, td {
     <tr>
     <td><a href="admin_status_check.jsp">참가신청 확인</a></td>
     </tr>
+    <tr>
+    <td><a href="admin_clear_check.jsp">참가완료 확인</a></td>
+    </tr>
     </table>
         </div>
  

@@ -259,12 +259,12 @@ th, td {
     <th>목록</th>
     </tr>
        <tr>
-    <td><a href="mypage2.jsp">봉사관련 관리</a></td>
+    <td style="background-color:#C0CECB"><a href="mypage2.jsp">봉사관련 관리</a></td>
     </tr>
      <tr>
     <td><a href="mypage3.jsp">게시글목록 관리</a></td>
     </tr>
-      <tr>
+    <tr>
     <td><a href="mypage4.jsp">고객센터 문의 목록</a></td>
     </tr>
       <tr>
@@ -272,9 +272,60 @@ th, td {
     </tr>
     </table>
             </div>
-  
+         <%   
+         String applicationsQuery = "SELECT * FROM applications A "
+                                 + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
+                                 + "WHERE A.user_id = ?";
+        pstmt2 = conn.prepareStatement(applicationsQuery);
+        pstmt2.setString(1, user_id);
+        rs2 = pstmt2.executeQuery();
+        %>
     <div class="container2">
-     
+       <h2>신청내역</h2>
+        <hr>
+        <table>
+            <tr>
+                <th>봉사지역</th>
+                <th>활동구분</th>
+                <th>봉사시작일</th>
+                <th>봉사종료일</th>
+                <th>봉사내용</th>
+                <th>관리자확인</th>
+                <th>취소</th>
+            </tr>
+            <%
+            while(rs2.next()) {
+            %>
+<%		
+		if("N".equals(rs2.getString("clear"))){
+		if("신청중".equals(rs2.getString("status"))){
+%>            
+            <tr>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("region") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("activity_type") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("start_date") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("end_date") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("field") %></a></td>
+                <td><a><%= rs2.getString("status") %></a></td>
+                <td><button type="button" onclick="fnDelete('<%= rs2.getString("f_id") %>')">취소하기</button></td>
+            </tr>
+            <%
+            }else{
+            	%>            
+                <tr>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("region") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("activity_type") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("start_date") %></a></td>
+                    <td style="background-color:#C0CECB"><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("end_date") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("field") %></a></td>
+                    <td style="background-color:#C0CECB"><a><%= rs2.getString("status") %></a></td>
+                    <td style="background-color:#C0CECB"><a href="Customer_Service.jsp?f_id=<%= rs2.getString("f_id") %>">고객센터 문의</a></td>
+                </tr>
+                <%
+            }
+            }}
+            %>
+        </table>
     </div>
    
 </div>

@@ -70,11 +70,11 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 20%; /* 너비 20% */
+    width: 32%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-    height: 400px;/* 화면 높이에서 80px를 뺀 높이 */
+    height: 380px;/* 화면 높이에서 80px를 뺀 높이 */
 }
 
 .container3 {
@@ -82,9 +82,9 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 20%; /* 너비 20% */
+    width: 32%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
-    top: 490px; /* 상단에서 80px 떨어진 위치 */
+    top: 470px; /* 상단에서 80px 떨어진 위치 */
     left: 5%; /* 페이지 왼쪽 끝에 정렬 */
    	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
 }
@@ -95,10 +95,10 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 70%; /* 너비 60% */
+    width: 58%; /* 너비 60% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
-    left: 25.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
+    left: 37.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
     height: calc(200vh); /* 화면 높이에서 80px를 뺀 높이 */
 }
 
@@ -133,7 +133,7 @@
         cursor: pointer;
     }
     .Jbutton {
-        width: 35%;
+        width: 25%;
         padding: 10px;
         background-color: #5cb85c;
         border: none;
@@ -227,7 +227,7 @@ th, td {
 			</div>
 <%
 		} else {			
-    
+    try {
         String userQuery = "SELECT * FROM users WHERE user_id = ?";
         pstmt1 = conn.prepareStatement(userQuery);
         pstmt1.setString(1, user_id);
@@ -250,33 +250,97 @@ th, td {
            <button type="button" class ="Jbutton" onclick="fnDelete3('<%= rs1.getString("user_id") %>')">회원탈퇴</button>
         </div>
     </div>
-<% }} %>
+<%        
+		String applicationsQuery = "SELECT * FROM community WHERE user_id = ?";
+        pstmt3 = conn.prepareStatement(applicationsQuery);
+        pstmt3.setString(1, user_id);
+        rs3 = pstmt3.executeQuery();
+%>  
     <div class="container3">
-           <h2>나의 활동</h2>
-    <hr>
-    <table>
-    <tr>
-    <th>목록</th>
-    </tr>
-       <tr>
-    <td><a href="mypage2.jsp">봉사관련 관리</a></td>
-    </tr>
-     <tr>
-    <td><a href="mypage3.jsp">게시글목록 관리</a></td>
-    </tr>
-      <tr>
-    <td><a href="mypage4.jsp">고객센터 문의 목록</a></td>
-    </tr>
-      <tr>
-    <td><a href="mypage5.jsp">참여완료 봉사 목록</a></td>
-    </tr>
-    </table>
+        <h2>내가 쓴글</h2>
+        <hr>
+       <table>
+            <tr>
+                <th>제목</th>
+                <th>게시일</th>
+                <th>수정</th>
+                <th>삭제</th>
+             </tr>
+            <%
+            while(rs3.next()) {
+            %>
+            <tr>       
+             <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_title") %></a></td>
+                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_cdatetime") %></a></td>
+                 <td><button type="button" onclick="fnUpdate('<%= rs3.getString("c_id") %>')">수정</button></td>
+                 <td><button type="button" onclick="fnDelete2('<%= rs3.getString("c_id") %>')">삭제</button></td>
+                 </tr>
+            <%
+            }
+            %>
+            </table>
             </div>
-  
+    <%
+        }
+        // 신청내역 가져오기
+        String applicationsQuery = "SELECT * FROM applications A "
+                                 + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
+                                 + "WHERE A.user_id = ?";
+        pstmt2 = conn.prepareStatement(applicationsQuery);
+        pstmt2.setString(1, user_id);
+        rs2 = pstmt2.executeQuery();
+    %>
     <div class="container2">
-     
+        <h2>신청내역</h2>
+        <hr>
+        <table>
+            <tr>
+                <th>봉사지역</th>
+                <th>활동구분</th>
+                <th>봉사시작일</th>
+                <th>봉사종료일</th>
+                <th>봉사내용</th>
+                <th>관리자확인</th>
+                <th>취소</th>
+            </tr>
+            <%
+            while(rs2.next()) {
+            %>
+<%		
+		if("신청중".equals(rs2.getString("status"))){
+%>            
+            <tr>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("region") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("activity_type") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("start_date") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("end_date") %></a></td>
+                <td><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("field") %></a></td>
+                <td><a><%= rs2.getString("status") %></a></td>
+                <td><button type="button" onclick="fnDelete('<%= rs2.getString("f_id") %>')">취소하기</button></td>
+            </tr>
+            <%
+            }else{
+            	%>            
+                <tr>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("region") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("activity_type") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("start_date") %></a></td>
+                    <td style="background-color:#C0CECB"><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("end_date") %></a></td>
+                    <td style="background-color:#C0CECB" ><a href="board2.jsp?f_id=<%= rs2.getString("f_id") %>"><%= rs2.getString("field") %></a></td>
+                    <td style="background-color:#C0CECB"><a><%= rs2.getString("status") %></a></td>
+                    <td style="background-color:#C0CECB"><a href="Customer_Service.jsp?f_id=<%= rs2.getString("f_id") %>">고객센터 문의</a></td>
+                </tr>
+                <%
+            }
+            }
+            %>
+        </table>
     </div>
-   
+    <%
+    } catch(SQLException ex) {
+        out.println("SQLException : " + ex.getMessage());
+    }}
+    %>
 </div>
 </form>
 <script>

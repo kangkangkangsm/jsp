@@ -70,23 +70,11 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 20%; /* 너비 20% */
+    width: 12%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
-    left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-    height: 400px;/* 화면 높이에서 80px를 뺀 높이 */
-}
-
-.container3 {
-    border-radius: 8px; /* 테두리 둥글기 */
-    background-color: #ffffff; /* 배경색 흰색 */
-    padding: 20px; /* 내부 여백 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 20%; /* 너비 20% */
-    position: absolute; /* 절대 위치 지정 */
-    top: 490px; /* 상단에서 80px 떨어진 위치 */
-    left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-   	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
+    left: 2%; /* 페이지 왼쪽 끝에 정렬 */
+   
 }
 
 /* 오른쪽에 위치할 .container2 스타일 */
@@ -95,12 +83,25 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 70%; /* 너비 60% */
+    width: 83%; /* 너비 60% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
-    left: 25.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
-    height: calc(200vh); /* 화면 높이에서 80px를 뺀 높이 */
+    left: 14.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
+   
 }
+/* .container3 {
+    border-radius: 8px; /* 테두리 둥글기 */
+    background-color: #ffffff; /* 배경색 흰색 */
+    padding: 20px; /* 내부 여백 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 32%; /* 너비 20% */
+    position: absolute; /* 절대 위치 지정 */
+    top: 470px; /* 상단에서 80px 떨어진 위치 */
+    left: 5%; /* 페이지 왼쪽 끝에 정렬 */
+   	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
+} */
+
+
 
  .container4 {
         	margin-top:260px;
@@ -133,7 +134,7 @@
         cursor: pointer;
     }
     .Jbutton {
-        width: 35%;
+        width: 25%;
         padding: 10px;
         background-color: #5cb85c;
         border: none;
@@ -173,8 +174,8 @@ tr:hover {
 
 /* 테이블 셀 스타일 */
 td {
-    padding: 12px 10px;
     border: 1px solid #ddd; /* 테두리 색상 */
+    padding: 12px 10px;
 }
 
 /* 테이블 전체 테두리 스타일 */
@@ -210,104 +211,104 @@ th, td {
 <form action="" name="user">
 <div class="content">
    <%@include file="db.jsp"%>
-    <%
-    ResultSet rs1 = null;
-    ResultSet rs2 = null;
-    ResultSet rs3 = null;
-    PreparedStatement pstmt1 = null;
-    PreparedStatement pstmt2 = null;
-    PreparedStatement pstmt3 = null;
-    String user_id = (String) session.getAttribute("user_id");
-	
-    if(user_id == null){			
-%>			
-			<div class="container4">	
-			<h2 style="margin-bottom: 70px; margin-top: 30px;">로그인 하세요</h2>
-			<button type="button" onclick="location.href='Mlogin.jsp'">로그인 하러 가기</button>
-			</div>
 <%
-		} else {			
-    
-        String userQuery = "SELECT * FROM users WHERE user_id = ?";
-        pstmt1 = conn.prepareStatement(userQuery);
-        pstmt1.setString(1, user_id);
-        rs1 = pstmt1.executeQuery();
-        if (rs1.next()) {
-    %>
+	ResultSet rs = null;
+	Statement stmt = null;
+    String user_id = (String) session.getAttribute("user_id");
+    try {
+    	stmt = conn.createStatement();
+		String querytext = "SELECT * FROM volunteering";
+		rs = stmt.executeQuery(querytext);
+%>
     <div class="container">
-        <h2>내정보</h2>
-        <hr>
-        <div class="details">
-            <p><strong>이름:</strong> <%= rs1.getString("name") %> 님</p>
-            <p><strong>아이디:</strong> <%= rs1.getString("user_id") %></p>
-            <p><strong>주소:</strong> <%= rs1.getString("address") %></p>
-            <p><strong>휴대폰번호:</strong> <%= rs1.getString("phone_number") %></p>
-            <p><strong>이메일:</strong> <%= rs1.getString("email") %></p>
-            <p><strong>봉사희망지역:</strong> <%= rs1.getString("volunteer_region") %></p>
-            <p><strong>가입일자:</strong> <%= rs1.getString("created_at") %></p>
-            <p><strong>나의등급:</strong> <%= rs1.getString("user_grade") %></p>
-           <button type="button" class ="Jbutton" onclick="fnUpdate2('<%= rs1.getString("user_id") %>')">내정보 변경</button> 
-           <button type="button" class ="Jbutton" onclick="fnDelete3('<%= rs1.getString("user_id") %>')">회원탈퇴</button>
-        </div>
-    </div>
-<% }} %>
-    <div class="container3">
-           <h2>나의 활동</h2>
+    <h2>관리 내역</h2>
     <hr>
     <table>
     <tr>
-    <th>목록</th>
+    <th>관리내용</th>
     </tr>
        <tr>
-    <td><a href="mypage2.jsp">봉사관련 관리</a></td>
+    <td><a href="admin_participate.jsp">봉사관련 관리</a></td>
     </tr>
      <tr>
-    <td><a href="mypage3.jsp">게시글목록 관리</a></td>
+    <td><a href="admin_Member.jsp">회원목록 관리</a></td>
+    </tr>
+     <tr>
+    <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
       <tr>
-    <td><a href="mypage4.jsp">고객센터 문의 목록</a></td>
+    <td ><a href="admin_status_check.jsp">참가신청 확인</a></td>
     </tr>
-      <tr>
-    <td><a href="mypage5.jsp">참여완료 봉사 목록</a></td>
+       <tr>
+    <td style="background-color:#C0CECB"><a href="admin_clear_check.jsp">참가완료 확인</a></td>
     </tr>
     </table>
-            </div>
-  
+        </div>
+ 
     <div class="container2">
-     
-    </div>
-   
+    <h2>참가신청 확인</h2>
+     <%
+                ResultSet rs2 = null;
+                Statement stmt2 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext2 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id ORDER BY A.application_date DESC";
+                    rs2 = stmt.executeQuery(querytext2);
+%>  
+	<table>
+	<tr>
+	<th> 신청ID </th>
+	<th> 참가 신청일 </th>
+	<th> 유형 </th>
+	<th> 제목 </th>
+	<th> 상태 </th>
+	<th> 수행여부 </th>
+	<th> 삭제 </th>
+	</tr>	
+<%	    
+   while(rs2.next()){
+%>
+<%		
+		if("참가 확정".equals(rs2.getString("status")) && "N".equals(rs2.getString("clear"))){
+%>
+<tr>
+		<td><%= rs2.getString("user_id") %></td>
+		<td><%= rs2.getString("application_date") %></td>
+		<td><%= rs2.getString("field") %></td>
+		<td><%= rs2.getString("title") %></td>
+		<td><%= rs2.getString("status") %></td>
+		<td><button type="button" onclick="fnstatus2('<%= rs2.getString("f_id") %>','<%= rs2.getString("user_id") %>')">수행완료</button></td>
+			<td><button type="button" onclick="fnstatus('<%= rs2.getString("f_id") %>')" >신청삭제</button></td>
+<% } %>	
+</tr>
+<%	   
+   }
+%>
+</table>
+<%              
+    } catch(SQLException ex) {
+        out.println("SQLException : " + ex.getMessage());
+    }
+    
+    
+    %>
 </div>
 </form>
 <script>
-function fnDelete(f_id){
-    if (confirm("정말로 이 신청을 취소하시겠습니까?")) {
-        window.location.href = "deleteB.jsp?f_id=" + f_id;
+function fnstatus(f_id){
+if (confirm("삭제하겠습니다?")) {
+	 window.location.href = "status_result.jsp?f_id=" + f_id;
+	}
+	}
+
+function fnstatus2(f_id, user_id){
+    if (confirm("아이디(" + user_id + ") 이용자가 봉사활동을 참여 하였나요?")) {
+        window.location.href = "status_result3.jsp?f_id=" + f_id;
     }
 }
-
-function fnDelete2(c_id){
-    if (confirm("정말로 삭제하실겁니까?")) {
-        window.location.href = "deleteC.jsp?c_id=" + c_id;
-    }
-}
-
-function fnUpdate(c_id){
-    if (confirm("정말로 수정하실겁니까?")) {
-        window.location.href = "updateC.jsp?c_id=" + c_id;
-    }
-}
-
-function fnUpdate2(uesr_id){
-    if (confirm("정말로 수정하실겁니까?")) {
-        window.location.href = "updateA.jsp?user_id=" + uesr_id;
-    }
-}
-
-function fnDelete3(uesr_id){
-    if (confirm("정말로 탈퇴하실겁니까?")) {
-        window.location.href = "unregister.jsp?user_id=" + uesr_id;
-    }
+			
+function fnReload(){ /* 페이지 새로고침 함수 */
+	location.reload(); /* 페이지를 새로 고침 */
 }
 
 
