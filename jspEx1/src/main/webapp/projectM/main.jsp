@@ -53,10 +53,11 @@ nav ul li a {
 }
 
 .main-banner {
-    text-align: center;
+
  background-color: #f4f4f4;
-    padding: 40px 20px;
-    border-bottom: 1px solid #eee;
+      display: flex;
+    justify-content: space-around;
+    padding: 20px;
 }
 
 .banner-content img {
@@ -83,8 +84,8 @@ nav ul li a {
 }
 
 .button img {
-    width: 70px;
-    height: 70px;
+    width: 170px;
+    height: 170px;
     margin-bottom: 10px;
 }
 
@@ -98,11 +99,26 @@ nav ul li a {
 <body>
 <%@ include file = "header.jsp" %>
        <main>
-        <section class="main-banner">
-            <div class="banner-content">
-                <img src="../images/mainBanner.jpg" width="100%" alt="배너 이미지">
-               
-            </div>
+          <section class="main-banner">           
+                <img src="../images/5.png" alt="">        
+           
+               <img src="../images/5.png" alt="">
+            
+        </section>
+            
+                 <section class="action-buttons">           
+                <img src="../images/1.png" alt="">        
+               <img src="../images/2.png" alt="">
+               <img src="../images/3.png" alt="">
+                <img src="../images/4.png" alt=""> 
+            
+        </section>
+            <section class="main-banner">           
+                <img src="../images/5.png" alt="">        
+               <img src="../images/5.png" alt="">
+             
+                   
+            
         </section>
 <%        
  ResultSet rs1 = null;
@@ -112,26 +128,7 @@ nav ul li a {
  PreparedStatement pstmt2 = null;
  PreparedStatement pstmt3 = null;
 %> 
-    <section class="action-buttons">
-            <div class="button">
-                <img src="button1-icon.png" alt="">
-                <p>자원봉사<br>이용하고 싶어요</p>
-            </div>
-            <div class="button">
-                <img src="button2-icon.png" alt="">
-                <p>자원봉사<br>이용하고 싶어요</p>
-            </div>
-            <div class="button">
-                <img src="button3-icon.png" alt="">
-                <p>자원봉사<br>이용하고 싶어요</p>
-            </div>
-            <div class="button">
-                <img src="button4-icon.png" alt="">
-                <p>자원봉사<br>이용하고 싶어요</p>
-            </div>
-           
-            </div>
-        </section>
+
     </main>
    
 </body>
