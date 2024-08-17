@@ -304,13 +304,13 @@ th, td {
                         	if ("일반사용자".equals(rs2.getString("user_grade"))) {   	
                     %>
                     <tr>
-                        <td><a><%= rs2.getString("name") %></a></td>
-                        <td><a><%= rs2.getString("user_id") %></a></td>               
-                        <td><a><%= rs2.getString("phone_number") %></a></td>
-                        <td><a><%= rs2.getString("email") %></a></td>
-                        <td><a><%= rs2.getString("volunteer_region") %></a></td>
-                        <td><a><%= rs2.getString("user_grade") %></a></td>
-                        <td><a><%= rs2.getString("created_at") %></a></td>
+                        <td><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><%= rs2.getString("name") %></a></td>
+                        <td><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><%= rs2.getString("user_id") %></a></td>               
+                        <td><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><%= rs2.getString("phone_number") %></a></td>
+                        <td><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><%= rs2.getString("email") %></a></td>
+                        <td><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><%= rs2.getString("volunteer_region") %></a></td>
+                        <td><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><%= rs2.getString("user_grade") %></a></td>
+                        <td><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><%= rs2.getString("created_at") %></a></td>
 <% 
      if ("일반사용자".equals(rs2.getString("user_grade"))) {
      if ("Y".equals(rs2.getString("VEN"))) {
@@ -335,13 +335,13 @@ th, td {
                         	}else{
 %>
 <tr>
-                        <td><strong><a style="color:#1E90FF" ><%= rs2.getString("name") %></a></strong></td>
-                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("user_id") %></a></strong></td>               
-                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("phone_number") %></a></strong></td>
-                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("email") %></a></strong></td>
-                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("volunteer_region") %></a></strong></td>
-                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("user_grade") %></a></strong></td>
-                        <td><strong><a style="color:#1E90FF"><%= rs2.getString("created_at") %></a></strong></td>
+                        <td><strong><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>" style="color:#1E90FF" ><%= rs2.getString("name") %></a></strong></td>
+                        <td><strong><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>" style="color:#1E90FF"><%= rs2.getString("user_id") %></a></strong></td>               
+                        <td><strong><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>" style="color:#1E90FF"><%= rs2.getString("phone_number") %></a></strong></td>
+                        <td><strong><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>" style="color:#1E90FF"><%= rs2.getString("email") %></a></strong></td>
+                        <td><strong><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>" style="color:#1E90FF"><%= rs2.getString("volunteer_region") %></a></strong></td>
+                        <td><strong><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>" style="color:#1E90FF"><%= rs2.getString("user_grade") %></a></strong></td>
+                        <td><strong><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>" style="color:#1E90FF"><%= rs2.getString("created_at") %></a></strong></td>
 <% 
      if ("일반사용자".equals(rs2.getString("user_grade"))) {
      if ("Y".equals(rs2.getString("VEN"))) {

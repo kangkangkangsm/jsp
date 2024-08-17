@@ -53,36 +53,41 @@
         
        
         
-        button {
-            
-            width: 100%;
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #00BFFF;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .Jbutton {
+        width: 8%;
+        padding: 10px;
+        background-color: #00BFFF;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        float:right;
+        margin-left:5px;
+        margin-top:-50px;
+        margin-bottom:0px;
+    }
+
+    button:hover {
+        background-color: #1E90FF;
+    }
+            .footer {
+            text-align: center;
             padding: 10px;
-            background-color: #5cb85c;
-            border: none;
-            border-radius: 4px;
+            background-color: #009688;
             color: #fff;
-            font-size: 16px;
-            cursor: pointer;
             margin-top: 20px;
-        }
-        
-         .xbutton {
-            
-            width: 49%;
-            padding: 10px;
-            background-color: #C0CECB;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .xbutton:hover {
-            background-color: #F4F4F4;
-        }
-        button:hover {
-            background-color: #4cae4c;
+            width:100%;
         }
         
         header {
@@ -182,7 +187,7 @@ if(rs5.next()){
 }
 while(rs4.next()) {
 %>	
-<p><strong><%= rs4.getString("user_id") %> : </strong> 봉사완료 [ 완료일 : (<%= rs4.getString("clear_date") %>) ]</p>
+<p><strong><%= rs4.getString("user_id") %> : </strong> 봉사완료 [ 완료일 : <%= rs4.getString("clear_date") %> ]</p>
 <%	
 }
 %>  

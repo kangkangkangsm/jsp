@@ -165,7 +165,7 @@
 	            <div class="container">
 	                <h3>정말 탈퇴하시겠습니까?</h3>
 	                <button class="Joinbtns" onclick="location.href='unregister_result3.jsp'">회원 탈퇴</button>
-	                <button type="button" class="Joinbtns" onclick="location.href='mypage.jsp'">아니요</button>
+	                <button type="button" class="Joinbtns" onclick="location.href='mypage2.jsp'">아니요</button>
 	            </div>
 	
 <%	
