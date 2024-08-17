@@ -169,7 +169,7 @@ rs4 = stmt4.executeQuery(querytext4);
   }
 while(rs2.next()) {
 %>	
-<p><strong><%= rs2.getString("user_id") %> : </strong><%= rs2.getString("status") %> </p>
+<p><strong><%= rs2.getString("user_id") %> : </strong><%= rs2.getString("status") %> [ 신청일 : <%= rs2.getString("application_date") %> ]  </p>
 <%	
 }
 %>  
@@ -182,7 +182,7 @@ if(rs5.next()){
 }
 while(rs4.next()) {
 %>	
-<p><strong><%= rs4.getString("user_id") %> : </strong> 봉사 완료(<%= rs4.getString("clear_date") %>)</p>
+<p><strong><%= rs4.getString("user_id") %> : </strong> 봉사완료 [ 완료일 : (<%= rs4.getString("clear_date") %>) ]</p>
 <%	
 }
 %>  

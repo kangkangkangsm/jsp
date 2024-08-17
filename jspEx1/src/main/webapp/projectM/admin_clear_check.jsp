@@ -220,6 +220,28 @@ th, td {
 		String querytext = "SELECT * FROM volunteering";
 		rs = stmt.executeQuery(querytext);
 %>
+<%
+                ResultSet rs3 = null;
+                Statement stmt3 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext3 = "SELECT COUNT(*) CNT FROM customer_support where STATUS ='대기중' GROUP BY STATUS";
+                    rs3 = stmt.executeQuery(querytext3);
+
+                ResultSet rs4 = null;
+                Statement stmt4 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext4 = "SELECT COUNT(*) CNT FROM applications where STATUS ='참가 확정' AND clear ='N' GROUP BY STATUS";
+                    rs4 = stmt.executeQuery(querytext4);
+
+                ResultSet rs5 = null;
+                Statement stmt5 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext5 = "SELECT COUNT(*) CNT FROM applications where STATUS ='신청중' GROUP BY STATUS";
+                    rs5 = stmt.executeQuery(querytext5);
+%>   
     <div class="container">
     <h2>관리 내역</h2>
     <hr>
@@ -237,13 +259,19 @@ th, td {
     <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
       <tr>
-    <td ><a href="admin_status_check.jsp">참가신청 확인</a></td>
+       <% if(rs5.next()){ %>  
+    <td ><a href="admin_status_check.jsp">참가신청 확인<strong> (<%= rs5.getString("CNT") %>)</strong></a></td>
+  <% } %>
     </tr>
        <tr>
-    <td style="background-color:#C0CECB"><a href="admin_clear_check.jsp">참가완료 확인</a></td>
+     <% if(rs4.next()){ %>  
+    <td style="background-color:#C0CECB"><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
+    <% } %>
     </tr>
      <tr>
-    <td ><a href="admin_service.jsp">문의내용 확인</a></td>
+ <%  if(rs3.next()){%>    
+    <td><a href="admin_service.jsp">문의내용 확인<strong> (<%= rs3.getString("CNT") %>)</strong></a></td>
+ <% } %>   
     </tr>
     </table>
         </div>
@@ -275,11 +303,11 @@ th, td {
 		if("참가 확정".equals(rs2.getString("status")) && "N".equals(rs2.getString("clear"))){
 %>
 <tr>
-		<td><%= rs2.getString("user_id") %></td>
-		<td><%= rs2.getString("application_date") %></td>
-		<td><%= rs2.getString("field") %></td>
-		<td><%= rs2.getString("title") %></td>
-		<td><%= rs2.getString("status") %></td>
+		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("application_date") %></a></td>
+		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("field") %></a></td>
+		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("title") %></a></td>
+		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
 		<td><button type="button" onclick="fnstatus2('<%= rs2.getString("f_id") %>','<%= rs2.getString("user_id") %>')">수행완료</button></td>
 			<td><button type="button" onclick="fnstatus('<%= rs2.getString("f_id") %>')" >신청삭제</button></td>
 <% } %>	

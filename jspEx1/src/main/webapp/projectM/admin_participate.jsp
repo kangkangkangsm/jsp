@@ -204,7 +204,38 @@ th, td {
 <form action="" name="user">
 <div class="content">
    <%@include file="db.jsp"%>
+   <%
+        ResultSet rs = null;
+        Statement stmt = null;
+                     
+        try {
+        stmt = conn.createStatement();
+        String querytext = "SELECT * FROM volunteering ORDER BY cdatetime DESC";
+        rs = stmt.executeQuery(querytext);
+                    
+ %>
+<%
+                ResultSet rs3 = null;
+                Statement stmt3 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext3 = "SELECT COUNT(*) CNT FROM customer_support where STATUS ='대기중' GROUP BY STATUS";
+                    rs3 = stmt.executeQuery(querytext3);
 
+                ResultSet rs4 = null;
+                Statement stmt4 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext4 = "SELECT COUNT(*) CNT FROM applications where STATUS ='참가 확정' AND clear ='N' GROUP BY STATUS";
+                    rs4 = stmt.executeQuery(querytext4);
+
+                ResultSet rs5 = null;
+                Statement stmt5 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext5 = "SELECT COUNT(*) CNT FROM applications where STATUS ='신청중' GROUP BY STATUS";
+                    rs5 = stmt.executeQuery(querytext5);
+%>   
     <div class="container">
     <h2>관리 내역</h2>
     <hr>
@@ -222,28 +253,25 @@ th, td {
     <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
       <tr>
-    <td><a href="admin_status_check.jsp">참가신청 확인</a></td>
+       <% if(rs5.next()){ %>  
+    <td ><a href="admin_status_check.jsp">참가신청 확인<strong> (<%= rs5.getString("CNT") %>)</strong></a></td>
+  <% } %>
     </tr>
        <tr>
-    <td><a href="admin_clear_check.jsp">참가완료 확인</a></td>
+     <% if(rs4.next()){ %>  
+    <td><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
+    <% } %>
     </tr>
      <tr>
-    <td ><a href="admin_service.jsp">문의내용 확인</a></td>
+ <%  if(rs3.next()){%>    
+    <td><a href="admin_service.jsp">문의내용 확인<strong> (<%= rs3.getString("CNT") %>)</strong></a></td>
+ <% } %>   
     </tr>
     </table>
         </div>
  
     <div class="container2">
-<%
-        ResultSet rs = null;
-        Statement stmt = null;
-                     
-        try {
-        stmt = conn.createStatement();
-        String querytext = "SELECT * FROM volunteering ORDER BY cdatetime DESC";
-        rs = stmt.executeQuery(querytext);
-                    
- %>
+
                 <h2>봉사게시글 관리</h2>
                <button type="button" class="Jbutton" onclick="fnmove()" value="글쓰기">추가하기</button>
 

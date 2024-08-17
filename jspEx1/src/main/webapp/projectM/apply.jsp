@@ -161,7 +161,7 @@ if(user_id == null){
 		try{
 			stmt = conn.createStatement();
 			String querytext = 
-			 		"INSERT INTO applications(user_id,volunteering_id) VALUES('" + sessionId + "', '" + id + "')";
+			 		"INSERT INTO applications(user_id,volunteering_id,application_date) VALUES('" + sessionId + "', '" + id + "', now())";
  			stmt.executeUpdate(querytext);
 %>
 			<div class="container">

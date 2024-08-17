@@ -94,6 +94,7 @@ nav ul li a {
 }
 </style>
 </head>
+<%@include file="db.jsp"%>
 <body>
 <%@ include file = "header.jsp" %>
        <main>
@@ -103,8 +104,15 @@ nav ul li a {
                
             </div>
         </section>
-
-        <section class="action-buttons">
+<%        
+ ResultSet rs1 = null;
+ ResultSet rs2 = null;
+ ResultSet rs3 = null;
+ PreparedStatement pstmt1 = null;
+ PreparedStatement pstmt2 = null;
+ PreparedStatement pstmt3 = null;
+%> 
+    <section class="action-buttons">
             <div class="button">
                 <img src="button1-icon.png" alt="">
                 <p>자원봉사<br>이용하고 싶어요</p>

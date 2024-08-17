@@ -251,7 +251,40 @@ th, td {
            <button type="button" class ="Jbutton" onclick="fnDelete3('<%= rs1.getString("user_id") %>')">회원탈퇴</button>
         </div>
     </div>
-<% }} %>
+<% } %>
+ <%
+                ResultSet rs5 = null;
+                Statement stmt5 = null;
+            
+                    stmt5 = conn.createStatement();
+                    String querytext5 = "SELECT COUNT(*) CNT FROM applications A "
+                            + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
+                            + "WHERE A.user_id ='" + user_id + "' AND clear = 'N'";
+                    rs5 = stmt5.executeQuery(querytext5);
+
+                ResultSet rs6 = null;
+                Statement stmt6 = null;
+            
+                    stmt6 = conn.createStatement();
+                    String querytext6 = "SELECT COUNT(*) CNT FROM applications A "
+                            + "INNER JOIN volunteering V ON A.volunteering_id = V.id "
+                            + "WHERE A.user_id ='" + user_id + "' AND clear = 'Y'";
+                    rs6 = stmt6.executeQuery(querytext6);
+
+                ResultSet rs7 = null;
+                Statement stmt7 = null;
+            
+                    stmt7 = conn.createStatement();
+                    String querytext7 = "SELECT COUNT(*) CNT FROM community WHERE user_id = '" + user_id +"'";
+                    rs7 = stmt7.executeQuery(querytext7);
+                    
+                 ResultSet rs8 = null;
+                 Statement stmt8 = null;
+                
+                     stmt8 = conn.createStatement();
+                     String querytext8 = "SELECT COUNT(*) CNT FROM customer_support WHERE user_id = '" + user_id +"'";
+                     rs8 = stmt8.executeQuery(querytext8);
+%>   
     <div class="container3">
            <h2>나의 활동</h2>
     <hr>
@@ -260,16 +293,24 @@ th, td {
     <th>목록</th>
     </tr>
        <tr>
-    <td ><a href="mypage2.jsp">봉사관련 관리</a></td>
+      <%if(rs5.next()){ %>
+    <td ><a href="mypage2.jsp">봉사신청 목록 <strong>(<%= rs5.getString("CNT") %>)</strong></a></td>
+    <% } %>
     </tr>
      <tr>
-    <td><a href="mypage3.jsp">게시글목록 관리</a></td>
+     <%if(rs7.next()){ %>
+    <td ><a href="mypage3.jsp">게시글목록 관리 <strong>(<%= rs7.getString("CNT") %>)</strong></a></td>
+      <% } %>
     </tr>
     <tr>
-    <td><a href="mypage4.jsp">고객센터 문의 목록</a></td>
+    <%if(rs8.next()){ %>
+    <td><a href="mypage4.jsp">고객센터 문의 목록 <strong>(<%= rs8.getString("CNT") %>)</strong></a></td>
+    <% } %>
     </tr>
       <tr>
-    <td style="background-color:#C0CECB"><a href="mypage5.jsp">참여완료 봉사 목록</a></td>
+      <%if(rs6.next()){ %>
+    <td style="background-color:#C0CECB"><a href="mypage5.jsp">참여완료 봉사 목록 <strong>(<%= rs6.getString("CNT") %>)</strong></a></td>
+   <% } %>
     </tr>
     </table>
             </div>
@@ -309,7 +350,7 @@ th, td {
                 <td><a>이전 참가완료했던 이력입니다.</a></td>
             </tr>
             <%
-            }}}
+            }}}}
             %>
         </table>
     </div>
