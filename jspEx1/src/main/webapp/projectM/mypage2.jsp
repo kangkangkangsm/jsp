@@ -133,7 +133,7 @@
         cursor: pointer;
     }
     .Jbutton {
-        width: 35%;
+        width: 40%;
         padding: 10px;
         background-color: #5cb85c;
         border: none;

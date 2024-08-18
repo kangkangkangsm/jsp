@@ -145,7 +145,7 @@
 	
 	%>  
 	<div class="comment">
-            <p><strong>관리자 답변 :</strong> <%= rs.getString("com_contents") %></p>
+            <p><strong>관리자 답변 :</strong> <%= rs.getString("com_contents") %><strong style="float:right"> (<%= rs.getString("cdatetime") %>)</strong></p>
         </div>
 	<% } %>
    <button type="button" class="xbutton" onclick="history.back()">돌아가기</button>

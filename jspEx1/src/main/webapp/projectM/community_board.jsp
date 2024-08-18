@@ -179,7 +179,7 @@
 				} else {
 %>
         <div class="comment">
-            <p><strong><%= rs.getString("session_id") %>님 :</strong> <%= rs.getString("com_contents") %></p>
+            <p><strong><%= rs.getString("session_id") %>님 :</strong> <%= rs.getString("com_contents") %> <strong style="float:right"> ( <%= rs.getString("cdatetime") %> )</strong></p>
         </div>
         
 <% 

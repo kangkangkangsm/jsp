@@ -24,7 +24,7 @@
 					"DELETE FROM community WHERE c_id = '" + c_id + "'";
 			stmt.executeUpdate(querytext);
 				out.println("삭제완료.");	
-				response.sendRedirect("mypage.jsp");
+				response.sendRedirect("mypage3.jsp");
 			
 		} catch(SQLException ex) {
 			out.println("SQLException : " + ex.getMessage());

@@ -184,7 +184,7 @@
 	
 %>  
 	<div class="comment">
-            <p><strong><%= rs.getString("session_id") %>님 :</strong> <%= rs.getString("com_contents") %></p>
+            <p><strong><%= rs.getString("session_id") %>님 :</strong> <%= rs.getString("com_contents") %><strong style="float:right"> ( <%= rs.getString("cdatetime") %> )</strong></p>
         </div>
 <% } %>
 				<button type="button" class="xbutton" onclick="location.href='admin_service.jsp'">돌아가기</button>
