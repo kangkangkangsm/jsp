@@ -247,16 +247,22 @@ th, td {
     <hr>
     <table>
     <tr>
-    <th>관리내용</th>
+    <th>회원 관리</th>
+    </tr>
+     <tr>
+    <td><a href="admin_Member.jsp">회원목록 관리</a></td>
+    </tr>
+    <tr>
+    <th>게시판 관리</th>
     </tr>
        <tr>
     <td><a href="admin_participate.jsp">봉사관련 관리</a></td>
     </tr>
      <tr>
-    <td><a href="admin_Member.jsp">회원목록 관리</a></td>
+    <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
      <tr>
-    <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
+    <th>신청 관리</th>
     </tr>
       <tr>
        <% if(rs5.next()){ %>  
@@ -267,6 +273,9 @@ th, td {
      <% if(rs4.next()){ %>  
     <td><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
     <% } %>
+    </tr>
+    <tr>
+    <th>고객 문의</th>
     </tr>
      <tr>
  <%  if(rs3.next()){%>    
@@ -294,25 +303,34 @@ th, td {
                 <th>내용</th>
                 <th>문의일</th>
                 <th>진행</th>
-                <th>답변완료</th>
+                <th>처리완료</th>
  </tr>
 <%	    
    while(rs2.next()){
 	   if("대기중".equals(rs2.getString("status"))){
 %>
-<tr>          <td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+<tr> 
+<%  if("null".equals(rs2.getString("user_id"))){ %>
+         <td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>">비로그인</a></td>
+   <% }else{ %>
+   		<td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+   <% } %>      
               <td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_type") %></a></td>
                 <td style="width:20%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_title") %></a></td>
              <td style="width:34%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_contents") %></a></td>
                 <td style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("submission_date") %></a></td>
                  <td style="width:8%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
-                 <td style="width:10%"><button type="button" onclick="fnstatus2('<%= rs2.getString("id") %>','<%= rs2.getString("user_id") %>')">답변완료</button></td>
+                 <td style="width:10%"><button type="button" onclick="fnstatus2('<%= rs2.getString("id") %>','<%= rs2.getString("user_id") %>')">처리완료</button></td>
                 
                  </tr>
 <% }else{ %>	
 			<tr>          
-			<td style="width:10%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
-              <td style="width:10%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_type") %></a></td>
+		<%  if("null".equals(rs2.getString("user_id"))){ %>
+         <td style="width:10%; background-color:#C0CECB" style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>">비로그인</a></td>
+   <% }else{ %>
+   		<td style="width:10%; background-color:#C0CECB" style="width:10%"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+   <% } %>  
+                 <td style="width:10%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_type") %></a></td>
                 <td style="width:20%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_title") %></a></td>
              <td style="width:34%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("service_contents") %></a></td>
                 <td style="width:10%; background-color:#C0CECB"><a href="board5.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("submission_date") %></a></td>

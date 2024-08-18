@@ -133,17 +133,6 @@
         width: 100%; /* Set width to auto for dynamic width based on text */
        
     }
-         a {
-            text-decoration: none; /* 밑줄 제거 */
-            color: black; /* 링크 색상 검정으로 설정 */
-        }
-        a:hover {
-            text-decoration: none; /* 마우스 오버 시 밑줄 제거 */
-            color: black; /* 마우스 오버 시 링크 색상 검정으로 유지 */
-        }
-        a:visited {
-            color: black; /* 방문한 링크 색상 검정으로 유지 */
-        }
 </style>
 </head>
 <body>
@@ -164,7 +153,7 @@
         if (rs.next()) {
     %>
     <h2><%= rs.getString("service_type") %></h2>
-        <p><a href="My_information.jsp?id=<%= rs.getString("user_id") %>"><strong>작성자:</strong> <%= rs.getString("user_id") %> (유저정보 확인)</a></p>
+        <p><strong>작성자:</strong> <%= rs.getString("user_id") %></p>
         <p><strong>문의 유형:</strong> <%= rs.getString("service_type") %></p>
         <p><strong>작성일:</strong> <%= rs.getString("submission_date") %></p>
         <p><strong>진행상황:</strong> <%= rs.getString("status") %></p>
@@ -187,7 +176,7 @@
             <p><strong><%= rs.getString("session_id") %>님 :</strong> <%= rs.getString("com_contents") %></p>
         </div>
 <% } %>
-				<button type="button" class="xbutton" onclick="location.href='admin_service.jsp'">돌아가기</button>
+				<button type="button" class="xbutton" onclick="history.back()">돌아가기</button>
     </form>
 </div>
 </body>

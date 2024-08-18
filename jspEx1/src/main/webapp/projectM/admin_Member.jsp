@@ -247,16 +247,22 @@ th, td {
     <hr>
     <table>
     <tr>
-    <th>관리내용</th>
-    </tr>
-       <tr>
-    <td><a href="admin_participate.jsp">봉사관련 관리</a></td>
+    <th>회원 관리</th>
     </tr>
      <tr>
     <td style="background-color:#C0CECB"><a href="admin_Member.jsp">회원목록 관리</a></td>
     </tr>
+    <tr>
+    <th>게시판 관리</th>
+    </tr>
+       <tr>
+    <td ><a href="admin_participate.jsp">봉사관련 관리</a></td>
+    </tr>
      <tr>
     <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
+    </tr>
+     <tr>
+    <th>신청 관리</th>
     </tr>
       <tr>
        <% if(rs5.next()){ %>  
@@ -265,8 +271,11 @@ th, td {
     </tr>
        <tr>
      <% if(rs4.next()){ %>  
-    <td ><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
+    <td><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
     <% } %>
+    </tr>
+    <tr>
+    <th>고객 문의</th>
     </tr>
      <tr>
  <%  if(rs3.next()){%>    
@@ -295,7 +304,7 @@ th, td {
                         <th>봉사지역</th>
                         <th>등급</th>
                         <th>가입일자</th>
-                        <th>VEN</th>
+                        <th>정지</th>
                         <th>탈퇴</th>
                     </tr>
                     <%

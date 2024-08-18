@@ -101,6 +101,24 @@ button {
             left: 0;
             z-index: 1000;
         }
+         a {
+            text-decoration: none; /* 밑줄 제거 */
+            color: black; /* 링크 색상 검정으로 설정 */
+        }
+        a:hover {
+            text-decoration: none; /* 마우스 오버 시 밑줄 제거 */
+            color: black; /* 마우스 오버 시 링크 색상 검정으로 유지 */
+        }
+        a:visited {
+            color: black; /* 방문한 링크 색상 검정으로 유지 */
+        }
+        
+         .disabled {
+        color: #a9a9a9; /* 회색 텍스트 색상 */
+        text-decoration: none; /* 밑줄 제거 */
+        cursor: not-allowed; /* 비활성화된 커서 */
+        pointer-events: none; /* 클릭 이벤트 차단 */
+    }
 </style>
 </head>
 <body>
@@ -219,7 +237,7 @@ button {
     <% } %> 
     <%while(rs9.next()){ %>
     	<ol>
-    	<p><strong style="width: 250px"><%= rs9.getString("field") %></strong><%= rs9.getString("title") %></p>
+    	<a href="admin_board.jsp?id=<%= rs9.getString("id") %>"><strong style="width: 250px"><%= rs9.getString("field") %></strong><%= rs9.getString("title") %></a>
     	</ol>
     <% } %>	
     <%if(rs7.next()){ %>
@@ -227,7 +245,7 @@ button {
     <% } %>  
     <% while(rs12.next()){ %>
     	<ol>
-    	<p><strong style="width: 250px"><%= rs12.getString("board_type") %></strong><%= rs12.getString("c_title") %></p>
+    	<a href="admin_community_board.jsp?c_id=<%= rs12.getString("c_id") %>"><strong style="width: 250px"><%= rs12.getString("board_type") %></strong><%= rs12.getString("c_title") %></a>
     	</ol>
     <% } %>	
     <%if(rs8.next()){ %>
@@ -235,7 +253,7 @@ button {
     <% } %>
     <% while(rs11.next()){ %>
     	<ol>
-    	<p><strong style="width: 250px"><%= rs11.getString("service_type") %></strong><%= rs11.getString("service_contents") %></p>
+    	<a href="board6.jsp?id=<%= rs11.getString("id") %>"><strong style="width: 250px"><%= rs11.getString("service_type") %></strong><%= rs11.getString("service_contents") %></a>
     	</ol>
     <% } %>	
     <%if(rs6.next()){ %>
@@ -243,7 +261,7 @@ button {
     <% } %>
      <%while(rs10.next()){ %>
     	<ol>
-    	<p><strong style="width: 250px"><%= rs10.getString("field") %></strong><%= rs10.getString("title") %></p>
+    	<a href="admin_board.jsp?id=<%= rs10.getString("id") %>"><strong style="width: 250px"><%= rs10.getString("field") %></strong><%= rs10.getString("title") %></a>
     	</ol>
     <% } %>	
     </div>

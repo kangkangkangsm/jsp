@@ -91,7 +91,7 @@
                     String userGrade = (String) session.getAttribute("user_grade");
                     if ("관리자".equals(userGrade)) {
                     %>
-                        <li><a href="#" style="color:blue;" onclick="location.href='admin_participate.jsp'">관리자페이지</a></li>
+                        <li><a href="#" style="color:blue;" onclick="location.href='admin_Member.jsp'">관리자페이지</a></li>
                     <% 
                     }
                     %>

@@ -101,6 +101,18 @@
             left: 0;
             z-index: 1000;
         }
+         a {
+            text-decoration: none; /* 밑줄 제거 */
+            color: black; /* 링크 색상 검정으로 설정 */
+        }
+        a:hover {
+            text-decoration: none; /* 마우스 오버 시 밑줄 제거 */
+            color: black; /* 마우스 오버 시 링크 색상 검정으로 유지 */
+        }
+        a:visited {
+            color: black; /* 방문한 링크 색상 검정으로 유지 */
+        }
+        
 </style>
 </head>
 <body>
@@ -174,7 +186,7 @@ rs4 = stmt4.executeQuery(querytext4);
   }
 while(rs2.next()) {
 %>	
-<p><strong><%= rs2.getString("user_id") %> : </strong><%= rs2.getString("status") %> [ 신청일 : <%= rs2.getString("application_date") %> ]  </p>
+<p><a href="My_information.jsp?id=<%= rs2.getString("user_id") %>"><strong><%= rs2.getString("user_id") %> : </strong><%= rs2.getString("status") %> [ 신청일 : <%= rs2.getString("application_date") %> ] </a></p>
 <%	
 }
 %>  
@@ -187,7 +199,7 @@ if(rs5.next()){
 }
 while(rs4.next()) {
 %>	
-<p><strong><%= rs4.getString("user_id") %> : </strong> 봉사완료 [ 완료일 : <%= rs4.getString("clear_date") %> ]</p>
+<p><a href="My_information.jsp?id=<%= rs4.getString("user_id") %>"><strong><%= rs4.getString("user_id") %> : </strong> 봉사완료 [ 완료일 : <%= rs4.getString("clear_date") %> ]</a></p>
 <%	
 }
 %>  
