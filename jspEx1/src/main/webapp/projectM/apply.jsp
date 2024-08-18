@@ -143,6 +143,24 @@
 <%@include file="db.jsp"%>	
 <%
 String user_id = (String) session.getAttribute("user_id");
+String id = request.getParameter("id");
+ResultSet rs2 = null;
+Statement stmt2 = null;
+
+    stmt2 = conn.createStatement();
+    String querytext2 = "SELECT * FROM applications WHERE user_id ='" + user_id +"' AND volunteering_id = '" + id +"'";
+    rs2 = stmt2.executeQuery(querytext2);
+
+    if(rs2.next()){
+%>
+	<div class="container4">	
+		<h2>이미 신청한 활동 입니다.</h2>
+		<button type="button" class="sJoinbtn" onclick="location.href='participate.jsp'">돌아가기</button>
+		</div>
+		
+<%    	
+	return;
+    }
 
 if(user_id == null){			
 %>			
@@ -156,8 +174,6 @@ if(user_id == null){
 		Statement stmt = null;
 		
 		String sessionId = (String) session.getAttribute("user_id");
-		String id = request.getParameter("id");
-		
 		try{
 			stmt = conn.createStatement();
 			String querytext = 
