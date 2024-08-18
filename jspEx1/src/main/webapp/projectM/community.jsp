@@ -220,7 +220,7 @@ th, td {
             <td><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("c_title") %> <%= CNT %></a></strong></td>
             <td style="width:10%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>">관리자</a></strong></td>
             <td style="width:15%"><strong><a style="color:red"  href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
-            <td style="width:5%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></strong></td>
+            <td style="width:5%"><strong><a style="color:red" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") -290 %></a></strong></td>
         </tr>
         <%
         } else {
@@ -230,7 +230,7 @@ th, td {
             <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("c_title") %> <%= CNT %></a></td>
             <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></td>
             <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></td>
-            <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") %></a></td>
+            <td><a href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") -290%> </a></td>
         </tr>
         
         <%
@@ -243,7 +243,7 @@ th, td {
             <td><strong><a class="disabled">관리자에 의해 숨김처리 되었습니다.</a></strong></td>
             <td><strong><a class="disabled"><%= rs.getString("user_id") %></a></strong></td>
             <td><strong><a class="disabled"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
-            <td><strong><a class="disabled"><%= rs.getInt("c_id") %></a></strong></td>
+            <td><strong><a class="disabled"><%= rs.getInt("c_id") -290 %></a></strong></td>
         </tr>
         <%
         } else {
@@ -253,7 +253,7 @@ th, td {
             <td><a class="disabled">관리자에 의해 숨김처리 되었습니다.</a></td>
             <td><a class="disabled"><%= rs.getString("user_id") %></a></td>
             <td><a class="disabled"><%= rs.getTimestamp("c_cdatetime") %></a></td>
-            <td><a class="disabled"><%= rs.getInt("c_id") %></a></td>
+            <td><a class="disabled"><%= rs.getInt("c_id") -290 %></a></td>
         </tr>
         
         <%
