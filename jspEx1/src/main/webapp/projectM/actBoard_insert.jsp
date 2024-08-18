@@ -149,23 +149,10 @@
 
 <%@ include file="header.jsp" %>
 <div class="container">
-    <form action="actBoard_insert-result.jsp" method="get">
+    <form action="actBoard_insert_result.jsp" method="get">
     <%@include file="db.jsp"%>	
 
-<%
-        ResultSet rs = null;
-        Statement stmt = null;
-        String id = request.getParameter("id");     
-        stmt = conn.createStatement();
-        String querytext = "SELECT * FROM volunteering WHERE id ='" + id + "'"; 
-        rs = stmt.executeQuery(querytext);              
-        System.out.println(querytext);
-        
-       	if(rs.next()){
-       	
-%>
-<input type="hidden" id="id" name="id" value="<%= rs.getString("id") %>">
-        <h2>수정하기</h2>
+        <h2>봉사 추가하기</h2>
 	
         <!-- First Row -->
         <div class="form-row">
@@ -177,7 +164,7 @@
         </div>
         <div class="form-row">
             <select id="region" name="region" required>
-                <option value="<%= rs.getString("region") %>"><%= rs.getString("region") %></option>
+                <option value="">전체포함</option>
                 <option value="서울특별시">서울특별시</option>
                 <option value="부산광역시">부산광역시</option>
                 <option value="대구광역시">대구광역시</option>
@@ -197,7 +184,7 @@
                 <option value="제주특별자치도">제주특별자치도</option>
             </select>
             <select id="activity_type" name="activity_type" required>
-                  <option value="<%= rs.getString("activity_type") %>"><%= rs.getString("activity_type") %></option>
+            
                   <option value="">전체포함</option>
                 <option value="온라인">온라인</option>
                 <option value="오프라인">오프라인</option>
@@ -205,14 +192,14 @@
             <select id="field" name="field"  required >
             </select>
             <select id="target_group" name="target_group" required>
-                <option value="<%= rs.getString("target_group") %>"><%= rs.getString("target_group") %></option>
+               <option value="">전체포함</option>
                 <option value="아동청소년">아동청소년</option>
                 <option value="장애인">장애인</option>
                 <option value="노인">노인</option>
                 <option value="다문화가정">다문화가정</option>
             </select>
             <select id="recruitment_status" name="recruitment_status" required>
-               <option value="<%= rs.getString("recruitment_status") %>"><%= rs.getString("recruitment_status") %></option>
+              <option value="">전체포함</option>
                 <option value="모집중">모집중</option>
                 <option value="모집완료">모집완료</option>
             </select>
@@ -230,20 +217,19 @@
             <label for="title" >제목</label>
         </div>
           <div class="form-row">
-        <input type="text" id="title" name="title" placeholder="제목" style="width:100%;" value="<%= rs.getString("title") %>">
+        <input type="text" id="title" name="title" placeholder="제목" style="width:100%;">
         </div>    
           <div class="form-row">
             <label for="contents" >내용</label>
         </div>
           <div class="form-row">
-        <input type="text" id="contents" name="contents" placeholder="내용" style="width:100%; height:250px;" value="<%= rs.getString("contents") %>">
+        <input type="text" id="contents" name="contents" placeholder="내용" style="width:100%; height:250px;">
         </div>    
             <button type="button" onclick="history.back()">취소</button>
             <input type="submit" value="저장">
     </form>
 </div>
 
-<%} %>
 
 </body>
 </html>

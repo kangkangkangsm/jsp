@@ -358,7 +358,7 @@ function fnupdate(id){
 		
 function fnmove(){
 	if (confirm("추가?")) {
-		location.href="Board_insert.jsp";
+		location.href="actBoard_insert.jsp";
 	}
 		}
 	
