@@ -295,6 +295,7 @@ th, td {
 
         <table>
         <tr>
+        	<th style="width: 3%;">No.</th> 
             <th style="width: 10%;">게시유형</th>
             <th style="width: 15%;">제목</th>
             <th>내용</th>
@@ -308,6 +309,7 @@ th, td {
 if ("공지사항".equals(rs.getString("board_type"))) {          		 
 %>
 <tr>
+			<td><a style="color:red" href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("c_id") %></a></td>
             <td style="width: 10%; color:red"><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getString("board_type") %></a></strong></td>
             <td style="width: 15%;"><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getString("c_title") %> </a></strong></td>
             <td><strong><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" style="color:red"><%= rs.getString("c_contents") %> </a></strong></td>
@@ -327,6 +329,7 @@ if ("공지사항".equals(rs.getString("board_type"))) {
 <% 
 }else {
 %>          <tr>
+  			<td><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("c_id") %></a></td>
             <td style="width: 10%;"><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("board_type") %></a></td>
             <td style="width: 15%;"><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("c_title") %> </a></td>
             <td><a href="admin_community_board.jsp?c_id=<%= rs.getInt("c_id") %>" ><%= rs.getString("c_contents") %> </a></td>

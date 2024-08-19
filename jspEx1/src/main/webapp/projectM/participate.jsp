@@ -237,40 +237,49 @@ th, td {
 					<th> 게시일 </th>
 					<th> 봉사지역 </th>
 					<th> 활동구분 </th>
-					<th> 봉사분야 </th>
+					<th style="width:20%"> 봉사분야 </th>
 					<th> 봉사대상 </th>
 					<th> 봉사시작일 </th>
 					<th> 봉사종료일 </th>
+					<th  style="width:7%"> 인원현황 </th>
 					<th> 모집상태 </th>
 				</tr>
 <%	
 			while(rs.next()){
+				  ResultSet rs2 = null;
+			        Statement stmt2 = null;
+			        stmt2 = conn.createStatement();
+			        String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+			        rs2 = stmt2.executeQuery(querytext2);
+			     
+			        if (rs2.next()) {
 				%>
 				 <tr>
 			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
 			        <td style="width:12%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
 			        <td style="width:8%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
+			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
+			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs2.getString("CNT") %> / <%= rs.getString("mn_people") %></a></td>
 			        <% 
-     				if("모집중".equals(rs.getString("recruitment_status"))) {
-                    %>                        
-			        <td><a style = "color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
-			      	<% 
-			      	}else{			       
+     				if("모집완료".equals(rs.getString("recruitment_status")) ||  rs2.getInt("CNT") == rs.getInt("mn_people")) {
 			        %>
-			        	<td><a style = "color:red" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			        	<td style="width:9%"><a style = "color:red" href="board.jsp?id=<%= rs.getInt("id") %>">모집완료</a></td>
 			        <%
+			      	}else{			       
+                    %>                        
+			        <td style="width:9%"><a style = "color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			      	<% 
 			        }
 			        %>
 			   		<tr>
 			        <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
-			        <td colspan="6"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
+			        <td colspan="7"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
 			    </tr>
 	<%
-				}
+				}}
 				
 	%>		
 			</table>
@@ -289,10 +298,18 @@ th, td {
 					<th> 봉사대상 </th>
 					<th> 봉사시작일 </th>
 					<th> 봉사종료일 </th>
+					<th  style="width:7%"> 인원현황 </th>
 					<th> 모집상태 </th>
 				</tr>
 <%	
 			while(rs.next()){
+			      ResultSet rs2 = null;
+			        Statement stmt2 = null;
+			        stmt2 = conn.createStatement();
+			        String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+			        rs2 = stmt2.executeQuery(querytext2);
+			     
+			        if (rs2.next()) {
 				%>
 				 <tr>
 			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
@@ -302,23 +319,24 @@ th, td {
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
 			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
+			         <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs2.getString("CNT") %> / <%= rs.getString("mn_people") %></a></td>
 			        <% 
-     				if("모집중".equals(rs.getString("recruitment_status"))) {
-                    %>                        
-			        <td><a style = "color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
-			      	<% 
-			      	}else{			       
+     				if("모집완료".equals(rs.getString("recruitment_status")) ||  rs2.getInt("CNT") == rs.getInt("mn_people")) {
 			        %>
-			        	<td><a style = "color:red" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			        	<td style="width:9%"><a style = "color:red" href="board.jsp?id=<%= rs.getInt("id") %>">모집완료</a></td>
 			        <%
+			      	}else{			       
+                    %>                        
+			        <td style="width:9%"><a style = "color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+			      	<% 
 			        }
 			        %>
 			   		<tr>
 			        <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
-			        <td colspan="6"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
+			        <td colspan="7"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
 			    </tr>
 	<%
-				}		
+				}}		
 	%>		
 			</table>
 <%

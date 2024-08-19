@@ -292,7 +292,7 @@ th, td {
                 Statement stmt2 = null;
             
                     stmt = conn.createStatement();
-                    String querytext2 = "SELECT * FROM customer_support ORDER BY submission_date DESC";
+                    String querytext2 = "SELECT * FROM customer_support ORDER BY status = '답변완료' ASC, submission_date DESC";
                     rs2 = stmt.executeQuery(querytext2);
 %>  
 	<table>

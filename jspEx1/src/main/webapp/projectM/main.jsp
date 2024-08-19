@@ -100,24 +100,15 @@ nav ul li a {
 <%@ include file = "header.jsp" %>
        <main>
           <section class="action-buttons">           
-            <img src="../images/1.png" alt="">        
-               <img src="../images/2.png" alt="">
-                      
+            <img src="../images/main.png" alt="">        
             
         </section>
-            
-                 <section class="main-banner">           
-               <img src="../images/22.png" alt="">
-               <img src="../images/21.png" alt="">   
-                <img src="../images/24.png" alt=""> 
+	 <section class="main-banner">            
+                <img src="../images/main2.png" alt=""> 
+                 <img src="../images/main5.jpg" alt=""> 
+                 <img src="../images/main3.jpg" alt=""> 
         </section>
-            <section class="action-buttons">           
-           <img src="../images/3.png" alt="">
-                <img src="../images/4.png" alt=""> 
-             
-                   
-            
-        </section>
+      
 <%        
  ResultSet rs1 = null;
  ResultSet rs2 = null;

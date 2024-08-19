@@ -286,13 +286,14 @@ th, td {
 
         <table>
         <tr>
+         	<th style="width: 3%;">No.</th>
             <th style="width: 8%;">게시일</th>
             <th style="width: 15%;">분야</th>
-            <th style="width: 23%;">제목</th>
+            <th style="width: 20%;">제목</th>
             <th style="width: 7%;">시작일</th>
             <th style="width: 7%;">종료일 </th>
-            <th style="width: 5%;">신청 인원수</th>
-            <th style="width: 5%;">모집 인원수</th>
+            <th style="width: 5%;">신청</th>
+            <th style="width: 5%;">모집</th>
              <th style="width:7%;">상태</th>
             <th style="width: 8%;">상태 변경</th>
             <th style="width: 8%;">수정</th>
@@ -310,25 +311,35 @@ th, td {
         
 %>
         <tr>
+         <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("id") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("cdatetime") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("field") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("title") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("start_date") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("end_date") %></a></td>
-            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs2.getString("CNT") %></a></td>
+<%   
+            if(rs2.getInt("CNT") == rs.getInt("mn_people")){
+%>
+			<td><a style="color:red; font-weight:bold;" href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs2.getString("CNT") %></a></td>
+            <td><a  style="color:red; font-weight:bold; ;" href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("mn_people") %></a></td>
+<%            	
+            }else{
+%>
+		<td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs2.getString("CNT") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("mn_people") %></a></td>
 <% 
-        } 
+            }} 
 %>         
-        <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("recruitment_status") %></a></td>
 <% 
-        if ("모집중".equals(rs.getString("recruitment_status"))) {
+        if ("모집완료".equals(rs.getString("recruitment_status")) || rs2.getInt("CNT") == rs.getInt("mn_people")) {
 %>
-        <td><button type="button" onclick="fnstatus('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>')">모집완료</button></td>
+        <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>">모집완료</a></td>
+        <td><button type="button" onclick="fnstatus2('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>','<%= rs2.getInt("CNT") %>','<%= rs.getInt("mn_people") %>')" style="background-color:red">모집중</button></td>     
 <% 
         } else { 
 %>         
-        <td><button type="button" onclick="fnstatus2('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>')" style="background-color:red">모집중</button></td>     
+        <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>">모집중</a></td>
+        <td><button type="button" onclick="fnstatus('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>')">모집완료</button></td>
 <% 
         }
 %>         
@@ -369,11 +380,17 @@ function fnmove(){
 			 window.location.href = "admin_status.jsp?id=" + id +"&recruitment_status=" + recruitment_status;
 			}
 			}
-	function fnstatus2(id,recruitment_status){
-		if (confirm("상태 변경할까요?")) {
-			 window.location.href = "admin_status2.jsp?id=" + id +"&recruitment_status=" + recruitment_status;
-			}
-			}
+	function fnstatus2(id, recruitment_status, CNT, mn_people) {
+	    if (CNT >= mn_people) {
+	        alert("인원수가 다 찼습니다!");
+	        return;
+	    }
+
+	    if (confirm("상태 변경할까요?")) {
+	        window.location.href = "admin_status2.jsp?id=" + id + "&recruitment_status=" + recruitment_status;
+	    }
+	}
+		
 
 	function fnReload(){ /* 페이지 새로고침 함수 */
 		location.reload(); /* 페이지를 새로 고침 */

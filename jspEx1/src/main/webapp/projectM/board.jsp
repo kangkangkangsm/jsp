@@ -120,6 +120,13 @@
     %>
     <%
         if (rs.next()) {
+	        ResultSet rs2 = null;
+	        Statement stmt2 = null;
+	        stmt2 = conn.createStatement();
+	        String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+	        rs2 = stmt2.executeQuery(querytext2);
+	     
+	        if (rs2.next()) {
     %>
     <h2><%= rs.getString("field") %></h2>
     <div class="details">
@@ -129,26 +136,32 @@
         <p><strong>봉사대상:</strong> <%= rs.getString("target_group") %></p>
         <p><strong>봉사시작일:</strong> <%= rs.getString("start_date") %></p>
         <p><strong>봉사종료일:</strong> <%= rs.getString("end_date") %></p>
-        <p><strong>모집상태:</strong> <%= rs.getString("recruitment_status") %></p>
+<%        
+       if(rs2.getInt("CNT") == rs.getInt("mn_people")){
+%>        
+        <p><strong>모집상태:</strong>모집완료</p>
+<% } else { %>
+		<p><strong>모집상태:</strong> <%= rs.getString("recruitment_status") %></p>
+<%} %>
         <p><strong>제목:</strong> <%= rs.getString("title") %></p>
         <p><strong>내용:</strong> <%= rs.getString("contents") %></p>
     </div>
     <div>
    <% 
-     if ("모집중".equals(rs.getString("recruitment_status"))) {
-                    %>                        
-    <button type="button" onclick="fnapply(<%= id %>)">신청하기</button>
-                    <% 
-                    }else{
+     if ("모집완료".equals(rs.getString("recruitment_status")) || rs2.getInt("CNT") == rs.getInt("mn_people")){
                     %>	
     <button class="xbutton" onclick="return false;" disabled>모집완료</button>              	
                     <%
+                    }else{
+                    %>                        
+    <button type="button" onclick="fnapply(<%= id %>)">신청하기</button>
+                    <% 
                     }
                     %>
     <button type="button" onclick="history.back()">돌아가기</button>
     </div>
     <%
-        } else {
+        }} else {
             out.println("게시글을 찾을 수 없습니다.");
         }
     %>

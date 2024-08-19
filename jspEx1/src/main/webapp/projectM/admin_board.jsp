@@ -137,6 +137,13 @@
     %>
     <%
         if (rs.next()) {
+        	 ResultSet rs11 = null;
+ 	        Statement stmt11 = null;
+ 	        stmt11 = conn.createStatement();
+ 	        String querytext11 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+ 	        rs11 = stmt11.executeQuery(querytext11);
+ 	     
+ 	        if (rs11.next()) {
     %>
     <h2><%= rs.getString("field") %></h2>
     <div class="details">
@@ -146,7 +153,13 @@
         <p><strong>봉사대상:</strong> <%= rs.getString("target_group") %></p>
         <p><strong>봉사시작일:</strong> <%= rs.getString("start_date") %></p>
         <p><strong>봉사종료일:</strong> <%= rs.getString("end_date") %></p>
-        <p><strong>모집상태:</strong> <%= rs.getString("recruitment_status") %></p>
+       <%        
+       if(rs11.getInt("CNT") == rs.getInt("mn_people")){
+%>        
+        <p><strong>모집상태:</strong>모집완료</p>
+<% } else { %>
+		<p><strong>모집상태:</strong> <%= rs.getString("recruitment_status") %></p>
+<%} %>
         <p><strong>제목:</strong> <%= rs.getString("title") %></p>
         <p><strong>내용:</strong> <%= rs.getString("contents") %></p>
 <%
@@ -217,7 +230,7 @@ while(rs4.next()) {
         }
     %>
     <%
-        } catch (SQLException ex) {
+        }} catch (SQLException ex) {
             out.println("SQLException : " + ex.getMessage());
         }
     %>
