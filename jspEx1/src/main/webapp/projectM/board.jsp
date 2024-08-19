@@ -107,6 +107,7 @@
         ResultSet rs = null;
         Statement stmt = null;
         String id = request.getParameter("id");
+        String user_grade = (String) session.getAttribute("user_grade");
         if (id == null || id.isEmpty()) {
             out.println("잘못된 접근입니다.");
             return;
@@ -148,6 +149,7 @@
     </div>
     <div>
    <% 
+   if("일반사용자".equals(user_grade)){
      if ("모집완료".equals(rs.getString("recruitment_status")) || rs2.getInt("CNT") == rs.getInt("mn_people")){
                     %>	
     <button class="xbutton" onclick="return false;" disabled>모집완료</button>              	
@@ -156,6 +158,10 @@
                     %>                        
     <button type="button" onclick="fnapply(<%= id %>)">신청하기</button>
                     <% 
+                    }}else{
+%>
+ <button class="xbutton" onclick="return false;" disabled>관리자 신청 불가</button>  
+<%                    	
                     }
                     %>
     <button type="button" onclick="history.back()">돌아가기</button>
