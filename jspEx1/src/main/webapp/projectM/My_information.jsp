@@ -237,7 +237,7 @@ button {
 
 	<% } %>        
 	<%if(rs5.next()){ %>
-		<p><strong>봉사신청 (<%= rs5.getString("CNT") %>)</strong></p>
+		<p><strong style="color:#1E90FF;">봉사신청 (<%= rs5.getString("CNT") %>)</strong></p>
     <% } %> 
     <%while(rs9.next()){ %>
     	<ol>
@@ -245,7 +245,7 @@ button {
     	</ol>
     <% } %>	
     <%if(rs7.next()){ %>
-        <p><strong>게시글 (<%= rs7.getString("CNT") %>)</strong></p>
+        <p><strong style="color:#1E90FF;">게시글 (<%= rs7.getString("CNT") %>)</strong></p>
     <% } %>  
     <% while(rs12.next()){ %>
     	<ol>
@@ -253,7 +253,7 @@ button {
     	</ol>
     <% } %>	
     <%if(rs8.next()){ %>
-        <p><strong>문의 (<%= rs8.getString("CNT") %>)</strong></p>
+        <p><strong style="color:#1E90FF;">문의 (<%= rs8.getString("CNT") %>)</strong></p>
     <% } %>
     <% while(rs11.next()){ %>
     	<ol>
@@ -261,7 +261,7 @@ button {
     	</ol>
     <% } %>	
     <%if(rs6.next()){ %>
-        <p><strong>봉사완료 (<%= rs6.getString("CNT") %>)</strong></p>
+        <p><strong style="color:#1E90FF;">봉사완료 (<%= rs6.getString("CNT") %>)</strong></p>
     <% } %>
      <%while(rs10.next()){ %>
     	<ol>
