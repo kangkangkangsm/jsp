@@ -340,8 +340,8 @@ th, td {
     %>
             </tr>
             <tr>
-                <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
-                <td colspan="7"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
+                <td style="height:70px;" colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
+                <td style="height:70px;" colspan="7"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
             </tr>
     <% 
             }
