@@ -206,19 +206,6 @@ while(rs2.next()) {
 <%	
 }
 %>  
-<hr> 
-<%
-if(rs5.next()){
-%>            
-	<p><strong>봉사종료(<%= rs5.getString("CNT") %>명)</strong></p>
-<%
-}
-while(rs4.next()) {
-%>	
-<ol><p><a href="My_information.jsp?id=<%= rs4.getString("user_id") %>"><strong><%= rs4.getString("user_id") %> : </strong> 봉사완료 [ 완료일 : <%= rs4.getString("clear_date") %> ]</a></p></ol>
-<%	
-}
-%>  
 <hr>
     
     </div>

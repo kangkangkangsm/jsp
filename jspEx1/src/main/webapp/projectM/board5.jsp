@@ -137,9 +137,10 @@
             text-decoration: none; /* 밑줄 제거 */
             color: black; /* 링크 색상 검정으로 설정 */
         }
-        a:hover {
+         a:hover {
             text-decoration: none; /* 마우스 오버 시 밑줄 제거 */
             color: black; /* 마우스 오버 시 링크 색상 검정으로 유지 */
+              background-color: #ddd; /* 행에 마우스 오버 시 배경색 */
         }
         a:visited {
             color: black; /* 방문한 링크 색상 검정으로 유지 */

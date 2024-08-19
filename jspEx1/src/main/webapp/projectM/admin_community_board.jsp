@@ -122,10 +122,13 @@
         a:hover {
             text-decoration: none; /* 마우스 오버 시 밑줄 제거 */
             color: black; /* 마우스 오버 시 링크 색상 검정으로 유지 */
+              background-color: #ddd; /* 행에 마우스 오버 시 배경색 */
         }
         a:visited {
             color: black; /* 방문한 링크 색상 검정으로 유지 */
         }
+        
+        
 
 </style>
 </head>
@@ -152,8 +155,8 @@
         %>
         <h2><%= rs.getString("c_title") %></h2>
         <div class="details">
-            <p><strong>작성자:</strong> <a href="My_information.jsp?id=<%= rs.getString("user_id") %>"><%= rs.getString("user_id") %>   (유저정보 확인) </a></p>
-            <p><strong>유형:</strong> <%= rs.getString("board_type") %></p>
+         <p><a href="My_information.jsp?id=<%= rs.getString("user_id") %>"><strong>작성자:</strong> <%= rs.getString("user_id") %> (유저정보 확인)</a></p>
+                     <p><strong>유형:</strong> <%= rs.getString("board_type") %></p>
             <p><strong>제목:</strong> <%= rs.getString("c_title") %></p>
             <p><strong>내용:</strong> <%= rs.getString("c_contents") %></p>
             <p><strong>게시일:</strong> <%= rs.getString("c_cdatetime") %></p>    

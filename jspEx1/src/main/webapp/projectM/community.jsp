@@ -153,42 +153,61 @@ th, td {
     String search = request.getParameter("search");
 
     try {
-        stmt = conn.createStatement();
-        
-        // 쿼리 텍스트 초기화
-        String querytext = "SELECT * FROM community";
-        
-        // 검색 조건이 있을 때만 WHERE 절 추가
-        boolean condition = false;
-        if (board_type != null && !board_type.isEmpty()) {
-            querytext += " WHERE board_type LIKE '%" + board_type + "%'";
-            condition = true;
-        }
-        if (user_id != null && !user_id.isEmpty()) {
-            if (condition) {
-                querytext += " AND";
-            } else {
-                querytext += " WHERE";
-                condition = true;
-            }
-            querytext += " user_id LIKE '%" + user_id + "%'";
-        }
-        if (search != null && !search.isEmpty()) {
-            if (condition) {
-                querytext += " AND";
-            } else {
-                querytext += " WHERE";
-                condition = true;
-            }
-            querytext += " (c_contents LIKE '%" + search + "%' OR c_title LIKE '%" + search + "%')";
-        }
+    	// Statement 객체를 생성하여 SQL 쿼리를 실행할 준비를 합니다.
+    	stmt = conn.createStatement();
 
-        // 최근 날짜 기준으로 정렬
-        querytext += " ORDER BY CASE WHEN board_type = '공지사항' THEN 0 ELSE 1 END, c_cdatetime DESC";
+    	// 쿼리 텍스트를 초기화합니다. 기본적으로 모든 커뮤니티 게시글을 선택하는 쿼리입니다.
+    	String querytext = "SELECT * FROM community";
 
-        // 쿼리 실행
-        rs = stmt.executeQuery(querytext);
-    %>
+    	// 검색 조건이 있을 때만 WHERE 절을 추가하기 위해 플래그를 설정합니다.
+    	boolean condition = false; // 조건이 추가되었는지 여부를 추적
+
+    	//isEmpty() 메서드는 Java의 String 클래스에 정의된 메서드로, 문자열이 비어있는지를 확인
+    	// board_type 파라미터가 null이 아니고 비어있지 않은 경우
+    	if (board_type != null && !board_type.isEmpty()) {
+    	    // board_type 조건이 추가된 경우 WHERE 절을 추가합니다.
+    	    // board_type이 비어있지 않으면 WHERE 절을 추가하고, 조건이 추가되었음을 표시합니다.
+    	    querytext += " WHERE board_type LIKE '%" + board_type + "%'";
+    	    condition = true; // 조건이 추가되었음을 표시
+    	}
+
+    	// user_id 파라미터가 null이 아니고 비어있지 않은 경우
+    	if (user_id != null && !user_id.isEmpty()) {
+    	    // 조건이 이미 추가된 경우 AND 연산자로 이어붙입니다.
+    	    if (condition) {
+    	        querytext += " AND";
+    	    } else {
+    	        // WHERE 절이 아직 추가되지 않은 경우, WHERE 절을 추가합니다.
+    	        querytext += " WHERE";
+    	        condition = true; // 조건이 추가되었음을 표시
+    	    }
+    	    // user_id 조건을 추가합니다.
+    	    querytext += " user_id LIKE '%" + user_id + "%'";
+    	}
+
+    	// search 파라미터가 null이 아니고 비어있지 않은 경우
+    	if (search != null && !search.isEmpty()) {
+    	    // 조건이 이미 추가된 경우 AND 연산자로 이어붙입니다.
+    	    if (condition) {
+    	        querytext += " AND";
+    	    } else {
+    	        // WHERE 절이 아직 추가되지 않은 경우, WHERE 절을 추가합니다.
+    	        querytext += " WHERE";
+    	        condition = true; // 조건이 추가되었음을 표시
+    	    }
+    	    // search 조건을 추가합니다. c_contents 또는 c_title에 search 문자열이 포함된 경우를 찾습니다.
+    	    querytext += " (c_contents LIKE '%" + search + "%' OR c_title LIKE '%" + search + "%')";
+    	}
+
+    	// 게시판 유형에 따라 우선순위를 정하고, 최근 날짜 기준으로 정렬합니다.
+    	// '공지사항' 게시판 유형은 우선순위가 0으로 설정되고, 그 외의 유형은 우선순위 1로 설정됩니다.
+    	// 이후 c_cdatetime 열을 기준으로 내림차순 정렬합니다.
+    	querytext += " ORDER BY CASE WHEN board_type = '공지사항' THEN 0 ELSE 1 END, c_cdatetime DESC";
+
+    	// 완성된 쿼리 문자열을 실행하여 결과를 ResultSet 객체에 저장합니다.
+    	rs = stmt.executeQuery(querytext);
+    	
+    	%>
     <table>
         <tr>
             <th>게시유형</th>

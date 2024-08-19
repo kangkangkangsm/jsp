@@ -119,6 +119,10 @@ button {
         cursor: not-allowed; /* 비활성화된 커서 */
         pointer-events: none; /* 클릭 이벤트 차단 */
     }
+    	ol:hover {
+    background-color: #ddd; /* 행에 마우스 오버 시 배경색 */
+		}
+
 </style>
 </head>
 <body>

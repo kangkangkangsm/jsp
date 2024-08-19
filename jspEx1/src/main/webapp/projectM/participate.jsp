@@ -200,155 +200,162 @@ th, td {
 <%@ include file="header2.jsp" %>
 <div class="container">
 <form action="" name="board">
-    <%@include file="db.jsp"%>	
-	<%
-		ResultSet rs = null;
-		Statement stmt = null;
-		String region = request.getParameter("region");
-		String activity_type = request.getParameter("activity_type");
-		String field = request.getParameter("field");
-		String target_group = request.getParameter("target_group");
-		String recruitment_status = request.getParameter("recruitment_status");
-		String start_date = request.getParameter("start_date");
-		String end_date = request.getParameter("end_date");
-		String search = request.getParameter("search");
-		
-		try{
-			stmt = conn.createStatement();
-			String querytext = "SELECT * FROM volunteering WHERE " +
-			        "region LIKE '%" + region + "%' " +
-			        "AND field LIKE '%" + field + "%' " +
-			        "AND target_group LIKE '%" + target_group + "%' " +
-			        "AND recruitment_status LIKE '%" + recruitment_status + "%' " +
-			        "AND activity_type LIKE '%" + activity_type + "%' " +
-			        "AND start_date >= '" + start_date + "' " +
-			        "AND end_date <= '" + end_date + "' " +
-			        "AND (contents LIKE '%" + search + "%' " +
-			        "OR title LIKE '%" + search + "%') " +
-			        "ORDER BY cdatetime DESC"; // c_cdatetime을 오름차순으로 정렬
+     <%@include file="db.jsp"%>
+    <%
+        ResultSet rs = null;
+        Statement stmt = null;
+        String region = request.getParameter("region");
+        String activity_type = request.getParameter("activity_type");
+        String field = request.getParameter("field");
+        String target_group = request.getParameter("target_group");
+        String recruitment_status = request.getParameter("recruitment_status");
+        String start_date = request.getParameter("start_date");
+        String end_date = request.getParameter("end_date");
+        String search = request.getParameter("search");
 
-			// System.out.println(querytext); // 쿼리 확인용 출력
-			rs = stmt.executeQuery(querytext);
-			
-			
-%>			
-				<table>
-				<tr>
-					<th> 게시일 </th>
-					<th> 봉사지역 </th>
-					<th> 활동구분 </th>
-					<th style="width:20%"> 봉사분야 </th>
-					<th> 봉사대상 </th>
-					<th> 봉사시작일 </th>
-					<th> 봉사종료일 </th>
-					<th  style="width:7%"> 인원현황 </th>
-					<th> 모집상태 </th>
-				</tr>
-<%	
-			while(rs.next()){
-				  ResultSet rs2 = null;
-			        Statement stmt2 = null;
-			        stmt2 = conn.createStatement();
-			        String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
-			        rs2 = stmt2.executeQuery(querytext2);
-			     
-			        if (rs2.next()) {
-				%>
-				 <tr>
-			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
-			        <td style="width:12%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
-			        <td style="width:8%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
-			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs2.getString("CNT") %> / <%= rs.getString("mn_people") %></a></td>
-			        <% 
-     				if("모집완료".equals(rs.getString("recruitment_status")) ||  rs2.getInt("CNT") == rs.getInt("mn_people")) {
-			        %>
-			        	<td style="width:9%"><a style = "color:red" href="board.jsp?id=<%= rs.getInt("id") %>">모집완료</a></td>
-			        <%
-			      	}else{			       
-                    %>                        
-			        <td style="width:9%"><a style = "color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
-			      	<% 
-			        }
-			        %>
-			   		<tr>
-			        <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
-			        <td colspan="7"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
-			    </tr>
-	<%
-				}}
-				
-	%>		
-			</table>
-			
-<%	
-			} catch(SQLException ex) {
-				String querytext = "SELECT * FROM volunteering ORDER BY cdatetime DESC";
-				rs = stmt.executeQuery(querytext);
-%>				
-				<table>
-				<tr>
-					<th> 게시일 </th>
-					<th> 봉사지역 </th>
-					<th> 활동구분 </th>
-					<th> 봉사분야 </th>
-					<th> 봉사대상 </th>
-					<th> 봉사시작일 </th>
-					<th> 봉사종료일 </th>
-					<th  style="width:7%"> 인원현황 </th>
-					<th> 모집상태 </th>
-				</tr>
-<%	
-			while(rs.next()){
-			      ResultSet rs2 = null;
-			        Statement stmt2 = null;
-			        stmt2 = conn.createStatement();
-			        String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
-			        rs2 = stmt2.executeQuery(querytext2);
-			     
-			        if (rs2.next()) {
-				%>
-				 <tr>
-			        <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
-			        <td style="width:12%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
-			        <td style="width:8%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
-			        <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
-			         <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs2.getString("CNT") %> / <%= rs.getString("mn_people") %></a></td>
-			        <% 
-     				if("모집완료".equals(rs.getString("recruitment_status")) ||  rs2.getInt("CNT") == rs.getInt("mn_people")) {
-			        %>
-			        	<td style="width:9%"><a style = "color:red" href="board.jsp?id=<%= rs.getInt("id") %>">모집완료</a></td>
-			        <%
-			      	}else{			       
-                    %>                        
-			        <td style="width:9%"><a style = "color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
-			      	<% 
-			        }
-			        %>
-			   		<tr>
-			        <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
-			        <td colspan="7"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
-			    </tr>
-	<%
-				}}		
-	%>		
-			</table>
-<%
-		}
-		
-	%>
+        try {
+            stmt = conn.createStatement();
+            String querytext = "SELECT * FROM volunteering";
+            boolean condition = false;
+
+            if (region != null && !region.isEmpty()) {
+                querytext += " WHERE region LIKE '%" + region + "%'";
+                condition = true;
+            }
+
+            if (activity_type != null && !activity_type.isEmpty()) {
+                if (condition) {
+                    querytext += " AND";
+                } else {
+                    querytext += " WHERE";
+                    condition = true;
+                }
+                querytext += " activity_type LIKE '%" + activity_type + "%'";
+            }
+
+            if (field != null && !field.isEmpty()) {
+                if (condition) {
+                    querytext += " AND";
+                } else {
+                    querytext += " WHERE";
+                    condition = true;
+                }
+                querytext += " field LIKE '%" + field + "%'";
+            }
+
+            if (target_group != null && !target_group.isEmpty()) {
+                if (condition) {
+                    querytext += " AND";
+                } else {
+                    querytext += " WHERE";
+                    condition = true;
+                }
+                querytext += " target_group LIKE '%" + target_group + "%'";
+            }
+
+            if (recruitment_status != null && !recruitment_status.isEmpty()) {
+                if (condition) {
+                    querytext += " AND";
+                } else {
+                    querytext += " WHERE";
+                    condition = true;
+                }
+                querytext += " recruitment_status LIKE '%" + recruitment_status + "%'";
+            }
+
+            if (start_date != null && !start_date.isEmpty()) {
+                if (condition) {
+                    querytext += " AND";
+                } else {
+                    querytext += " WHERE";
+                    condition = true;
+                }
+                querytext += " start_date >= '" + start_date + "' ";
+            }
+
+            if (end_date != null && !end_date.isEmpty()) {
+                if (condition) {
+                    querytext += " AND";
+                } else {
+                    querytext += " WHERE";
+                    condition = true;
+                }
+                querytext += " end_date <= '" + end_date + "' ";
+            }
+
+            if (search != null && !search.isEmpty()) {
+                if (condition) {
+                    querytext += " AND";
+                } else {
+                    querytext += " WHERE";
+                    condition = true;
+                }
+                querytext += "(title LIKE '%" + search + "%' OR contents LIKE '%" + search + "%' OR field LIKE '%" + search + "%')";
+            }
+
+            querytext += " ORDER BY cdatetime DESC";
+            rs = stmt.executeQuery(querytext);
+    %>            
+        <table>
+            <tr>
+                <th> 게시일 </th>
+                <th> 봉사지역 </th>
+                <th> 활동구분 </th>
+                <th style="width:20%"> 봉사분야 </th>
+                <th> 봉사대상 </th>
+                <th> 봉사시작일 </th>
+                <th> 봉사종료일 </th>
+                <th style="width:7%"> 인원현황 </th>
+                <th> 모집상태 </th>
+            </tr>
+    <%
+        while(rs.next()) {
+            ResultSet rs2 = null;
+            Statement stmt2 = null;
+            stmt2 = conn.createStatement();
+            String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
+            rs2 = stmt2.executeQuery(querytext2);
+        
+            if (rs2.next()) {
+    %>
+            <tr>
+                <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("cdatetime") %></a></td>
+                <td style="width:12%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("region") %></a></td>
+                <td style="width:8%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("activity_type") %></a></td>
+                <td style="width:15%"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("field") %></a></td>
+                <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("target_group") %></a></td>
+                <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("start_date") %></a></td>
+                <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("end_date") %></a></td>
+                <td><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs2.getString("CNT") %> / <%= rs.getString("mn_people") %></a></td>
+    <% 
+        if("모집완료".equals(rs.getString("recruitment_status")) || rs2.getInt("CNT") == rs.getInt("mn_people")) {
+    %>
+                <td style="width:9%"><a style="color:red" href="board.jsp?id=<%= rs.getInt("id") %>">모집완료</a></td>
+    <% 
+        } else { 
+    %>                        
+                <td style="width:9%"><a style="color:green" href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("recruitment_status") %></a></td>
+    <% 
+        } 
+    %>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("title") %></a></td>
+                <td colspan="7"><a href="board.jsp?id=<%= rs.getInt("id") %>"><%= rs.getString("contents") %></a></td>
+            </tr>
+    <% 
+            }
+        }
+    %>        
+        </table>
+    <%
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    %>
 </div>
-
 </form>
 </body>
 </html>
 <script>
-
-</script>
-  
+</script>  

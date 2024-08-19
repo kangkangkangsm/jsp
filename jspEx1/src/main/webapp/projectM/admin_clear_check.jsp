@@ -312,11 +312,11 @@ th, td {
 		if("참가 확정".equals(rs2.getString("status")) && "N".equals(rs2.getString("clear"))){
 %>
 <tr>
-		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
-		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("application_date") %></a></td>
-		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("field") %></a></td>
-		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("title") %></a></td>
-		<td><a href="admin_board.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("application_date") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("field") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("title") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
 		<td><button type="button" onclick="fnstatus2('<%= rs2.getString("f_id") %>','<%= rs2.getString("user_id") %>')">수행완료</button></td>
 			<td><button type="button" onclick="fnstatus('<%= rs2.getString("f_id") %>')" >신청삭제</button></td>
 <% } %>	

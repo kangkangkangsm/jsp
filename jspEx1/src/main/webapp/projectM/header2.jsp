@@ -202,60 +202,65 @@ th, td {
             <label for="target_group">봉사대상</label>
             <label for="recruitment_status">모집상태</label>
         </div>
-        <div class="form-row">
-            <select id="region" name="region">
-                <option value="">전체포함</option>
-                <option value="서울특별시">서울특별시</option>
-                <option value="부산광역시">부산광역시</option>
-                <option value="대구광역시">대구광역시</option>
-                <option value="인천광역시">인천광역시</option>
-                <option value="광주광역시">광주광역시</option>
-                <option value="대전광역시">대전광역시</option>
-                <option value="울산광역시">울산광역시</option>
-                <option value="세종특별자치시">세종특별자치시</option>
-                <option value="경기도">경기도</option>
-                <option value="강원도">강원도</option>
-                <option value="충청북도">충청북도</option>
-                <option value="충청남도">충청남도</option>
-                <option value="전라북도">전라북도</option>
-                <option value="전라남도">전라남도</option>
-                <option value="경상북도">경상북도</option>
-                <option value="경상남도">경상남도</option>
-                <option value="제주특별자치도">제주특별자치도</option>
-            </select>
-            <select id="activity_type" name="activity_type" >
-                <option value="">전체포함</option>
-                <option value="온라인">온라인</option>
-                <option value="오프라인">오프라인</option>
-            </select>
-            <select id="field" name="field" >
-            </select>
-            <select id="target_group" name="target_group" >
-                <option value="">전체포함</option>
-                <option value="아동청소년">아동청소년</option>
-                <option value="장애인">장애인</option>
-                <option value="노인">노인</option>
-                <option value="다문화가정">다문화가정</option>
-            </select>
-            <select id="recruitment_status" name="recruitment_status" >
-                <option value="">전체포함</option>
-                <option value="모집중">모집중</option>
-                <option value="모집완료">모집완료</option>
-            </select>
-        </div>
+          <div class="form-row">
+        <select id="region" name="region">
+            <option value="">전체포함</option>
+            <option value="서울특별시" <%= "서울특별시".equals(request.getParameter("region")) ? "selected" : "" %>>서울특별시</option>
+            <option value="부산광역시" <%= "부산광역시".equals(request.getParameter("region")) ? "selected" : "" %>>부산광역시</option>
+            <option value="대구광역시" <%= "대구광역시".equals(request.getParameter("region")) ? "selected" : "" %>>대구광역시</option>
+            <option value="인천광역시" <%= "인천광역시".equals(request.getParameter("region")) ? "selected" : "" %>>인천광역시</option>
+            <option value="광주광역시" <%= "광주광역시".equals(request.getParameter("region")) ? "selected" : "" %>>광주광역시</option>
+            <option value="대전광역시" <%= "대전광역시".equals(request.getParameter("region")) ? "selected" : "" %>>대전광역시</option>
+            <option value="울산광역시" <%= "울산광역시".equals(request.getParameter("region")) ? "selected" : "" %>>울산광역시</option>
+            <option value="세종특별자치시" <%= "세종특별자치시".equals(request.getParameter("region")) ? "selected" : "" %>>세종특별자치시</option>
+            <option value="경기도" <%= "경기도".equals(request.getParameter("region")) ? "selected" : "" %>>경기도</option>
+            <option value="강원도" <%= "강원도".equals(request.getParameter("region")) ? "selected" : "" %>>강원도</option>
+            <option value="충청북도" <%= "충청북도".equals(request.getParameter("region")) ? "selected" : "" %>>충청북도</option>
+            <option value="충청남도" <%= "충청남도".equals(request.getParameter("region")) ? "selected" : "" %>>충청남도</option>
+            <option value="전라북도" <%= "전라북도".equals(request.getParameter("region")) ? "selected" : "" %>>전라북도</option>
+            <option value="전라남도" <%= "전라남도".equals(request.getParameter("region")) ? "selected" : "" %>>전라남도</option>
+            <option value="경상북도" <%= "경상북도".equals(request.getParameter("region")) ? "selected" : "" %>>경상북도</option>
+            <option value="경상남도" <%= "경상남도".equals(request.getParameter("region")) ? "selected" : "" %>>경상남도</option>
+            <option value="제주도" <%= "제주도".equals(request.getParameter("region")) ? "selected" : "" %>>제주도</option>
+        </select>
+        <select id="activity_type" name="activity_type">
+            <option value="">전체포함</option>
+            <option value="온라인" <%= "온라인".equals(request.getParameter("activity_type")) ? "selected" : "" %>>온라인</option>
+            <option value="오프라인" <%= "오프라인".equals(request.getParameter("activity_type")) ? "selected" : "" %>>오프라인</option>
+        </select>
+        <select id="field" name="field">
+            <!-- 이 부분은 JavaScript로 동적으로 변경됨 -->
+        </select>
+        <select id="target_group" name="target_group">
+            <option value="">전체포함</option>
+            <option value="아동청소년" <%= "아동청소년".equals(request.getParameter("target_group")) ? "selected" : "" %>>아동청소년</option>
+            <option value="노인" <%= "노인".equals(request.getParameter("target_group")) ? "selected" : "" %>>노인</option>
+            <option value="장애인" <%= "장애인".equals(request.getParameter("target_group")) ? "selected" : "" %>>장애인</option>
+            <option value="여성" <%= "여성".equals(request.getParameter("target_group")) ? "selected" : "" %>>여성</option>
+            <option value="저소득층" <%= "저소득층".equals(request.getParameter("target_group")) ? "selected" : "" %>>저소득층</option>
+            <option value="기타" <%= "기타".equals(request.getParameter("target_group")) ? "selected" : "" %>>기타</option>
+        </select>
+        <select id="recruitment_status" name="recruitment_status">
+            <option value="">전체포함</option>
+            <option value="모집중" <%= "모집중".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>모집중</option>
+            <option value="모집완료" <%= "모집완료".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>모집완료</option>
+            <option value="진행중" <%= "진행중".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>진행중</option>
+            <option value="종료" <%= "종료".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>종료</option>
+        </select>
+    </div>
 
-        <div class="form-row">
-            <label for="start_date">봉사기간</label>
-        </div>
-        <div class="form-row2">
-            <input type="date" id="start_date" name="start_date" value="2024-01-01">
-            <span style="margin: 0 -7px;">~</span>
-            <input type="date" id="end_date" name="end_date" value="2024-12-31">         
-            <input type="text" id="search" name="search" placeholder="상세검색">
-            <input type="submit" value="검색" id="submit">
-            <input type="reset" value="초기화">
-        </div>
-    </form>
+    <div class="form-row">
+        <label for="start_date">봉사기간</label>
+    </div>
+    <div class="form-row2">
+        <input type="date" id="start_date" name="start_date" value="<%= request.getParameter("start_date") != null ? request.getParameter("start_date") : "" %>">
+        <span style="margin: 0 -7px;">~</span>
+        <input type="date" id="end_date" name="end_date" value="<%= request.getParameter("end_date") != null ? request.getParameter("end_date") : "" %>">
+        <input type="text" id="search" name="search" placeholder="상세검색" value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>">
+        <input type="submit" value="검색" id="submit">
+        <input type="reset" value="초기화">
+    </div>
+</form>
     </div>
 </body>
 </html>
