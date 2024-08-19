@@ -115,8 +115,25 @@
         <p><strong>모집상태:</strong> <%= rs.getString("recruitment_status") %></p>
         <p><strong>제목:</strong> <%= rs.getString("title") %></p>
         <p><strong>내용:</strong> <%= rs.getString("contents") %></p>
-    </div>
-    <div>
+    
+    <%
+ResultSet rs4 = null;
+Statement stmt4 = null;
+stmt4 = conn.createStatement();
+String querytext4 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id "
++ "WHERE V.id = '" + rs.getString("id") + "' AND A.user_id = '" + rs.getString("user_id") + "' AND clear = 'Y'";
+System.out.println(querytext4);
+rs4 = stmt4.executeQuery(querytext4);
+
+
+while(rs4.next()) {
+%>	
+<p><strong>봉사 완료일 : </strong>  <%= rs4.getString("clear_date") %> </p>
+<%	
+}
+%>
+</div>
+<div>
     <button type="button" onclick="history.back()">돌아가기</button>
     </div>
     <%
