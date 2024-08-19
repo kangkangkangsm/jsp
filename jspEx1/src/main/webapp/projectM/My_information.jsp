@@ -265,7 +265,7 @@ button {
     <% } %>
      <%while(rs10.next()){ %>
     	<ol>
-    	<a href="admin_board.jsp?id=<%= rs10.getString("id") %>"><strong style="width: 250px"><%= rs10.getString("field") %></strong><%= rs10.getString("title") %></a>
+    	<a href="admin_board4.jsp?id=<%= rs10.getString("id") %>"><strong style="width: 250px"><%= rs10.getString("field") %></strong><%= rs10.getString("title") %></a>
     	</ol>
     <% } %>	
     </div>

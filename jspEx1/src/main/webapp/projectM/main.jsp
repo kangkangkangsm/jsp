@@ -100,13 +100,13 @@ nav ul li a {
 <%@ include file = "header.jsp" %>
        <main>
           <section class="action-buttons">           
-            <img src="../images/main.png" alt="">        
+            <img onclick="location.href='participate.jsp'" src="../images/main.png" alt="">        
             
         </section>
 	 <section class="main-banner">            
-                <img src="../images/main2.png" alt=""> 
-                 <img src="../images/main5.jpg" alt=""> 
-                 <img src="../images/main3.jpg" alt=""> 
+                <img onclick="location.href='participate.jsp'" src="../images/main2.png" alt=""> 
+                 <img onclick="location.href='participate.jsp'" src="../images/main5.jpg" alt=""> 
+                 <img onclick="location.href='participate.jsp'" src="../images/main3.jpg" alt=""> 
         </section>
       
 <%        

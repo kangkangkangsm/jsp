@@ -104,6 +104,14 @@
         cursor: pointer;
         margin-left:10px;
     }
+     .container4 {
+        	margin-top:360px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
 
     button:hover,
     input[type="submit"]:hover,
@@ -111,7 +119,28 @@
         background-color: #4cae4c;
     }
 
-   
+    .sbutton {
+        width: 100%;
+        padding: 10px;
+        background-color: #5cb85c;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+  
+    .sbutton:hover {
+        background-color: #4cae4c;
+    }
+            .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #009688;
+            color: #fff;
+            margin-top: 20px;
+            width:100%;
+        }  
   </style>
 </head>
 <body>
@@ -120,8 +149,18 @@
 
 <%
     String s = (String) session.getAttribute("user_grade");
+    String user_id = (String) session.getAttribute("user_id");
+	
+    if(user_id == null){			
+%>			
+			<div class="container4">	
+			<h2 style="margin-bottom: 70px; margin-top: 30px;">로그인 하세요</h2>
+			<button class="sbutton" type="button" onclick="location.href='Mlogin.jsp'">로그인 하러 가기</button>
+			</div>
+<%
+		} else {			
+    
 %>
-
 <div class="container">
     <form action="community_insert_result.jsp" method="get" target="_blank">
         <h2>글쓰기</h2>
@@ -160,6 +199,7 @@
         </div>    
         <button type="button" onclick="history.back()">취소</button>
         <input type="submit" value="저장">
+        <%} %>
     </form>
 </div>
 </body>
