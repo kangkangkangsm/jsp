@@ -148,7 +148,7 @@ ResultSet rs2 = null;
 Statement stmt2 = null;
 
     stmt2 = conn.createStatement();
-    String querytext2 = "SELECT * FROM applications WHERE user_id ='" + user_id +"' AND volunteering_id = '" + id +"'";
+    String querytext2 = "SELECT * FROM applications WHERE user_id ='" + user_id +"' AND volunteering_id = '" + id +"' AND clear = 'N'";
     rs2 = stmt2.executeQuery(querytext2);
 
     if(rs2.next()){

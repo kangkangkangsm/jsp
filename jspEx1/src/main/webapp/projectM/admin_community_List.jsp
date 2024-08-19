@@ -89,18 +89,6 @@
     left: 14.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
     
 }
-/* .container3 {
-    border-radius: 8px; /* 테두리 둥글기 */
-    background-color: #ffffff; /* 배경색 흰색 */
-    padding: 20px; /* 내부 여백 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 32%; /* 너비 20% */
-    position: absolute; /* 절대 위치 지정 */
-    top: 470px; /* 상단에서 80px 떨어진 위치 */
-    left: 5%; /* 페이지 왼쪽 끝에 정렬 */
-   	height: calc(200vh);/* 화면 높이에서 80px를 뺀 높이 */
-} */
-
 
 
  .container4 {
@@ -215,7 +203,17 @@ th, td {
     <%
                 ResultSet rs = null;
                 Statement stmt = null;
-               
+                String user_grade = (String) session.getAttribute("user_grade");
+                
+                if("일반사용자".equals(user_grade)){
+             %>   	
+                	<div class="container4">	
+            		<h2 style="margin-bottom: 70px; margin-top: 30px;">일반사용자 접근 금지</h2>
+            		<button type="button" onclick="location.href='Mlogin.jsp'">관리자 로그인 하러 가기</button>
+            		</div>
+            <%  
+            return;
+                }
                 try {
                     stmt = conn.createStatement();
                     String querytext = "SELECT * FROM community ORDER BY CASE WHEN board_type = '공지사항' THEN 0 ELSE 1 END, c_cdatetime DESC";

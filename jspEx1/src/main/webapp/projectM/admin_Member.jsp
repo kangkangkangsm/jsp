@@ -202,6 +202,15 @@ th, td {
         a:visited {
             color: black; /* 방문한 링크 색상 검정으로 유지 */
         }
+         .container4 {
+        	margin-top:260px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        
 </style>
 </head>
 <body>
@@ -215,6 +224,17 @@ th, td {
 	ResultSet rs = null;
 	Statement stmt = null;
     String user_id = (String) session.getAttribute("user_id");
+    String user_grade = (String) session.getAttribute("user_grade");
+    
+    if("일반사용자".equals(user_grade)){
+ %>   	
+    	<div class="container4">	
+		<h2 style="margin-bottom: 70px; margin-top: 30px;">일반사용자 접근 금지</h2>
+		<button type="button" onclick="location.href='Mlogin.jsp'">관리자 로그인 하러 가기</button>
+		</div>
+<%  
+return;
+    }
     try {
     	stmt = conn.createStatement();
 		String querytext = "SELECT * FROM volunteering";
