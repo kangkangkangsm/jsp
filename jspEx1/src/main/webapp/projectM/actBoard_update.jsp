@@ -143,13 +143,38 @@
         margin-top: 20px;
         width: 100%;
     }
+    
+       .form-row3 {
+        display: flex;
+        
+        
+        margin-bottom: 15px;
+    }
+
+    .form-row3 input[type="date"],
+    .form-row3 select {
+        width: 18%;
+        padding: 10px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-row3 input[type="text"] {
+        width: 18%;
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
   </style>
 </head>
 <body>
 
 <%@ include file="header.jsp" %>
 <div class="container">
-    <form action="actBoard_insert-result.jsp" method="get">
+    <form action="actBoard_update-result.jsp" method="get">
     <%@include file="db.jsp"%>	
 
 <%
@@ -218,13 +243,16 @@
             </select>
         </div>
 
-        <div class="form-row">
-            <label for="start_date">봉사기간</label>
+         <div class="form-row2">
+            <label for="start_date">봉사기간(시작일)</label>
+            <label style="margin-left:150px" for="start_date">(종료일)</label>
+             <label style="margin-left:214px;" for="mn_people">모집 인원수</label>
         </div>
-        <div class="form-row2">
-            <input type="date" id="start_date" name="start_date" value="2024-01-01">
+        <div class="form-row3">
+            <input type="date" id="start_date" name="start_date" value="<%= rs.getString("start_date") %>">
             <span style="margin: 0 4px; margin-top:10px;">~</span>
-            <input type="date" id="end_date" name="end_date" value="2024-12-31">         
+            <input style="margin-left:8px" type="date" id="end_date" name="end_date" value="<%= rs.getString("end_date") %>">    
+            <input type="text" style="margin-left:30px;" id="mn_people" name="mn_people" placeholder="인원수"  value="<%= rs.getString("mn_people") %>">        
         </div>
           <div class="form-row">
             <label for="title" >제목</label>

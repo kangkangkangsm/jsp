@@ -70,7 +70,7 @@ button:hover {
 		String end_date = request.getParameter("end_date");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
-		
+		String mn_people = request.getParameter("mn_people");
 				
 		try{
 			stmt = conn.createStatement();
@@ -84,7 +84,8 @@ button:hover {
 									    + "start_date = '" + start_date + "', " 
 									    + "end_date = '" + end_date + "', " 
 									    + "title = '" + title + "', " 
-									    + "contents = '" + contents + "' " 
+									    + "contents = '" + contents + "', " 
+										+ "mn_people = '" + mn_people + "' " 
 									    + "WHERE id = '" + id + "'";
 					
 			stmt.executeUpdate(querytext);

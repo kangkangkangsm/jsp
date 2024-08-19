@@ -69,15 +69,15 @@ button:hover {
 		String end_date = request.getParameter("end_date");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
-		
+		String mn_people = request.getParameter("mn_people");
 		System.out.println(region +", " + contents);		
 		try{
 			stmt = conn.createStatement();
 					String querytext = 
-							 "INSERT INTO Volunteering(region, activity_type, field, target_group, recruitment_status, start_date, end_date, title, contents, cdatetime)"
+							 "INSERT INTO Volunteering(region, activity_type, field, target_group, recruitment_status, start_date, end_date, title, contents, mn_people, cdatetime)"
 							 + " VALUES('"+ region +"','"+ activity_type +"','"+ field +"','"
 							 + target_group +"','"+ recruitment_status +"','"+ start_date +"','"
-							 + end_date +"','"+ title +"','"+ contents +"', NOW())";  
+							 + end_date +"','"+ title +"','"+ contents +"','"+ mn_people +"', NOW())";  
 			stmt.executeUpdate(querytext);
 %>
 			<div class="container">

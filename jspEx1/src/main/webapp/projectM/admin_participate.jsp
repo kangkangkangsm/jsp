@@ -287,11 +287,12 @@ th, td {
         <table>
         <tr>
             <th style="width: 8%;">게시일</th>
-            <th style="width: 18%;">분야</th>
-            <th style="width: 25%;">제목</th>
+            <th style="width: 15%;">분야</th>
+            <th style="width: 23%;">제목</th>
             <th style="width: 7%;">시작일</th>
             <th style="width: 7%;">종료일 </th>
             <th style="width: 5%;">신청 인원수</th>
+            <th style="width: 5%;">모집 인원수</th>
              <th style="width:7%;">상태</th>
             <th style="width: 8%;">상태 변경</th>
             <th style="width: 8%;">수정</th>
@@ -304,9 +305,9 @@ th, td {
         stmt2 = conn.createStatement();
         String querytext2 = "SELECT COUNT(*) AS CNT FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id WHERE V.id = '" + rs.getString("id") + "'";
         rs2 = stmt2.executeQuery(querytext2);
-        
-   
+     
         if (rs2.next()) {
+        
 %>
         <tr>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("cdatetime") %></a></td>
@@ -315,6 +316,7 @@ th, td {
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("start_date") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("end_date") %></a></td>
             <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs2.getString("CNT") %></a></td>
+            <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>"><%= rs.getString("mn_people") %></a></td>
 <% 
         } 
 %>         
