@@ -336,10 +336,10 @@ th, td {
             while(rs3.next()) {
             %>
             <tr>       
-              <td style="width:10%"><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("board_type") %></a></td>
-                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_title") %></a></td>
-             <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_contents") %></a></td>
-                <td><a href="community_board.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_cdatetime") %></a></td>
+              <td style="width:10%"><a href="community_board2.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("board_type") %></a></td>
+                <td><a href="community_board2.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_title") %></a></td>
+             <td><a href="community_board2.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_contents") %></a></td>
+                <td><a href="community_board2.jsp?c_id=<%= rs3.getString("c_id") %>"><%= rs3.getString("c_cdatetime") %></a></td>
                  <td style="width:8%"><button type="button" onclick="fnUpdate('<%= rs3.getString("c_id") %>')">수정</button></td>
                  <td style="width:8%"><button type="button" onclick="fnDelete2('<%= rs3.getString("c_id") %>')">삭제</button></td>
                  </tr>

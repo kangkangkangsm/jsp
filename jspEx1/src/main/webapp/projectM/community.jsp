@@ -151,6 +151,7 @@ th, td {
     String board_type = request.getParameter("board_type");
     String user_id = request.getParameter("user_id");
     String search = request.getParameter("search");
+    String s = (String) session.getAttribute("user_grade");
 
     try {
     	// Statement 객체를 생성하여 SQL 쿼리를 실행할 준비를 합니다.
@@ -255,6 +256,31 @@ th, td {
         <%
         }
             }else{ 
+                if ("관리자".equals(s)) {
+                	 if ("공지사항".equals(rs.getString("board_type"))) {        
+                         %>
+                     <tr>
+                         <td style="width:10%"><strong><a style="color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></strong></td>
+                         <td><strong><a style="color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>">관리자에 의해 숨김처리 되었습니다.</a></strong></td>
+                         <td style="width:10%"><strong><a style="color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>">관리자</a></strong></td>
+                         <td style="width:15%"><strong><a style="color: #D3D3D3"  href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></strong></td>
+                         <td style="width:5%"><strong><a style="color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") -290 %></a></strong></td>
+                     </tr>
+                     <%
+                     } else {
+                     %>
+                     <tr>
+                         <td><a style=" color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("board_type") %></a></td>
+                         <td><a style=" color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>">관리자에 의해 숨김처리 되었습니다.</a></td>
+                         <td><a style=" color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getString("user_id") %></a></td>
+                         <td><a style=" color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getTimestamp("c_cdatetime") %></a></td>
+                         <td><a style=" color: #D3D3D3" href="community_board.jsp?c_id=<%= rs.getInt("c_id") %>"><%= rs.getInt("c_id") -290%> </a></td>
+                     </tr>
+                     
+                     <%
+                     }
+                	
+                }else{
             if ("공지사항".equals(rs.getString("board_type"))) {        
             %>
         <tr>
@@ -277,7 +303,7 @@ th, td {
         
         <%
         }       
-        }}
+        }}}
 %>  
         </table>
     <%

@@ -300,7 +300,7 @@
 %>        	
              	     <button style="width:120px"type="button" class="sbutton" onclick="fnUpdate('<%= rs2.getString("c_id") %>')">수정하기</button>
              	     <button style="width:120px" type="button"  class="dbutton" onclick="fnDelete2('<%= rs2.getString("c_id") %>')">삭제하기</button>
-                 <button style="width:120px"type="button" onclick="fnRemove();">돌아가기</button>
+                 <button style="width:120px"type="button" onclick="fnRemove()">돌아가기</button>
              	</div>
         <%     
             } else { 
@@ -321,7 +321,7 @@
 %>   
 
         
-            <button style="width:120px" type="button" onclick="fnRemove();">돌아가기</button>
+            <button style="width:120px" type="button" onclick="fnRemove()">돌아가기</button>
         </div>
         <%
             }}} else {
@@ -352,29 +352,29 @@ function fnComment(c_id) {
 
 function fnDelete2(c_id){
     if (confirm("정말로 삭제하실겁니까?")) {
-        window.location.href = "deleteC4.jsp?c_id=" + c_id;
+        window.location.href = "deleteC7.jsp?c_id=" + c_id;
     }
 }
 
 function fnDelete3(commentNo,c_id){
     if (confirm("정말로 삭제하실겁니까?")) {
-        window.location.href = "deleteC5.jsp?commentNo=" + commentNo + "&c_id=" + c_id;
+        window.location.href = "deleteC6.jsp?commentNo=" + commentNo + "&c_id=" + c_id;
     }
 }
 
 function fnUpdate3(commentNo,c_id){
     if (confirm("댓글수정?")) {
-        location.href = "updateZ.jsp?commentNo=" + commentNo + "&c_id=" + c_id;
+        location.href = "updateZ2.jsp?commentNo=" + commentNo + "&c_id=" + c_id;
     }
 }
 
 function fnUpdate(c_id){
     if (confirm("정말로 수정하실겁니까?")) {
-        window.location.href = "updateE.jsp?c_id=" + c_id;
+        window.location.href = "updateE2.jsp?c_id=" + c_id;
     }
 }
 function fnRemove(){ /* 페이지 새로고침 함수 */
-	location.href="community.jsp";
+	location.href="mypage3.jsp";
 }
 
 function fnrhidden(c_id){

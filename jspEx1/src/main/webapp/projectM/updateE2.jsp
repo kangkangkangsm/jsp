@@ -134,14 +134,13 @@
     <%@ include file="header.jsp" %>
 </header>
 <div class="container">
-    <form action="updateC_result.jsp" method="get" target="_blank">
+    <form action="updateE_result2.jsp" method="get" target="_blank">
         <%@include file="db.jsp"%>
         <%
             ResultSet rs = null;
             Statement stmt = null;
             String c_id = (String)request.getParameter("c_id");
             String s = (String) session.getAttribute("user_grade");
-            
             try {
                 stmt = conn.createStatement();
                 String querytext = "SELECT * FROM community WHERE c_id ='" + c_id + "'";
@@ -158,7 +157,8 @@
                 <option value="소식알리기">소식알리기</option>
                 <option value="건의합니다">건의합니다</option>
                 <option value="요청합니다">요청합니다</option>
-                <%    
+                
+<%    
             if ("관리자".equals(s)) {
 %>
                <option value="공지사항">공지사항</option>

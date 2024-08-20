@@ -109,7 +109,7 @@
         .csbutton {
         width: 60px;
         padding: 3px;
-        background-color: #FF5733;
+        background-color: #00BFFF;
         border: none;
         border-radius: 4px;
         color: #fff;
@@ -118,7 +118,7 @@
         margin:-5px 0;
     }
          .csbutton:hover {
-        background-color: #C70039;
+        background-color: #1E90FF;
     }
  
        .sbutton:hover {
@@ -128,7 +128,7 @@
         .cs2button {
         width: 60px;
         padding: 3px;
-        background-color: #00BFFF;
+        background-color: ##5cb85c;
         border: none;
         border-radius: 4px;
         color: #fff;
@@ -138,7 +138,7 @@
     }
     
     .cs2button:hover {
-        background-color: #1E90FF;
+        background-color: #4cae4c;
     }
     .dbutton {
     width: 120px;
@@ -208,6 +208,7 @@
             ResultSet rs2 = null;
             Statement stmt2 = null;
             String c_id = (String)request.getParameter("c_id");
+            String commentNo = (String)request.getParameter("commentNo");
             String sessionId = (String)session.getAttribute("user_id");
             String s = (String) session.getAttribute("user_grade");
             
@@ -260,10 +261,10 @@
 				} else {
 %>
         <div class="comment">
-<%        if(sessionId.equals(rs.getString("session_id"))){	 %>
-            <p><strong><%= rs.getString("session_id") %>님 :</strong> <%= rs.getString("com_contents") %> <strong style="float:right"> ( <%= rs.getString("cdatetime") %> )</strong>
-            <button class="cs2button" type="button" onclick="fnUpdate3('<%= rs.getString("commentNo") %>','<%= rs.getString("c_id") %>')">수정하기</button>
-            <button class="csbutton" type="button" onclick="fnDelete3('<%= rs.getString("commentNo") %>','<%= rs.getString("c_id") %>')">삭제하기</button>
+<%        if(sessionId.equals(rs.getString("session_id")) && commentNo.equals(rs.getString("commentNo")) ){	 %>
+            <p><strong><input type="text" id="dat2" name="dat2" value="<%= rs.getString("com_contents") %>"></strong>
+            <button class="csbutton" type="button" onclick="fnUpdate2('<%= rs.getString("c_id") %>' , '<%= rs.getString("commentNo") %>')">수정하기</button>
+            <button class="cs2button" type="button" onclick="fnRemove2(<%= rs.getString("c_id") %>)">돌아가기</button>
             </p>
 						
 <% } else{ %>
@@ -339,7 +340,6 @@
 function fnReload(){ /* 페이지 새로고침 함수 */
 	location.reload(); /* 페이지를 새로 고침 */
 }
-
 function fnComment(c_id) {
     var dat = document.getElementById('dat').value;
     if (confirm("댓글을 달까요?")) {
@@ -373,9 +373,21 @@ function fnUpdate(c_id){
         window.location.href = "updateE.jsp?c_id=" + c_id;
     }
 }
+
+function fnUpdate2(c_id,commentNo){
+	var dat2 = document.getElementById('dat2').value;
+    if (confirm("정말로 수정하실겁니까?")) {
+        window.location.href = "comment_result4.jsp?c_id=" + c_id + "&dat=" + dat2 + "&commentNo=" + commentNo;
+    }
+}
 function fnRemove(){ /* 페이지 새로고침 함수 */
 	location.href="community.jsp";
 }
+
+function fnRemove2(c_id){ /* 페이지 새로고침 함수 */
+	location.href="community_board2.jsp?c_id=" + c_id;
+}
+
 
 function fnrhidden(c_id){
 	if (confirm("숨김처리 해제 할게용?")) {
