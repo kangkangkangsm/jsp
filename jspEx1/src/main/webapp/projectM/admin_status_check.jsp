@@ -70,7 +70,7 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 12%; /* 너비 20% */
+    width: 11.85%; /* 너비 20% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 2%; /* 페이지 왼쪽 끝에 정렬 */
@@ -83,21 +83,23 @@
     background-color: #ffffff; /* 배경색 흰색 */
     padding: 20px; /* 내부 여백 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    width: 83%; /* 너비 60% */
+    width: 41.5%; /* 너비 60% */
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
-    left: 14.5%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
+    left: 14.35%; /* 페이지 왼쪽 끝에서 30% 떨어진 위치에서 시작 */
    
 }
 
 
  .container4 {
-        	margin-top:260px;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+        	border-radius: 8px; /* 테두리 둥글기 */
+    background-color: #ffffff; /* 배경색 흰색 */
+    padding: 20px; /* 내부 여백 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 41.5%; /* 너비 60% */
+    position: absolute; /* 절대 위치 지정 */
+    top: 80px; /* 상단에서 80px 떨어진 위치 */
+    left: 56.5%; /* 페이지 왼쪽 끝에
         }
 
     .container:last-child {
@@ -163,7 +165,7 @@ tr:hover {
 /* 테이블 셀 스타일 */
 td {
     border: 1px solid #ddd; /* 테두리 색상 */
-    padding: 12px 10px;
+    padding: 6px 5px;
 }
 
 /* 테이블 전체 테두리 스타일 */
@@ -240,6 +242,8 @@ return;
                     stmt = conn.createStatement();
                     String querytext5 = "SELECT COUNT(*) CNT FROM applications where STATUS ='신청중' GROUP BY STATUS";
                     rs5 = stmt.executeQuery(querytext5);
+                    
+           
 %>   
    <div class="container">
     <h2>관리 내역</h2>
@@ -254,23 +258,21 @@ return;
     <tr>
     <th>게시판 관리</th>
     </tr>
-       <tr>
-    <td ><a href="admin_participate.jsp">봉사관련 관리</a></td>
-    </tr>
      <tr>
     <td ><a href="admin_community_List.jsp">게시글목록 관리</a></td>
     </tr>
      <tr>
-    <th>신청 관리</th>
+    <th>봉사 관리</th>
+    </tr>
+       <tr>
+    <td ><a href="admin_participate.jsp">봉사 게시글목록 관리</a></td>
     </tr>
       <tr>
        <% if(rs5.next()){ %>  
-    <td style="background-color:#C0CECB" ><a href="admin_status_check.jsp">참가신청 확인<strong> (<%= rs5.getString("CNT") %>)</strong></a></td>
+    <td style="background-color:#C0CECB" ><a href="admin_status_check.jsp">신청<strong> (<%= rs5.getString("CNT") %>) / </strong></a>
   <% } %>
-    </tr>
-       <tr>
      <% if(rs4.next()){ %>  
-    <td><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
+    <a href="admin_status_check.jsp">완료<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
     <% } %>
     </tr>
     <tr>
@@ -285,7 +287,7 @@ return;
         </div>
  
     <div class="container2">
-    <h2>참가신청 확인</h2>
+    <h2>참가신청 확인 (승인시)====></h2>
      <%
                 ResultSet rs2 = null;
                 Statement stmt2 = null;
@@ -297,8 +299,7 @@ return;
 	<table>
 	<tr>
 	<th> 신청ID </th>
-	<th> 참가 신청일 </th>
-	<th> 유형 </th>
+	<th> 신청일 </th>
 	<th> 제목 </th>
 	<th> 상태 </th>
 	<th> 승인/취소 </th>
@@ -311,20 +312,59 @@ return;
 		if("신청중".equals(rs2.getString("status"))){
 %>
 <tr>
-		<td><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
-		<td><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("application_date") %></a></td>
-		<td><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("field") %></a></td>
-		<td><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("title") %></a></td>
-		<td><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
-			<td><button type="button" onclick="fnstatus2('<%= rs2.getString("f_id") %>')">승인</button></td>
-			<td><button type="button" onclick="fnstatus('<%= rs2.getString("f_id") %>')" >신청삭제</button></td>
+		<td style="width:13%"><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
+		<td style="width:13%"><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("application_date") %></a></td>
+		<td style="width:37%"><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("title") %></a></td>
+		<td style="width:8%"><a href="admin_board2.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
+			<td style="width:13%"><button type="button" onclick="fnstatus2('<%= rs2.getString("f_id") %>')">승인</button></td>
+			<td style="width:13%"><button type="button" onclick="fnstatus('<%= rs2.getString("f_id") %>')" >신청삭제</button></td>
 <% } %>	
 </tr>
 <%	   
    }
 %>
 </table>
-<%              
+</div>
+    <div class="container4">
+    <h2>봉사완료 확인</h2>
+     <%
+                ResultSet rs15 = null;
+                Statement stmt15 = null;
+            
+                    stmt = conn.createStatement();
+                    String querytext15 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id ORDER BY A.application_date DESC";
+                    rs15 = stmt.executeQuery(querytext15);
+%>  
+	<table>
+	<tr>
+	<th> 신청ID </th>
+	<th> 신청일 </th>
+	<th> 제목 </th>
+	<th> 상태 </th>
+	<th> 수행여부 </th>
+	<th> 삭제 </th>
+	</tr>	
+<%	    
+   while(rs15.next()){
+%>
+<%		
+		if("참가 확정".equals(rs15.getString("status")) && "N".equals(rs15.getString("clear"))){
+%>
+<tr>
+		<td style="width:13%"><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("user_id") %></a></td>
+		<td style="width:13%"><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("application_date") %></a></td>
+		<td style="width:37%"><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("title") %></a></td>
+		<td style="width:8%"><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("status") %></a></td>
+		<td style="width:13%"><button type="button" onclick="fnstatus4('<%= rs15.getString("f_id") %>','<%= rs15.getString("user_id") %>')">수행완료</button></td>
+			<td style="width:13%"><button type="button" onclick="fnstatus3('<%= rs15.getString("f_id") %>')" >신청삭제</button></td>
+<% } %>	
+</tr>
+<%	   
+   }
+%>
+</table>
+<% 
+
     } catch(SQLException ex) {
         out.println("SQLException : " + ex.getMessage());
     }
@@ -345,6 +385,17 @@ function fnstatus2(f_id){
 		 window.location.href = "status_result2.jsp?f_id=" + f_id;
 		}
 		}
+function fnstatus3(f_id){
+	if (confirm("삭제하겠습니다?")) {
+		 window.location.href = "status_result.jsp?f_id=" + f_id;
+		}
+		}
+
+	function fnstatus4(f_id, user_id){
+	    if (confirm("아이디(" + user_id + ") 이용자가 봉사활동을 참여 하였나요?")) {
+	        window.location.href = "status_result3.jsp?f_id=" + f_id;
+	    }
+	}
 			
 function fnReload(){ /* 페이지 새로고침 함수 */
 	location.reload(); /* 페이지를 새로 고침 */

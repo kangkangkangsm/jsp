@@ -22,7 +22,7 @@
 					"UPDATE applications SET clear = 'Y', clear_date = now() WHERE f_id = '" + f_id + "'";
 			stmt.executeUpdate(querytext);
 				out.println("승인완료.");	
-				response.sendRedirect("admin_clear_check.jsp");
+				response.sendRedirect("admin_status_check.jsp");
 			
 		} catch(SQLException ex) {
 			out.println("SQLException : " + ex.getMessage());

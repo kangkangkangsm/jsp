@@ -197,7 +197,7 @@ rs4 = stmt4.executeQuery(querytext4);
 <%
   if(rs3.next()){
 %>            
-	<p><strong>참여희망(<%= rs3.getString("CNT") %>명)</strong></p>
+	<p><strong style="color:#1E90FF" >참여희망(<%= rs3.getString("CNT") %>명)</strong></p>
 <%
   }
 while(rs2.next()) {

@@ -244,8 +244,6 @@ th, td {
             <option value="">전체포함</option>
             <option value="모집중" <%= "모집중".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>모집중</option>
             <option value="모집완료" <%= "모집완료".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>모집완료</option>
-            <option value="진행중" <%= "진행중".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>진행중</option>
-            <option value="종료" <%= "종료".equals(request.getParameter("recruitment_status")) ? "selected" : "" %>>종료</option>
         </select>
     </div>
 

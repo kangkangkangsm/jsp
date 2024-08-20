@@ -74,6 +74,7 @@
     position: absolute; /* 절대 위치 지정 */
     top: 80px; /* 상단에서 80px 떨어진 위치 */
     left: 2%; /* 페이지 왼쪽 끝에 정렬 */
+    
    
 }
 
@@ -175,7 +176,7 @@ tr:hover {
 /* 테이블 셀 스타일 */
 td {
     border: 1px solid #ddd; /* 테두리 색상 */
-    padding: 12px 10px;
+    padding: 6px 5px;
 }
 
 /* 테이블 전체 테두리 스타일 */
@@ -262,7 +263,7 @@ return;
                     String querytext5 = "SELECT COUNT(*) CNT FROM applications where STATUS ='신청중' GROUP BY STATUS";
                     rs5 = stmt.executeQuery(querytext5);
 %>   
-    <div class="container">
+   <div class="container">
     <h2>관리 내역</h2>
     <hr>
     <table>
@@ -275,23 +276,21 @@ return;
     <tr>
     <th>게시판 관리</th>
     </tr>
+     <tr>
+    <td ><a href="admin_community_List.jsp">게시글목록 관리</a></td>
+    </tr>
+     <tr>
+    <th>봉사 관리</th>
+    </tr>
        <tr>
-    <td ><a href="admin_participate.jsp">봉사관련 관리</a></td>
-    </tr>
-     <tr>
-    <td><a href="admin_community_List.jsp">게시글목록 관리</a></td>
-    </tr>
-     <tr>
-    <th>신청 관리</th>
+    <td ><a href="admin_participate.jsp">봉사 게시글목록 관리</a></td>
     </tr>
       <tr>
        <% if(rs5.next()){ %>  
-    <td ><a href="admin_status_check.jsp">참가신청 확인<strong> (<%= rs5.getString("CNT") %>)</strong></a></td>
+    <td><a href="admin_status_check.jsp">신청<strong> (<%= rs5.getString("CNT") %>) / </strong></a>
   <% } %>
-    </tr>
-       <tr>
      <% if(rs4.next()){ %>  
-    <td><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
+    <a href="admin_status_check.jsp">완료<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
     <% } %>
     </tr>
     <tr>

@@ -219,26 +219,26 @@ return;
 		rs = stmt.executeQuery(querytext);
 %>
 <%
-                ResultSet rs3 = null;
-                Statement stmt3 = null;
+                ResultSet rs11 = null;
+                Statement stmt11 = null;
             
                     stmt = conn.createStatement();
-                    String querytext3 = "SELECT COUNT(*) CNT FROM customer_support where STATUS ='대기중' GROUP BY STATUS";
-                    rs3 = stmt.executeQuery(querytext3);
+                    String querytext11 = "SELECT COUNT(*) CNT FROM customer_support where STATUS ='대기중' GROUP BY STATUS";
+                    rs11 = stmt.executeQuery(querytext11);
 
-                ResultSet rs4 = null;
-                Statement stmt4 = null;
+                ResultSet rs12 = null;
+                Statement stmt12 = null;
             
                     stmt = conn.createStatement();
-                    String querytext4 = "SELECT COUNT(*) CNT FROM applications where STATUS ='참가 확정' AND clear ='N' GROUP BY STATUS";
-                    rs4 = stmt.executeQuery(querytext4);
+                    String querytext12 = "SELECT COUNT(*) CNT FROM applications where STATUS ='참가 확정' AND clear ='N' GROUP BY STATUS";
+                    rs12 = stmt.executeQuery(querytext12);
 
-                ResultSet rs5 = null;
-                Statement stmt5 = null;
+                ResultSet rs13 = null;
+                Statement stmt13 = null;
             
                     stmt = conn.createStatement();
-                    String querytext5 = "SELECT COUNT(*) CNT FROM applications where STATUS ='신청중' GROUP BY STATUS";
-                    rs5 = stmt.executeQuery(querytext5);
+                    String querytext13 = "SELECT COUNT(*) CNT FROM applications where STATUS ='신청중' GROUP BY STATUS";
+                    rs13 = stmt.executeQuery(querytext13);
 %>   
      <div class="container">
     <h2>관리 내역</h2>
@@ -263,21 +263,21 @@ return;
     <th>신청 관리</th>
     </tr>
       <tr>
-       <% if(rs5.next()){ %>  
-    <td ><a href="admin_status_check.jsp">참가신청 확인<strong> (<%= rs5.getString("CNT") %>)</strong></a></td>
+       <% if(rs13.next()){ %>  
+    <td ><a href="admin_status_check.jsp">참가신청 확인<strong> (<%= rs13.getString("CNT") %>)</strong></a></td>
   <% } %>
     </tr>
        <tr>
-     <% if(rs4.next()){ %>  
-    <td style="background-color:#C0CECB" ><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs4.getString("CNT") %>)</strong></a></td>
+     <% if(rs12.next()){ %>  
+    <td style="background-color:#C0CECB" ><a href="admin_clear_check.jsp">참가완료 확인<strong> (<%= rs12.getString("CNT") %>)</strong></a></td>
     <% } %>
     </tr>
     <tr>
     <th>고객 문의</th>
     </tr>
      <tr>
- <%  if(rs3.next()){%>    
-    <td><a href="admin_service.jsp">문의내용 확인<strong> (<%= rs3.getString("CNT") %>)</strong></a></td>
+ <%  if(rs11.next()){%>    
+    <td><a href="admin_service.jsp">문의내용 확인<strong> (<%= rs11.getString("CNT") %>)</strong></a></td>
  <% } %>   
     </tr>
     </table>
@@ -286,37 +286,35 @@ return;
     <div class="container2">
     <h2>참가신청 확인</h2>
      <%
-                ResultSet rs2 = null;
-                Statement stmt2 = null;
+                ResultSet rs15 = null;
+                Statement stmt15 = null;
             
                     stmt = conn.createStatement();
-                    String querytext2 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id ORDER BY A.application_date DESC";
-                    rs2 = stmt.executeQuery(querytext2);
+                    String querytext15 = "SELECT * FROM applications A INNER JOIN volunteering V ON A.volunteering_id = V.id ORDER BY A.application_date DESC";
+                    rs15 = stmt.executeQuery(querytext15);
 %>  
 	<table>
 	<tr>
 	<th> 신청ID </th>
 	<th> 참가 신청일 </th>
-	<th> 유형 </th>
 	<th> 제목 </th>
 	<th> 상태 </th>
 	<th> 수행여부 </th>
 	<th> 삭제 </th>
 	</tr>	
 <%	    
-   while(rs2.next()){
+   while(rs15.next()){
 %>
 <%		
-		if("참가 확정".equals(rs2.getString("status")) && "N".equals(rs2.getString("clear"))){
+		if("참가 확정".equals(rs15.getString("status")) && "N".equals(rs15.getString("clear"))){
 %>
 <tr>
-		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("user_id") %></a></td>
-		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("application_date") %></a></td>
-		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("field") %></a></td>
-		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("title") %></a></td>
-		<td><a href="admin_board3.jsp?id=<%= rs2.getString("id") %>"><%= rs2.getString("status") %></a></td>
-		<td><button type="button" onclick="fnstatus2('<%= rs2.getString("f_id") %>','<%= rs2.getString("user_id") %>')">수행완료</button></td>
-			<td><button type="button" onclick="fnstatus('<%= rs2.getString("f_id") %>')" >신청삭제</button></td>
+		<td><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("user_id") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("application_date") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("title") %></a></td>
+		<td><a href="admin_board3.jsp?id=<%= rs15.getString("id") %>"><%= rs15.getString("status") %></a></td>
+		<td><button type="button" onclick="fnstatus4('<%= rs15.getString("f_id") %>','<%= rs15.getString("user_id") %>')">수행완료</button></td>
+			<td><button type="button" onclick="fnstatus3('<%= rs15.getString("f_id") %>')" >신청삭제</button></td>
 <% } %>	
 </tr>
 <%	   
@@ -333,13 +331,13 @@ return;
 </div>
 </form>
 <script>
-function fnstatus(f_id){
+function fnstatus3(f_id){
 if (confirm("삭제하겠습니다?")) {
 	 window.location.href = "status_result.jsp?f_id=" + f_id;
 	}
 	}
 
-function fnstatus2(f_id, user_id){
+function fnstatus4(f_id, user_id){
     if (confirm("아이디(" + user_id + ") 이용자가 봉사활동을 참여 하였나요?")) {
         window.location.href = "status_result3.jsp?f_id=" + f_id;
     }

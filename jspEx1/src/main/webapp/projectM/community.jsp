@@ -288,3 +288,9 @@ th, td {
 </div>
 </body>
 </html>
+
+<script>
+function fnReload(){ /* 페이지 새로고침 함수 */
+	location.reload(); /* 페이지를 새로 고침 */
+}
+</script>

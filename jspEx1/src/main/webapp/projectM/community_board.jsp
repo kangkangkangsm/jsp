@@ -192,7 +192,7 @@
         
       
         <div class="button-group">
-            <button type="button" onclick="history.back()">돌아가기</button>
+            <button type="button" onclick="fnRemove();">돌아가기</button>
         </div>
         <%
             } else {
@@ -215,10 +215,13 @@ function fnComment(c_id) {
     if (confirm("댓글을 달까요?")) {
         var url = "comment_result.jsp?dat=" + dat + "&c_id=" + c_id;
         window.open(url, "reset", "width=0, height=0");
+
       
     }
 }
-
+function fnRemove(){ /* 페이지 새로고침 함수 */
+	location.href="community.jsp";
+}
 </script>
 </body>
 </html>
