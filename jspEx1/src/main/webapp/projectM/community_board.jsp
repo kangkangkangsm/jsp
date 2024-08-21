@@ -92,17 +92,17 @@
         background-color: #4cae4c;
     }
     
-    .sbutton {
+    .s1button {
         width: 120px;
         padding: 10px;
-        background-color: #00BFFF;
+       background-color: #00BFFF;
         border: none;
         border-radius: 4px;
         color: #fff;
         font-size: 16px;
         cursor: pointer;
     }
-    .sbutton:hover {
+    .s1button:hover {
         background-color: #1E90FF;
     }
     
@@ -267,7 +267,7 @@
 <%
 				if(sessionId == null){			
 %>				
-					<input type="text" placeholder="로그인 하셔야 글쓰기 가능!" disabled  >
+					<input type="text" placeholder="로그인 하셔야 글쓰기 가능!" disabled>
 <%
 				} else {
 %>
@@ -331,7 +331,7 @@
 <%
             }}
 %>        	
-             	     <button style="width:120px" type="button" class="sbutton" onclick="fnUpdate('<%= rs2.getString("c_id") %>')">수정하기</button>
+             	     <button style="width:120px" type="button" class="s1button" onclick="fnUpdate('<%= rs2.getString("c_id") %>')">수정하기</button>
              	     <button style="width:120px" type="button"  class="dbutton" onclick="fnDelete2('<%= rs2.getString("c_id") %>')">삭제하기</button>
                  <button style="width:120px"type="button" onclick="fnRemove();">돌아가기</button>
              	</div>
