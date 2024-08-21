@@ -65,13 +65,30 @@
 		String volunteer_region = request.getParameter("volunteer_region");
 		
 		
-		ResultSet rs = null;
-		Statement stmt = null;	
 		
+		
+		ResultSet rs2 = null; /* 데이터베이스에서 SELECT 한 결과 집합을 저장할 변수 선언 */ /* INSERT,DELETE,UPDATE는 RS객체가 필요없음 */
+		Statement stmt2 = null; /* SQL 문을 실행하기 위한 Statement 객체 선언 */
+		stmt2 = conn.createStatement(); /* Statement 객체 생성 */
+		String query2 = "SELECT * FROM users WHERE user_id ='" + user_id + "'";
+		rs2 = stmt2.executeQuery(query2);
+		
+  	 if(rs2.next()){ 
+ %>
+ <div class="container">
+	     <h2> 중복된 아이디로 가입하지 마세요.. 새로작성하세요 </h2>
+			<button onclick="location.href='Mjoin.jsp'">뒤로가기</button>
+</div>
+<% 
+		return;
+		}
+  	%><% 
+		Statement stmt = null;	
+		ResultSet rs = null;
 		try{
 			stmt = conn.createStatement();
 			String query = 
-				    "INSERT INTO users(name, user_id, password, gender, resident_registration_number, address, phone_number, email, volunteer_region) VALUES ("
+				    "INSERT INTO users(name, user_id, password, gender, resident_registration_number, address, phone_number, email, volunteer_region,created_at) VALUES ("
 				            + "'" + name + "'," 
 				            + "'" + user_id + "'," 
 				            + "'" + password + "'," 
@@ -80,7 +97,7 @@
 				            + "'" + address + "'," 
 				            + "'" + phone_number + "'," 
 				            + "'" + email + "',"
-				            + "'" + volunteer_region + "')";
+				            + "'" + volunteer_region + "', now())";
 			stmt.executeUpdate(query);
 %>
 		<div class="container">
@@ -92,9 +109,13 @@
 			out.println("중복된 아이디로 가입하지 말라고");
 		}
 	        
-	%>
+%>
 </body>
 </html>
 <script>
+function fnclose() {
+	window.close();
+	window.opener.fnReload();
+}
 </script>
 

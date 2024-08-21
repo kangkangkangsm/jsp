@@ -10,7 +10,14 @@
         * {
             box-sizing: border-box;
         }
-        
+          .container4 {
+        	margin: 360px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
         body {
         	
             font-family: Arial, sans-serif;
@@ -27,6 +34,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 800px;
+            
         }
         
         h2 {
@@ -56,6 +64,19 @@
         button {
             
             width: 49%;
+            padding: 10px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+         .sbutton {
+            
+            width: 100%;
             padding: 10px;
             background-color: #5cb85c;
             border: none;
@@ -100,7 +121,6 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<div class="container">
  <form action="" name="board">
     <%@include file="db.jsp"%>
     <%
@@ -108,17 +128,23 @@
         Statement stmt = null;
         String id = request.getParameter("id");
         String user_grade = (String) session.getAttribute("user_grade");
-        if (id == null || id.isEmpty()) {
-            out.println("잘못된 접근입니다.");
-            return;
+        String user_id = (String) session.getAttribute("user_id");
+        if(user_id == null){			
+        	%>			
+        				<div class="container4">	
+        				<h2 style="margin-bottom: 70px; margin-top: 30px;">로그인 하세요</h2>
+        				<button class="sbutton" type="button" onclick="location.href='Mlogin.jsp'">로그인 하러 가기</button>
+        				</div>
+        	<%
+        	return;
         }
-        
         try {
             stmt = conn.createStatement();
             String querytext = "SELECT * FROM volunteering WHERE id = " + id;
             rs = stmt.executeQuery(querytext);
             
     %>
+<div class="container">
     <%
         if (rs.next()) {
 	        ResultSet rs2 = null;

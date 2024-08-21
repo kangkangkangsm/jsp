@@ -192,14 +192,37 @@
         width: 100%; /* Set width to auto for dynamic width based on text */
        
     }
+    
+       .sbutton {
+            
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
 
+       .container4 {
+        	margin: 360px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+    .sbutton:hover {
+        background-color: #4cae4c;
+    }
 </style>
 </head>
 <body>
 <header>
     <%@ include file="header.jsp" %>
 </header>
-<div class="container">
     <form action="" name="board">
         <%@include file="db.jsp"%>
         <%
@@ -211,6 +234,15 @@
             String sessionId = (String)session.getAttribute("user_id");
             String s = (String) session.getAttribute("user_grade");
             
+            if(sessionId == null){			
+            	%>			
+            				<div class="container4">	
+            				<h2 style="margin-bottom: 70px; margin-top: 30px;">로그인 하세요</h2>
+            				<button class="sbutton" type="button" onclick="location.href='Mlogin.jsp'">로그인 하러 가기</button>
+            				</div>
+            	<%
+            	return;
+            }
             try {
                 stmt = conn.createStatement();
                 String querytext = "SELECT * FROM community WHERE c_id ='" + c_id + "'";
@@ -219,6 +251,7 @@
         <%
             if (rs.next()) {
         %>
+<div class="container">
         <h2><%= rs.getString("c_title") %></h2>
         <div class="details">
             <p><strong>작성자:</strong> <%= rs.getString("user_id") %></p>
