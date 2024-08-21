@@ -152,7 +152,7 @@
 th {
     background-color: #4CAF50; /* 그라데이션 배경색 */
     color: white; /* 텍스트 색상 */
-    padding: 12px 15px;
+    padding: 6px 15px;
     text-align: left;
 }
 
@@ -305,7 +305,7 @@ th, td {
                 <th> 봉사대상 </th>
                 <th> 봉사시작일 </th>
                 <th> 봉사종료일 </th>
-                <th style="width:7%"> 인원현황 </th>
+                <th style="width:8%"> 인원현황 </th>
                 <th> 모집상태 </th>
             </tr>
     <%

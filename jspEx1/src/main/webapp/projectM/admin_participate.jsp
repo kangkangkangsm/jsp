@@ -327,12 +327,13 @@ th, td {
             }} 
 %>         
 <% 
-        if ("모집완료".equals(rs.getString("recruitment_status")) || rs2.getInt("CNT") == rs.getInt("mn_people")) {
+        if ("모집완료".equals(rs.getString("recruitment_status"))) {
 %>
         <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>">모집완료</a></td>
         <td><button type="button" onclick="fnstatus2('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>','<%= rs2.getInt("CNT") %>','<%= rs.getInt("mn_people") %>')" style="background-color:red">모집중</button></td>     
 <% 
-        } else { 
+        } else {
+        	
 %>         
         <td><a href="admin_board.jsp?id=<%= rs.getString("id") %>">모집중</a></td>
         <td><button type="button" onclick="fnstatus('<%= rs.getString("id") %>', '<%= rs.getString("recruitment_status") %>')">모집완료</button></td>

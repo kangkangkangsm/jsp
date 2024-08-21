@@ -177,10 +177,9 @@
                     <label for="volunteer_region">봉사_소속지역</label>
                 </div>
                 <div class="form-row">
-                    <select id="gender" name="gender" disabled>
-                        <option value='<%= rs.getString("gender") %>'><%= rs.getString("gender") %></option>
-                       
-                    </select>
+                  
+                       <input type="text" id="name" name="gender" maxlength="50" disabled value="<%= rs.getString("gender") %>" >
+                 
                     <select id="volunteer_region" name="volunteer_region" required>
                         <option value='<%= rs.getString("volunteer_region") %>'><%= rs.getString("volunteer_region") %></option>
                         <option value="서울특별시">서울특별시</option>

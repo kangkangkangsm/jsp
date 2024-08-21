@@ -106,7 +106,7 @@
         background-color: #1E90FF;
     }
     
-        .csbutton {
+       .csbutton {
         width: 60px;
         padding: 3px;
         background-color: #FF5733;
@@ -331,7 +331,7 @@
 <%
             }}
 %>        	
-             	     <button style="width:120px"type="button" class="sbutton" onclick="fnUpdate('<%= rs2.getString("c_id") %>')">수정하기</button>
+             	     <button style="width:120px" type="button" class="sbutton" onclick="fnUpdate('<%= rs2.getString("c_id") %>')">수정하기</button>
              	     <button style="width:120px" type="button"  class="dbutton" onclick="fnDelete2('<%= rs2.getString("c_id") %>')">삭제하기</button>
                  <button style="width:120px"type="button" onclick="fnRemove();">돌아가기</button>
              	</div>
