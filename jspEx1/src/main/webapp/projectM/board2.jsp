@@ -128,7 +128,7 @@ rs4 = stmt4.executeQuery(querytext4);
 
 while(rs4.next()) {
 %>	
-<p><strong>봉사 완료일 : </strong>  <%= rs4.getString("clear_date") %> </p>
+<p><strong>봉사 완료일 : </strong>  <strong><%= rs4.getString("clear_date") %></strong> </p>
 <%	
 }
 %>

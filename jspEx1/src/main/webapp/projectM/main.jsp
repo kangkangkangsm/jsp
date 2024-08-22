@@ -62,7 +62,7 @@ nav ul li a {
 
 .banner-content img {
     width: 100%;
-    
+    cursor: pointer;
     height: auto;
 }
 
@@ -81,6 +81,7 @@ nav ul li a {
 
 .button {
     text-align: center;
+    cursor: pointer;
 }
 
 .button img {
@@ -104,7 +105,7 @@ nav ul li a {
             
         </section>
 	 <section class="main-banner">            
-                <img onclick="location.href='participate.jsp'" src="../images/main2.png" alt=""> 
+                <img onclick="location.href='participate.jsp'" src="../images/main2.png" alt="sdf"> 
                  <img onclick="location.href='participate.jsp'" src="../images/main5.jpg" alt=""> 
                  <img onclick="location.href='participate.jsp'" src="../images/main3.jpg" alt=""> 
         </section>
